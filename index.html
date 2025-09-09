@@ -9,11 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="style.css">
-       
-    </style>
 </head>
 
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- 3D Running Theme -->
+    <div class="floating-shapes">
+        <div class="shape triangle"
+            style="width: 50px; height: 50px; top: 10%; left: 5%; animation-duration: 25s; animation-delay: 0s;"></div>
+        <div class="shape circle"
+            style="width: 40px; height: 40px; top: 20%; left: 15%; animation-duration: 20s; animation-delay: 2s;"></div>
+        <div class="shape square"
+            style="width: 60px; height: 60px; top: 30%; left: 25%; animation-duration: 30s; animation-delay: 1s;"></div>
+        <div class="shape triangle"
+            style="width: 45px; height: 45px; top: 40%; left: 35%; animation-duration: 22s; animation-delay: 3s;"></div>
+        <div class="shape circle"
+            style="width: 35px; height: 35px; top: 50%; left: 45%; animation-duration: 28s; animation-delay: 4s;"></div>
+        <div class="shape square"
+            style="width: 55px; height: 55px; top: 60%; left: 55%; animation-duration: 26s; animation-delay: 0.5s;">
+        </div>
+        <div class="shape triangle"
+            style="width: 50px; height: 50px; top: 70%; left: 65%; animation-duration: 24s; animation-delay: 2.5s;">
+        </div>
+        <div class="shape circle"
+            style="width: 45px; height: 45px; top: 80%; left: 75%; animation-duration: 32s; animation-delay: 1.5s;">
+        </div>
+    </div>
 
     <!-- Loader -->
     <div id="loader">
@@ -27,6 +51,9 @@
                 <div class="cube-face"><i class="fas fa-database"></i></div>
             </div>
         </div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
         <div class="loader-text">Loading Portfolio...</div>
     </div>
 
@@ -38,7 +65,7 @@
     </div>
 
     <!-- Video Modal -->
-    <div class="video-modal" id="videoModal">
+   <div class="video-modal" id="videoModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="modalTitle">Project Demo</h3>
@@ -106,6 +133,22 @@
                 <img src="adi2.png" alt="Aditya Singh" loading="lazy">
             </div>
         </div>
+
+        <!-- Water Wave Effect -->
+        <div class="wave-container">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="3 1 1000 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                    opacity=".25" class="shape-fill"></path>
+                <path
+                    d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                    opacity=".5" class="shape-fill"></path>
+                <path
+                    d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
     </section>
 
     <section class="about" id="about">
@@ -131,7 +174,7 @@
         <h2 class="heading">My <span>Education</span></h2>
 
         <div class="education-timeline">
-            <div class="education-container">
+            <div class="education-container left">
                 <div class="education-box">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Bachelor of Computer Applications (BCA)</h3>
@@ -141,7 +184,7 @@
                     <p>CGPA: 7.3/10</p>
                 </div>
             </div>
-            <div class="education-container">
+            <div class="education-container right">
                 <div class="education-box">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Bachelor of Science (B.Sc.)</h3>
@@ -152,7 +195,7 @@
                 </div>
             </div>
 
-            <div class="education-container">
+            <div class="education-container left">
                 <div class="education-box">
                     <i class="fas fa-school"></i>
                     <h3>12th Grade (Senior Secondary)</h3>
@@ -162,7 +205,7 @@
                     <p>Percentage: 64.4%</p>
                 </div>
             </div>
-            <div class="education-container">
+            <div class="education-container right">
                 <div class="education-box">
                     <i class="fas fa-school"></i>
                     <h3>10th Grade (Secondary)</h3>
@@ -370,6 +413,35 @@
                 </div>
             </div>
             <!-- Certificate 9 -->
+            <div class="certificate-box">
+                <div class="certificate-img">
+                    <img src="Certificates/AW.png" alt="Database Certification" loading="lazy">
+                </div>
+                <div class="certificate-content">
+                    <div class="certificate-header">
+                        <h3 class="certificate-title">AWS Cloud Practitioner Essentials</h3>
+                        <span class="certificate-date">Sep 2025</span>
+                    </div>
+                    <p class="certificate-issuer">Amazon Web Services (AWS)
+                    </p>
+                    <p class="certificate-description">Achieved in September 2025, this AWS certificate validates a
+                        foundational understanding of Amazon Web Services cloud concepts and services.                            
+                        <br>👉🏻Skills Gained: This official AWS Certification validates a comprehensive and foundational
+                        understanding of the Amazon Web Services (AWS) Cloud. It demonstrates proven knowledge of core
+                        cloud concepts, essential AWS services, fundamental architecture best practices, and the value
+                        proposition of cloud computing. The credential signifies an ability to articulate basic AWS
+                        security and compliance principles, including the Shared Responsibility Model, and an
+                        understanding of core billing, pricing, and cloud economics.
+                        Through this certification, I gained expertise in navigating the AWS Cloud environment,
+                        identifying key services like compute (EC2), storage (S3), databases (RDS), and networking
+                        (VPC), and understanding their primary use cases. </p>
+                    <a href="Certificates/AWS.pdf" class="certificate-btn"
+                        download="AWS Cloud Practitioner Essentials Certificate.pdf">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </a>
+                </div>
+            </div>
+            <!-- Certificate 10 -->
             <div class="certificate-box">
                 <div class="certificate-img">
                     <img src="Certificates/App.png" alt="Database Certification" loading="lazy">
@@ -675,7 +747,7 @@
                         <span class="tech-tag">Postman</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Job.mp4"
+                        <a href="#" class="live-demo-btn" data-video="Videoes/J.mp4"
                             data-title=" Job & Internship Portal Demo"><i class="fas fa-external-link-alt"></i> Live
                             Demo</a>
                         <a href="https://github.com/Adishiv9494/Job_Portal"><i class="fab fa-github"></i> View Code</a>
@@ -904,10 +976,11 @@
             <!-- Service 3: Full Stack Developer -->
             <div class="service-box">
                 <i class="fas fa-code service-icon"></i>
-                <h3 class="service-title">TODO List Web Application</h3>
+                <h3 class="service-title">Full Stack Developer</h3>
                 <p class="service-description">
                     I deliver end-to-end web solutions that combine front-end and back-end technologies. Whether you're
-                    building a dynamic web application or an e-commerce platform, I provide expertise in complete
+                    building a dynamic web application or any full stack web application platform, I provide expertise
+                    in complete
                     solution development.
                 </p>
                 <div class="service-tech">
@@ -961,26 +1034,25 @@
             <a href="#home"><i class="fa-solid fa-angles-up"></i></a>
         </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js">
-</script>
-<script src="script.js"></script>
+    </script>
     <script>
         // Initialize Particles.js
         particlesJS("particles-js", {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: { value: "#FF7D00" },
+                color: { value: "#3b82f6" },
                 shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
                 opacity: { value: 0.9, random: true },
                 size: { value: 5, random: true },
                 line_linked: {
                     enable: true,
                     distance: 120,
-                    color: "#FF7D00",
+                    color: "#ff7b00",
                     opacity: 0.8,
                     width: 1
                 },
@@ -1003,6 +1075,36 @@
                 }
             },
             retina_detect: true
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // Add a slight delay to the follower for a smooth trailing effect
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Add hover effects to interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .education-box, .certificate-box, .skills-box, .project-item, .service-box, .theme-toggle, .img-container, .social-media a, .project-links a, .certificate-btn, .live-demo-btn');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
         });
 
         // Theme Toggle
