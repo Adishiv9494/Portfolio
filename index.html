@@ -5,75 +5,1142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="adi2.png" type="image/x-icon">
-    <title>Aditya Singh | Portfolio</title>
+    <title>Aditya Singh | Full Stack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- 3D Running Theme -->
-    <div class="floating-shapes">
-        <div class="shape triangle"
-            style="width: 50px; height: 50px; top: 10%; left: 5%; animation-duration: 25s; animation-delay: 0s;"></div>
-        <div class="shape circle"
-            style="width: 40px; height: 40px; top: 20%; left: 15%; animation-duration: 20s; animation-delay: 2s;"></div>
-        <div class="shape square"
-            style="width: 60px; height: 60px; top: 30%; left: 25%; animation-duration: 30s; animation-delay: 1s;"></div>
-        <div class="shape triangle"
-            style="width: 45px; height: 45px; top: 40%; left: 35%; animation-duration: 22s; animation-delay: 3s;"></div>
-        <div class="shape circle"
-            style="width: 35px; height: 35px; top: 50%; left: 45%; animation-duration: 28s; animation-delay: 4s;"></div>
-        <div class="shape square"
-            style="width: 55px; height: 55px; top: 60%; left: 55%; animation-duration: 26s; animation-delay: 0.5s;">
-        </div>
-        <div class="shape triangle"
-            style="width: 50px; height: 50px; top: 70%; left: 65%; animation-duration: 24s; animation-delay: 2.5s;">
-        </div>
-        <div class="shape circle"
-            style="width: 45px; height: 45px; top: 80%; left: 75%; animation-duration: 32s; animation-delay: 1.5s;">
-        </div>
-    </div>
-
-    <!-- Loader -->
+    <!-- Professional Loader -->
     <div id="loader">
-        <div class="loader-content">
-            <div class="cube">
-                <div class="cube-face"><i class="fas fa-code"></i></div>
-                <div class="cube-face"><i class="fas fa-laptop-code"></i></div>
-                <div class="cube-face"><i class="fas fa-terminal"></i></div>
-                <div class="cube-face"><i class="fas fa-server"></i></div>
-                <div class="cube-face"><i class="fas fa-mobile-alt"></i></div>
-                <div class="cube-face"><i class="fas fa-database"></i></div>
+        <div class="loader-container">
+            <div class="loader-logo">
+                <div class="logo-outer">
+                    <div class="logo-inner">
+                        <img src="logo.png" alt="Code Loading" class="loader-gif">
+                    </div>
+                </div>
+                <div class="logo-text">ADITYA SINGH</div>
+                <div class="logo-subtext">Full Stack Developer</div>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Loading Portfolio <span class="progress-percentage">0%</span></div>
+            </div>
+            <div class="loader-tech">
+                <div class="tech-item">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-react"></i>
+                    <span>React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js"></i>
+                    <span>Node.js</span>
+                </div>
             </div>
         </div>
-        <div class="loading-bar-container">
-            <div class="loading-bar"></div>
-        </div>
-        <div class="loader-text">Loading Portfolio...</div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="downloadToast">
-        <i class="fas fa-download"></i>
-        <div class="text">Download started!</div>
-        <button class="close-btn" onclick="hideToast()">&times;</button>
+    <!-- Professional Background -->
+    <div class="professional-bg">
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-dots"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <div class="logo-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">Aditya Singh</span>
+                    <span class="logo-tag">Full Stack Developer</span>
+                </div>
+            </div>
+
+            <nav class="navbar">
+                <a href="#home" class="nav-link active" data-text="Home">
+                    <span class="nav-icon"><i class="fas fa-home"></i></span>
+                    <span class="nav-text">Home</span>
+                </a>
+                <a href="#about" class="nav-link" data-text="About">
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="#education" class="nav-link" data-text="Education">
+                    <span class="nav-icon"><i class="fas fa-graduation-cap"></i></span>
+                    <span class="nav-text">Education</span>
+                </a>
+                <a href="#certifications" class="nav-link" data-text="Certifications">
+                    <span class="nav-icon"><i class="fas fa-certificate"></i></span>
+                    <span class="nav-text">Certifications</span>
+                </a>
+                <a href="#skills" class="nav-link" data-text="Skills">
+                    <span class="nav-icon"><i class="fas fa-code"></i></span>
+                    <span class="nav-text">Skills</span>
+                </a>
+                <a href="#projects" class="nav-link" data-text="Projects">
+                    <span class="nav-icon"><i class="fas fa-project-diagram"></i></span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="#contact" class="nav-link" data-text="Contact">
+                    <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+                    <span class="nav-text">Contact</span>
+                </a>
+
+                <div class="theme-toggle-wrapper">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <div class="toggle-track">
+                            <div class="toggle-thumb">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </nav>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="home-container">
+            <div class="home-content">
+                <div class="intro-badge">
+                    <span class="badge-text">Welcome to my Portfolio</span>
+                    <div class="badge-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="title-line">Hi, I'm</span>
+                    <span class="title-line highlight">Aditya Singh</span>
+                    <span class="title-line">
+                        <span class="typing-text"></span>
+                        <span class="cursor-animate">|</span>
+                    </span>
+                </h1>
+
+                <p class="hero-description">
+                    A passionate Full Stack Developer specializing in creating modern web applications.
+                    With expertise in both frontend and backend technologies, I transform ideas into
+                    functional, scalable, and user-friendly digital solutions.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        <span class="btn-text">View Projects</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span class="btn-text">Contact Me</span>
+                        <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                    </a>
+                </div>
+
+                <div class="stats-counter">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="6">0</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="10">0</div>
+                        <div class="stat-label">Certificates</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="0">0</div>
+                        <div class="stat-label">Years Exp</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="19">0</div>
+                        <div class="stat-label">Skills</div>
+                    </div>
+                </div>
+
+                <div class="social-hub">
+                    <div class="social-title">Connect with me</div>
+                    <div class="social-grid-icons">
+                        <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="social-icon-btn linkedin"
+                            target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/Adishiv9494" class="social-icon-btn github" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/Aditya_Singh_96" class="social-icon-btn twitter" target="_blank">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="https://tinyurl.com/3myan9h2" class="social-icon-btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.instagram.com/the_aditya__singh_" class="social-icon-btn instagram"
+                            target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/" class="social-icon-btn facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-image">
+                <div class="professional-profile">
+                    <div class="profile-frame">
+                        <div class="profile-image-wrapper" id="profile-image-wrapper">
+                            <img src="adi2.png" alt="Aditya Singh" class="profile-image">
+                            <div class="profile-overlay">
+                                <div class="overlay-content">
+                                    <i class="fas fa-expand"></i>
+                                    <span>View Profile</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-border"></div>
+                        <div class="profile-shine"></div>
+                        <div class="profile-glow"></div>
+                    </div>
+                    <div class="profile-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="badge-content">
+                            <div class="badge-title">Fresher</div>
+                            <div class="badge-subtitle">Ready to Work</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span class="scroll-text">Scroll Down</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>About <span>Me</span></h2>
+                <div class="title-line">
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                </div>
+            </div>
+            <p class="section-subtitle">Get to know me better</p>
+        </div>
+
+        <div class="about-container">
+            <div class="about-image">
+                <div class="professional-about-image">
+                    <div class="about-image-wrapper" id="about-image-wrapper">
+                        <img src="AdityaSingh.jpeg" alt="Aditya Singh" class="about-profile">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye"></i>
+                                <span>View Full</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-decoration">
+                        <div class="decoration-border"></div>
+                        <div class="decoration-corner corner-tl"></div>
+                        <div class="decoration-corner corner-tr"></div>
+                        <div class="decoration-corner corner-bl"></div>
+                        <div class="decoration-corner corner-br"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <div class="content-header">
+                    <div class="role-badge">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Full Stack Developer</span>
+                    </div>
+                    <h3 class="content-title">Crafting Digital Excellence</h3>
+                </div>
+
+                <div class="content-body">
+                    <p class="content-para">
+                        Hello! I'm a dedicated and enthusiastic student currently pursuing a Master's degree in Computer
+                        Applications (MCA). My journey in computer science began with a fascination for how
+                        technology transforms ideas into reality.
+                    </p>
+                    <p class="content-para">
+                        I specialize in creating responsive, high-performance web applications using modern
+                        technologies.
+                        With expertise in both front-end and back-end development, I deliver clean, efficient, and
+                        scalable solutions.
+                    </p>
+                    <p class="content-para">
+                        My approach combines technical expertise with creative problem-solving to build applications
+                        that not only function flawlessly but also provide exceptional user experiences.
+                    </p>
+                </div>
+
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="feature-info">
+                            <h4>Fast & Efficient</h4>
+                            <p>Optimized performance</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="feature-info">
+                            <h4>Secure Code</h4>
+                            <p>Best practices</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="feature-info">
+                            <h4>Responsive</h4>
+                            <p>All devices</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-actions">
+                    <a href="Aditya_Resume.pdf" class="btn btn-primary" id="resumeBtn">
+                        <span class="btn-text">Download Resume</span>
+                        <span class="btn-icon"><i class="fas fa-download"></i></span>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span class="btn-text">Hire Me</span>
+                        <span class="btn-icon"><i class="fas fa-briefcase"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section (Updated for alternating layout) -->
+    <section class="education" id="education">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>My <span>Education</span></h2>
+                <div class="title-line">
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                </div>
+            </div>
+            <p class="section-subtitle">Academic Journey</p>
+        </div>
+
+        <div class="education-timeline">
+            <div class="timeline">
+                <!-- Timeline Item 1 (Left side) -->
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content">
+                        <div class="content-icon">
+                            <i class="fas fa-graduation-cap fa-2x"></i>
+                        </div>
+                        <div class="timeline-date timeline-date-left">
+                            <span class="date-year">2022 - 2025</span>
+                            <span class="date-duration">3 Years</span>
+                        </div>
+                        <div class="content-card card-left">
+                            <div class="card-header">
+                                <h3>Bachelor of Computer Applications (BCA)</h3>
+                                <span class="card-badge">CGPA: 7.3/10</span>
+                            </div>
+                            <p class="card-institution">Allenhouse Business School</p>
+                            <p class="card-description">Specialization in Software Development with focus on modern web
+                                technologies and programming principles.</p>
+                            <div class="card-tags">
+                                <span class="tag">Programming</span>
+                                <span class="tag">Web Development</span>
+                                <span class="tag">Database</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 (Right side) - B.Sc -->
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-content">
+                        <div class="content-icon">
+                            <i class="fas fa-university fa-2x"></i>
+                        </div>
+                        <div class="timeline-date timeline-date-right">
+                            <span class="date-year">2015 - 2018</span>
+                            <span class="date-duration">3 Years</span>
+                        </div>
+                        <div class="content-card card-right">
+                            <div class="card-header">
+                                <h3>Bachelor of Science (B.Sc.)</h3>
+                                <span class="card-badge">Percentage: 44%</span>
+                            </div>
+                            <p class="card-institution">Shankranand Mahavidyalaya</p>
+                            <p class="card-description">Specialization in Mathematics with advanced studies in calculus,
+                                algebra, and mathematical modeling.</p>
+                            <div class="card-tags">
+                                <span class="tag">Mathematics</span>
+                                <span class="tag">Statistics</span>
+                                <span class="tag">Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 (Left side) - 12th Grade -->
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content">
+                        <div class="content-icon">
+                            <i class="fas fa-school fa-2x"></i>
+                        </div>
+                        <div class="timeline-date timeline-date-left">
+                            <span class="date-year">2014 - 2015</span>
+                            <span class="date-duration">1 Year</span>
+                        </div>
+                        <div class="content-card card-left">
+                            <div class="card-header">
+                                <h3>12th Grade (Senior Secondary)</h3>
+                                <span class="card-badge">Percentage: 64.4%</span>
+                            </div>
+                            <p class="card-institution">Acharya Raghuveer Inter College</p>
+                            <p class="card-description">Science Stream with Mathematics, Physics, and Chemistry.</p>
+                            <div class="card-tags">
+                                <span class="tag">Science</span>
+                                <span class="tag">Mathematics</span>
+                                <span class="tag">Physics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 (Right side) - 10th Grade -->
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-content">
+                        <div class="content-icon">
+                            <i class="fas fa-school fa-2x"></i>
+                        </div>
+                        <div class="timeline-date timeline-date-right">
+                            <span class="date-year">2012 - 2013</span>
+                            <span class="date-duration">1 Year</span>
+                        </div>
+                        <div class="content-card card-right">
+                            <div class="card-header">
+                                <h3>10th Grade (Secondary)</h3>
+                                <span class="card-badge">Percentage: 75.5%</span>
+                            </div>
+                            <p class="card-institution">Acharya Raghuveer Inter College</p>
+                            <p class="card-description">Mathematics and Science Focus with strong foundation in core
+                                subjects.</p>
+                            <div class="card-tags">
+                                <span class="tag">Foundation</span>
+                                <span class="tag">Core Subjects</span>
+                                <span class="tag">Basic Sciences</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Certifications Section -->
+    <section class="certifications" id="certifications">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>My <span>Certifications</span></h2>
+                <div class="title-line">
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                </div>
+            </div>
+            <p class="section-subtitle">Professional Accreditations & Achievements</p>
+            <div class="cert-stats">
+                <div class="stat-badge">
+                    <i class="fas fa-trophy"></i>
+                    <span>Total: <strong id="certTotal">10</strong> Certifications</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Average Score: <strong>85%</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate Categories Filter -->
+        <div class="cert-filter">
+            <button class="filter-btn active" data-filter="all">All Certificates</button>
+            <button class="filter-btn" data-filter="university">University</button>
+            <button class="filter-btn" data-filter="professional">Professional</button>
+            <button class="filter-btn" data-filter="technical">Technical</button>
+            <button class="filter-btn" data-filter="top-rated">Top Rated</button>
+        </div>
+
+        <!-- Certificates Grid -->
+        <div class="certifications-grid" id="certificationsGrid">
+            <!-- Certificates will be loaded via JavaScript -->
+        </div>
+
+        <!-- View More/Less Buttons -->
+        <div class="cert-controls">
+            <div class="count-display">
+                Showing <span id="showingCerts">3</span> of <span id="totalCerts">10</span> certificates
+            </div>
+            <div class="control-buttons">
+                <button class="btn btn-load-more" id="loadMoreCerts">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Load More Certificates</span>
+                </button>
+                <button class="btn btn-show-less" id="showLessCerts" style="display: none;">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>Show Less</span>
+                </button>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>Technical <span>Skills</span></h2>
+                <div class="title-line">
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                </div>
+            </div>
+            <p class="section-subtitle">Technologies I'm Working with us </p>
+            <div class="skill-count">
+                <i class="fas fa-code"></i>
+                <span>Total: <span id="skillsTotal">19</span> Skills</span>
+            </div>
+        </div>
+
+        <div class="skills-container">
+            <!-- Programming Languages (Updated with JavaScript) -->
+            <div class="skills-category">
+                <div class="category-header">
+                    <h3 class="category-title">
+                        <i class="fas fa-keyboard"></i>
+                        Programming Languages
+                    </h3>
+                    <div class="category-pulse"></div>
+                </div>
+                <div class="skills-grid" id="programmingGrid">
+                    <!-- Skills loaded via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Frontend Skills (JavaScript removed) -->
+            <div class="skills-category">
+                <div class="category-header">
+                    <h3 class="category-title">
+                        <i class="fas fa-desktop"></i>
+                        Frontend
+                    </h3>
+                    <div class="category-pulse"></div>
+                </div>
+                <div class="skills-grid" id="frontendGrid">
+                    <!-- Skills loaded via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Backend Skills -->
+            <div class="skills-category">
+                <div class="category-header">
+                    <h3 class="category-title">
+                        <i class="fas fa-server"></i>
+                        Backend
+                    </h3>
+                    <div class="category-pulse"></div>
+                </div>
+                <div class="skills-grid" id="backendGrid">
+                    <!-- Skills loaded via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Development Tools (AWS removed) -->
+            <div class="skills-category">
+                <div class="category-header">
+                    <h3 class="category-title">
+                        <i class="fas fa-tools"></i>
+                        Development Tools
+                    </h3>
+                    <div class="category-pulse"></div>
+                </div>
+                <div class="skills-grid" id="toolsGrid">
+                    <!-- Skills loaded via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="skills-category">
+                <div class="category-header">
+                    <h3 class="category-title">
+                        <i class="fas fa-brain"></i>
+                        Soft Skills
+                    </h3>
+                    <div class="category-pulse"></div>
+                </div>
+                <div class="soft-skills-grid">
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>Communication</h4>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h4>Problem Solving</h4>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Teamwork</h4>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Creativity</h4>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Time Management</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- Projects Section -->
+<section class="projects" id="projects">
+    <div class="section-header">
+        <div class="section-title">
+            <h2>My <span>Projects</span></h2>
+            <div class="title-line">
+                <div class="line-dot"></div>
+                <div class="line-dot"></div>
+                <div class="line-dot"></div>
+            </div>
+        </div>
+        <p class="section-subtitle">Featured Work</p>
+        <div class="projects-count">
+            <i class="fas fa-project-diagram"></i>
+            <span>Showing: <span id="showingProjects">3</span> of <span id="projectsTotal">8</span> Projects</span>
+        </div>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+        <!-- Projects loaded via JavaScript -->
+    </div>
+
+    <div class="view-more">
+        <button class="btn btn-load" id="loadMoreProjects">
+            <span>View More Projects</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <button class="btn btn-less" id="showLessProjects" style="display: none;">
+            <span>Show Less</span>
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <div class="section-title">
+                <h2>Contact <span>Me</span></h2>
+                <div class="title-line">
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                    <div class="line-dot"></div>
+                </div>
+            </div>
+            <p class="section-subtitle">Scan QR codes or send a message to connect instantly</p>
+        </div>
+
+        <div class="contact-container">
+            <!-- QR Code Cards Grid -->
+            <div class="qr-section">
+                <div class="qr-section-header">
+                    <h3><i class="fas fa-qrcode"></i> Quick Connect via QR Codes</h3>
+                    <p class="qr-section-subtitle">Scan any QR code for instant connection</p>
+                </div>
+
+                <div class="qr-cards-grid">
+                    <!-- WhatsApp QR Card -->
+                    <div class="qr-card">
+                        <div class="qr-card-header">
+                            <div class="qr-card-icon whatsapp-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="qr-card-info">
+                                <h3>WhatsApp Chat</h3>
+                                <div class="qr-status">
+                                    <span class="status-dot active"></span>
+                                    <span class="status-text">Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <img src="WhatsApp.png" alt="WhatsApp QR Code" class="qr-code-image">
+                                <div class="qr-code-overlay">
+                                    <i class="fas fa-expand-alt"></i>
+                                </div>
+                            </div>
+                            <div class="qr-instruction">
+                                <p class="qr-message">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    Scan to start a conversation on WhatsApp
+                                </p>
+                            </div>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="btn-qr-action scan-guide-btn" data-type="whatsapp">
+                                <i class="fas fa-info-circle"></i> How to Scan
+                            </button>
+                            <a href="https://tinyurl.com/3myan9h2" class="btn-qr-action direct-link-btn"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Open Directly
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Email QR Card -->
+                    <div class="qr-card">
+                        <div class="qr-card-header">
+                            <div class="qr-card-icon email-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="qr-card-info">
+                                <h3>Email Contact</h3>
+                                <div class="qr-status">
+                                    <span class="status-dot active"></span>
+                                    <span class="status-text">24/7 Response</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <img src="Email.png" alt="Email QR Code" class="qr-code-image">
+                                <div class="qr-code-overlay">
+                                    <i class="fas fa-expand-alt"></i>
+                                </div>
+                            </div>
+                            <div class="qr-instruction">
+                                <p class="qr-message">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                    Scan to compose email instantly
+                                </p>
+                            </div>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="btn-qr-action scan-guide-btn" data-type="email">
+                                <i class="fas fa-info-circle"></i> How to Scan
+                            </button>
+                            <a href="mailto:aadityasingh.knp@gmail.com" class="btn-qr-action direct-link-btn"
+                                target="_blank">
+                                <i class="fas fa-paper-plane"></i> Compose Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Phone Call QR Card -->
+                    <div class="qr-card">
+                        <div class="qr-card-header">
+                            <div class="qr-card-icon phone-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="qr-card-info">
+                                <h3>Phone Call</h3>
+                                <div class="qr-status">
+                                    <span class="status-dot active"></span>
+                                    <span class="status-text">Available</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <img src="Contact.png" alt="Call QR Code" class="qr-code-image">
+                                <div class="qr-code-overlay">
+                                    <i class="fas fa-expand-alt"></i>
+                                </div>
+                            </div>
+                            <div class="qr-instruction">
+                                <p class="qr-message">
+                                    <i class="fas fa-phone-volume"></i>
+                                    Scan to call directly from your phone
+                                </p>
+                            </div>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="btn-qr-action scan-guide-btn" data-type="phone">
+                                <i class="fas fa-info-circle"></i> How to Scan
+                            </button>
+                            <a href="tel:+917318413600" class="btn-qr-action direct-link-btn" target="_blank">
+                                <i class="fas fa-phone-alt"></i> Call Now
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Instagram QR Card -->
+                    <div class="qr-card">
+                        <div class="qr-card-header">
+                            <div class="qr-card-icon instagram-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="qr-card-info">
+                                <h3>Instagram Profile</h3>
+                                <div class="qr-status">
+                                    <span class="status-dot active"></span>
+                                    <span class="status-text">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <img src="Instragram.png" alt="Instagram QR Code" class="qr-code-image">
+                                <div class="qr-code-overlay">
+                                    <i class="fas fa-expand-alt"></i>
+                                </div>
+                            </div>
+                            <div class="qr-instruction">
+                                <p class="qr-message">
+                                    <i class="fab fa-instagram"></i>
+                                    Scan to follow me on Instagram
+                                </p>
+                            </div>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="btn-qr-action scan-guide-btn" data-type="instagram">
+                                <i class="fas fa-info-circle"></i> How to Scan
+                            </button>
+                            <a href="https://www.instagram.com/the_aditya__singh_?igsh=OWhzcm1seDBrNm9k"
+                                class="btn-qr-action direct-link-btn" target="_blank">
+                                <i class="fab fa-instagram"></i> Open Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Contact Form -->
+            <div class="contact-form-section">
+                <div class="form-header">
+                    <div class="form-header-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Send Me a Message</h3>
+                    <p>I'll respond within 24 hours</p>
+                </div>
+
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user"></i>
+                                <span>Full Name</span>
+                            </label>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email Address</span>
+                            </label>
+                            <input type="email" id="email" placeholder="Enter your email address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">
+                                <i class="fas fa-phone"></i>
+                                <span>Phone Number</span>
+                            </label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                <i class="fas fa-tag"></i>
+                                <span>Subject</span>
+                            </label>
+                            <input type="text" id="subject" placeholder="What is this regarding?" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">
+                            <i class="fas fa-comment-alt"></i>
+                            <span>Your Message</span>
+                        </label>
+                        <textarea id="message" placeholder="Hello Aditya, I'd like to discuss..." rows="6"
+                            required></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span>/500 characters
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Send Message</span>
+                        <div class="submit-loader">
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                        </div>
+                    </button>
+                </form>
+
+                <!-- Alternative Contact Methods -->
+                <div class="alternative-contact">
+                    <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
+                    <div class="alt-contact-grid">
+                        <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="alt-contact-item linkedin"
+                            target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                            <div class="alt-contact-info">
+                                <h5>LinkedIn</h5>
+                                <p>Professional networking</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Adishiv9494" class="alt-contact-item github" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <div class="alt-contact-info">
+                                <h5>GitHub</h5>
+                                <p>View my projects</p>
+                            </div>
+                        </a>
+                        <a href="https://twitter.com/Aditya_Singh_96" class="alt-contact-item twitter" target="_blank">
+                            <i class="fab fa-x-twitter"></i>
+                            <div class="alt-contact-info">
+                                <h5>Twitter</h5>
+                                <p>Follow updates</p>
+                            </div>
+                        </a>
+                        <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                            <div class="alt-contact-info">
+                                <h5>Facebook</h5>
+                                <p>Connect socially</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info-cards">
+                    <div class="contact-info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Email Address</h4>
+                            <p>aadityasingh.knp@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Phone Number</h4>
+                            <p>+91 7318413600</p>
+                        </div>
+                    </div>
+                    <!-- <div class="contact-info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Location</h4>
+                            <p>Kanpur, Uttar Pradesh</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <i class="fas fa-code"></i>
+                    <span>Aditya Singh</span>
+                </div>
+                <p class="footer-tagline">Building the future, one line of code at a time</p>
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <i class="fas fa-project-diagram"></i>
+                        <span><span id="footerProjects">6</span> Projects</span>
+                    </div>
+                    <div class="footer-stat">
+                        <i class="fas fa-certificate"></i>
+                        <span><span id="footerCerts">10</span> Certificates</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#contact">Contact</a>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-newsletter">
+                <h4>Stay Updated</h4>
+                <p>Get notified about new projects</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email address" id="newsletterEmail">
+                    <button type="button" id="newsletterBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Aditya Singh. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/aditya-singh-671a592b6">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Adishiv9494">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/Aditya_Singh_96">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/the_aditya__singh_">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <button class="back-to-top" id="backToTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+
+    <!-- QR Code Zoom Modal -->
+    <div class="modal qr-modal" id="qrModal">
+        <div class="modal-content qr-modal-content">
+            <div class="modal-header">
+                <h3 id="qrModalTitle">QR Code Preview</h3>
+                <button class="modal-close" id="qrModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="qr-modal-image">
+                    <img id="modalQrImage" src="" alt="QR Code">
+                </div>
+                <p class="qr-modal-message" id="modalQrMessage"></p>
+                <div class="qr-modal-actions">
+                    <button class="btn btn-secondary" id="closeQrModal">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                    <button class="btn btn-primary" id="downloadQr">
+                        <i class="fas fa-download"></i> Download QR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal" id="imagePreviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="imageModalTitle">Image Preview</h3>
+                <button class="modal-close" id="imageModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="previewImage" src="" alt="Preview">
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Certificate Preview</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="certificateImage" src="" alt="Certificate">
+            </div>
+        </div>
     </div>
 
     <!-- Video Modal -->
-    <div class="video-modal" id="videoModal">
+    <div class="modal video-modal" id="videoModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Project Demo</h3>
-                <button class="close-modal" id="closeModal">&times;</button>
+                <h3 id="videoTitle">Project Demo</h3>
+                <button class="modal-close" id="videoClose">&times;</button>
             </div>
-            <div class="video-container">
+            <div class="modal-body">
                 <video id="projectVideo" controls>
                     Your browser does not support the video tag.
                 </video>
@@ -81,975 +1148,18 @@
         </div>
     </div>
 
-    <!-- Particles Background -->
-    <div id="solar-system">
-
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="toast-message"></div>
+        </div>
+        <div class="toast-progress"></div>
     </div>
-    <div id="particles-js"></div>
 
-    <header class="header">
-        <a href="#" class="logo"><i class="fas fa-code"></i> Aditya Singh</a>
-        <i class="fa-solid fa-bars" id="menu-icon"></i>
-        <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-            <div class="theme-toggle-container">
-                <div class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-sun icon"></i>
-                    <i class="fas fa-moon icon"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <section class="home" id="home">
-        <div class="home-content">
-            <h3>Hi, I'm</h3>
-            <h1>Aditya Singh</h1>
-            <h3>And I'm a <span class="multiple-text"></span></h3>
-            <p>A passionate developer specializing in creating immersive digital experiences. With expertise in modern
-                web technologies and a focus on user-centric design, I transform ideas into functional and beautiful
-                applications.</p>
-            <div class="social-media">
-                <a href="https://www.facebook.com/adityasinghachauhan?mibextid=JRoKGi" aria-label="Facebook"><i
-                        class="fa-brands fa-facebook"></i></a>
-                <a href="https://twitter.com/Aditya_Singh_96" aria-label="Twitter"><i
-                        class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/the_aditya__singh_?igsh=OWhzcm1seDBrNm9k" aria-label="Instagram"><i
-                        class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/aditya-singh-671a592b6?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BDnfC4k1LRzm3eBuIRIv6Yw%3D%3D"
-                    aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/Adishiv9494" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tinyurl.com/3myan9h2" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-            <div class="resume-download">
-                <a href="Aditya_Resume.pdf" class="btn" id="resumeBtn">Download Resume<i
-                        class="fas fa-download download-icon"></i></a>
-            </div>
-        </div>
-        <div class="home-img">
-            <div class="img-container">
-                <img src="adi2.png" alt="Aditya Singh" loading="lazy">
-            </div>
-        </div>
-
-        <!-- Water Wave Effect -->
-        <div class="wave-container">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="3 1 1000 120"
-                preserveAspectRatio="none">
-                <path
-                    d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-                    opacity=".25" class="shape-fill"></path>
-                <path
-                    d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-                    opacity=".5" class="shape-fill"></path>
-                <path
-                    d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-                    class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="about-img">
-            <img src="Aditya Photo.jpg" alt="About Me" loading="lazy">
-        </div>
-        <div class="about-content">
-            <h2 class="heading">About <span>Me</span></h2>
-            <h3>Full Stack Developer</h3>
-            <p>Hello! I'm a dedicated and enthusiastic student currently pursuing a Master's degree in Computer
-                Applications (MCA). My journey in the field of computer science began with a fascination for how
-                technology impacts our daily lives.</p>
-            <p>I specialize in creating responsive, user-friendly web applications using modern technologies. With a
-                strong foundation in both front-end and back-end development, I bring ideas to life with clean code and
-                intuitive design.</p>
-            <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or
-                participating in hackathons to challenge myself and grow as a developer.</p>
-        </div>
-    </section>
-
-    <!-- Updated Education Section -->
-    <section class="education" id="education">
-        <h2 class="heading">My <span>Education</span></h2>
-
-        <div class="education-timeline">
-            <div class="education-container left">
-                <div class="education-box">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Bachelor of Computer Applications (BCA)</h3>
-                    <p>Allenhouse Business School</p>
-                    <p>Specialization in Software Development</p>
-                    <p class="year">2022 - 2025</p>
-                    <p>CGPA: 7.3/10</p>
-                </div>
-            </div>
-            <div class="education-container right">
-                <div class="education-box">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Bachelor of Science (B.Sc.)</h3>
-                    <p>Shankranand Mahavidyalaya</p>
-                    <p>Specialization in Mathematics</p>
-                    <p class="year">2015 - 2018</p>
-                    <p>Percentage: 44%</p>
-                </div>
-            </div>
-
-            <div class="education-container left">
-                <div class="education-box">
-                    <i class="fas fa-school"></i>
-                    <h3>12th Grade (Senior Secondary)</h3>
-                    <p>Acharya Raghuveer Inter College </p>
-                    <p>Science Stream with Mathematics</p>
-                    <p class="year">2014 - 2015</p>
-                    <p>Percentage: 64.4%</p>
-                </div>
-            </div>
-            <div class="education-container right">
-                <div class="education-box">
-                    <i class="fas fa-school"></i>
-                    <h3>10th Grade (Secondary)</h3>
-                    <p>Acharya Raghuveer Inter College</p>
-                    <p>Mathematics and Science Focus</p>
-                    <p class="year">2012 - 2013</p>
-                    <p>Percentage: 75.5%</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="certifications" id="certifications">
-        <h2 class="heading">My <span>Certifications</span></h2>
-        <div class="certifications-container">
-            <!-- Certificate 1 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/Py.png" alt="Python Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Programming in Python</h3>
-                        <span class="certificate-date">Dec 2023</span>
-                    </div>
-                    <p class="certificate-issuer">Dibrugarh University Conducted by NPTEL </p>
-                    <p class="certificate-description">Successfully completed the 4-credit course in December 2023 with
-                        an excellent consolidated score of 84%, demonstrating strong proficiency in Python programming
-                        fundamentals through online assignments and a proctored exam.<br>👉🏻 Skills Gained: Core Python
-                        syntax, data types, control structures, functions, OOP principles, file handling, and basic
-                        problem-solving using Python. Demonstrated proficiency through high scores in assignments and
-                        exams.
-                    </p>
-                    <a href="Certificates/Python.pdf" class="certificate-btn" download="Python_Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-
-            <!-- Certificate 2 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/ibm2.png" alt="Web Development Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Getting Started with Enterprise Data Science</h3>
-                        <span class="certificate-date">Jun 2024</span>
-                    </div>
-                    <p class="certificate-issuer">IBM</p>
-                    <p class="certificate-description">Earned this IBM credential in June 2024, validating foundational
-                        knowledge and commitment to understanding cloud solution design principles and their business
-                        application. <br>
-                        👉🏻Skills Gained: Foundational understanding of cloud computing concepts (IaaS, PaaS, SaaS),
-                        cloud deployment models, business benefits of cloud adoption, and the initial steps in designing
-                        cloud-based solutions aligned with business needs.</p>
-                    <a href="Certificates/ibm2.png" class="certificate-btn" download="IBM_Data_Science_Certificate.png">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-
-            <!-- Certificate 3 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/Java.png" alt="React Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Programming in Java</h3>
-                        <span class="certificate-date">Dec 2024</span>
-                    </div>
-                    <p class="certificate-issuer">IIT Kharagpur Conducted by NPTEL </p>
-                    <p class="certificate-description">Concluded this 12-week Java programming course in Jul-Oct 2024
-                        with a consolidated score of 64% with "Elite Batch", showcasing strong practical skills through
-                        assignments and exams certified by IIT Kharagpur. <br>
-                        👉🏻Skills Gained: Strong foundation in Java programming, including syntax, data types, control
-                        flow, OOP concepts (classes, objects, inheritance, polymorphism, abstraction, encapsulation),
-                        exception handling, multithreading basics, and Java Collections Framework.</p>
-                    <a href="Certificates/Programming in Java.pdf" class="certificate-btn"
-                        download="Java_Programming_Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-
-            <!-- Certificate 4 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/DBMS.png" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Database Management System</h3>
-                        <span class="certificate-date">Nov 2024</span>
-                    </div>
-                    <p class="certificate-issuer">IIT Kharagpur Conducted by NPTEL</p>
-                    <p class="certificate-description">Completed this 8-week core course in the Jul-Sep 2024 session
-                        with a consolidated score of 56%, covering fundamental DBMS concepts and practices certified by
-                        IIT Kharagpur.<br>
-                        👉🏻Skills Gained: Core concepts of database systems, Entity-Relationship (ER) modeling,
-                        relational model fundamentals, Structured Query Language (SQL) for data definition and
-                        manipulation, normalization principles, and basic transaction management. </p>
-                    <a href="Certificates/Data Base Management System (1).pdf" class="certificate-btn"
-                        download="Database_Management_Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-            <!-- Certificate 5 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/DSA.png" alt="DSA certificate" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Data Structure & Algorithms Using Java</h3>
-                        <span class="certificate-date">Dec 2024</span>
-                    </div>
-                    <p class="certificate-issuer">IIT Kharagpur Conducted by NPTEL</p>
-                    <p class="certificate-description">Completed this 8-week core course in the Jul-Oct 2024 session
-                        with a consolidated score of 61% with "Elite Batch", covering fundamental DBMS concepts and
-                        practices certified by IIT Kharagpur.<br>
-                        👉🏻Skills Gained: Implementation and analysis of fundamental data structures (arrays, linked
-                        lists, stacks, queues, trees, graphs, hash tables) and algorithms (searching, sorting,
-                        traversal) using the Java programming language, focusing on time and space complexity.</p>
-                    <a href="Certificates/Data Structure and Algorithms using Java.pdf" class="certificate-btn"
-                        download="Data_Structure_Algorithms_Java_Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-            <!-- Certificate 6 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/ibm.png" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Journey to Cloud Envisioning Your Solution</h3>
-                        <span class="certificate-date">Jun 2024</span>
-                    </div>
-                    <p class="certificate-issuer">IBM</p>
-                    <p class="certificate-description">Achieved in June 2024, this IBM badge signifies the acquisition
-                        of essential concepts for applying data science methodologies within an enterprise
-                        environment.<br>
-                        👉🏻Skills Gained: Introduction to the data science lifecycle within an enterprise context,
-                        understanding key roles, challenges of scaling data science, core methodologies, and the
-                        importance of data governance and model management.</p>
-                    <a href="Certificates/ibm.png" class="certificate-btn" download="IBM_Cloud_Certificate.png">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-            <!-- Certificate 7 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/Front.jpg" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Frontend Web Development</h3>
-                        <span class="certificate-date">Dec 2023</span>
-                    </div>
-                    <p class="certificate-issuer">Lakshya IT Solution</p>
-                    <p class="certificate-description">I have successfully completed a Frontend Web Development
-                        certification course, significantly enhancing my skills in HTML5, CSS3, and JavaScript. Through
-                        hands-on projects, I mastered modern techniques like responsive design (Flexbox, Grid), CSS
-                        animations, DOM manipulation, and API integration. The course deepened my understanding of
-                        semantic HTML, accessibility standards, and cross-browser compatibility while strengthening my
-                        problem-solving abilities in JavaScript (ES6+). I’m now proficient in building interactive,
-                        user-centric web applications with clean code and optimized performance, equipped to contribute
-                        effectively to frontend development teams.</p>
-                    <a href="Certificates/Front.jpg" class="certificate-btn"
-                        download="Frontend_Web_Development_Certificate.jpg">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-
-
-            <!-- Certificate 8 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/ITI.png" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Industrial Training Institute (ITI)</h3>
-                        <span class="certificate-date">Aug 2016-17</span>
-                    </div>
-                    <p class="certificate-issuer">Ministry of Skill Development and Enterpreneurship Goverment of India
-                    </p>
-                    <p class="certificate-description">Upon completing the ITI COPA trade, I gained comprehensive
-                        proficiency in computer fundamental and stroubleshooting, and operating systems. I developed
-                        strong skills in office productivity software (MS Word, Excel, PowerPoint, Internet & Email) for
-                        efficient data management and communication. The course equipped me with foundational
-                        programming knowledge in C/C++, HTML, and CSS, along with database concepts for data
-                        handling.his practical one-year NCVT-certified program prepared me for roles such as Computer
-                        Operator, Data Entry Executive, Office Assistant, or Junior Programmer, providing a solid entry
-                        point into the IT and administrative sectors.</p>
-                    <a href="Certificates/ITI.png" class="certificate-btn" download="ITI_Certificate.png">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-            <!-- Certificate 9 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/AW.png" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">AWS Cloud Practitioner Essentials</h3>
-                        <span class="certificate-date">Sep 2025</span>
-                    </div>
-                    <p class="certificate-issuer">Amazon Web Services (AWS)
-                    </p>
-                    <p class="certificate-description">Achieved in September 2025, this AWS certificate validates a
-                        foundational understanding of Amazon Web Services cloud concepts and services.
-                        <br>👉🏻Skills Gained: This official AWS Certification validates a comprehensive and
-                        foundational
-                        understanding of the Amazon Web Services (AWS) Cloud. It demonstrates proven knowledge of core
-                        cloud concepts, essential AWS services, fundamental architecture best practices, and the value
-                        proposition of cloud computing. The credential signifies an ability to articulate basic AWS
-                        security and compliance principles, including the Shared Responsibility Model, and an
-                        understanding of core billing, pricing, and cloud economics.
-                        Through this certification, I gained expertise in navigating the AWS Cloud environment,
-                        identifying key services like compute (EC2), storage (S3), databases (RDS), and networking
-                        (VPC), and understanding their primary use cases.
-                    </p>
-                    <a href="Certificates/AWS.pdf" class="certificate-btn"
-                        download="AWS Cloud Practitioner Essentials Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-            <!-- Certificate 10 -->
-            <div class="certificate-box">
-                <div class="certificate-img">
-                    <img src="Certificates/App.png" alt="Database Certification" loading="lazy">
-                </div>
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <h3 class="certificate-title">Apprenticeship in HPCL </h3>
-                        <span class="certificate-date">Jan 2018-19</span>
-                    </div>
-                    <p class="certificate-issuer">Ministry of Skill Development and Enterpreneurship Goverment of India
-                    </p>
-                    <p class="certificate-description">I have successfully completed the COPA Trade Apprenticeship
-                        Certificate Course, a government-recognized program certified by NCVT. This comprehensive
-                        training equipped me with practical skills in computer operations, including hardware assembly,
-                        software installation, and troubleshooting. I gained proficiency in office automation tools,
-                        learned programming fundamentals in Python/C++, and developed database management capabilities.
-                        The course also covered internet applications and basic networking, while strengthening my
-                        problem-solving and communication skills. Through hands-on projects and industry-aligned
-                        training, I am now prepared for roles in IT support, data entry, and junior programming
-                        positions, holding an NSQF Level-4 certification that validates my technical competencies.</p>
-                    <a href="Certificates/Apprenticeship_Certificate.pdf" class="certificate-btn"
-                        download="HPCL_Apprenticeship_Certificate.pdf">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills" id="skills">
-        <h2 class="heading">My <span>Skills</span></h2>
-        <div class="skills-container">
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"
-                    loading="lazy">
-                <h4>HTML5</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"
-                    loading="lazy">
-                <h4>CSS3</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                    alt="JavaScript" loading="lazy">
-                <h4>JavaScript</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"
-                    loading="lazy">
-                <h4>Java</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"
-                    loading="lazy">
-                <h4>MySQL</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
-                    loading="lazy">
-                <h4>Python</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"
-                    loading="lazy">
-                <h4>C++</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=shQTXiDQiQVR&format=png&color=000000" alt="C Programming"
-                    loading="lazy">
-                <h4>C</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"
-                    loading="lazy">
-                <h4>React</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000" alt="Node"
-                    loading="lazy">
-                <h4>Node.js</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=2ZOaTclOqD4q&format=png&color=000000" alt="Express"
-                    loading="lazy">
-                <h4>Express.js</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"
-                    loading="lazy">
-                <h4>MongoDB</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" alt="Tailwindcss"
-                    loading="lazy">
-                <h4>Tailwindcss</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"
-                    loading="lazy">
-                <h4>Git</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=LoL4bFzqmAa0&format=png&color=000000" alt="GitHub"
-                    loading="lazy">
-                <h4>GitHub</h4>
-            </div>
-            <div class="skills-box">
-                <img src="https://img.icons8.com/?size=100&id=ZMc42tPbG32H&format=png&color=000000" alt="Bootstrap"
-                    loading="lazy">
-                <h4>Bootstrap</h4>
-            </div>
-        </div>
-    </section>
-
-    <section class="projects" id="projects">
-        <h2 class="heading">My <span>Projects</span></h2>
-        <div class="projects-container">
-            <!-- Project 1 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/L.png" alt="E-commerce Website" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Library Management System</h3>
-                        <span class="project-duration">Jan 2025 - April 2025</span>
-                    </div>
-                    <p class="project-description">This Library Management System is a comprehensive web application
-                        designed to fully digitize and automate the operations of a library, targeting efficiency and
-                        reducing manual paperwork. Built using JSP and Servlets for dynamic web logic, it connects to a
-                        MySQL database via JDBC to securely manage all data transactions. The system enforces role-based
-                        authority login to protect sensitive functions, provides bulk data import capabilities via
-                        Excel/CSV for librarians, and automates critical processes like issuing books, calculating
-                        fines, generating PDF receipts, and flagging defaulters who fail to return books after a
-                        two-week grace period past the due date.
-                    </p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>Secure Role-Based Authority Login</h4>
-                            Implements a robust authentication system that distinguishes between Admin/Librarian and
-                            Student logins. Librarians have full access to all management features, while students can
-                            only view their profile, borrowing history, and status.
-                        </li>
-                        <li>
-                            <h4>Bulk Student & Book Data Import via Excel/CSV</h4>
-                            Librarians can add students and books individually or in bulk by uploading Excel (.xlsx) or
-                            CSV files. This feature uses a library like Apache POI on the server-side (Servlet) to parse
-                            the file, extract the data, and insert it into the MySQL database in batch, saving
-                            significant manual entry time.
-                        </li>
-                        <li>
-                            <h4>Book Issue & Return Management</h4>
-                            The core transaction system records the issue date, due date (e.g., set to 14 days after
-                            issuing), and return date for every book. The Servlet logic calculates the difference
-                            between the return date and the due date to determine if a fine is applicable.
-                        </li>
-                        <li>
-                            <h4>Automated Fine Calculation and Defaulter List</h4>
-                            The system automatically imposes a fine (e.g., ₹10 per day) if a book is returned after the
-                            due date. If a book is not returned within 2 weeks (14 days) past the due date, the student
-                            is automatically added to a Defaulter List, which can restrict them from borrowing further
-                            books.
-                        </li>
-                        <li>
-                            <h4>Dynamic PDF Generation for Receipts & Reports</h4>
-                            Integrates a PDF generation library (like iText or Apache PDFBox) in the backend to create
-                            official receipts for issued books, returned books with fine details, and student reports.
-                            These PDFs are generated on-the-fly by a Servlet and can be downloaded or printed.
-                        </li>
-                        <li>
-                            <h4>Centralized MySQL Database with JDBC Connectivity</h4>
-                            All data—including student details, book inventory, transaction records, fine payments, and
-                            the defaulter list—is stored and managed in a structured MySQL database. JDBC is used from
-                            the Servlets to perform all CRUD operations securely and efficiently.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">JSP</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Java Script</span>
-                        <span class="tech-tag">Servlet</span>
-                        <span class="tech-tag">MySQL</span>
-
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Library.mp4"
-                            data-title="Library Management System Website Demo"><i class="fas fa-external-link-alt"></i>
-                            Live Demo</a>
-                        <a href="https://github.com/Adishiv9494/Library_Management_System"><i class="fab fa-github"></i>
-                            View Code</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/C.png" alt="Portfolio Website" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title"> Code Editor</h3>
-                        <span class="project-duration">Feb 2025 - Aug 2025</span>
-                    </div>
-                    <p class="project-description">This project is a sophisticated, real-time collaborative code editor
-                        that allows multiple developers to write and edit code together simultaneously from different
-                        locations. It leverages a powerful React frontend to create a dynamic and responsive user
-                        interface, integrated with the CodeMirror editor component for essential features like syntax
-                        highlighting and language support. The Node.js and Express backend serves as the central server,
-                        managing client connections and using Socket.IO to establish a persistent, bidirectional
-                        communication channel. This enables the instantaneous broadcast of every code change to all
-                        connected users in the same session, creating a seamless, shared editing experience.</p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>Real-Time Collaboration Engine</h4>
-                            The core functionality is powered by Socket.IO, which uses WebSockets to instantly
-                            synchronize code changes across all clients in a room. When one user types, the changes are
-                            immediately reflected on the screens of all other participants.
-                        </li>
-                        <li>
-                            <h4>Advanced Editing Interface with CodeMirror</h4>
-                            Integrates the CodeMirror library into the React frontend to provide a professional-grade
-                            code editor with features like syntax highlighting, auto-indentation, bracket matching, and
-                            line numbers for a wide range of programming languages.
-                        </li>
-                        <li>
-                            <h4>Language Selection and Theme Support</h4>
-                            Provides a user-friendly dropdown menu to select the programming language (e.g., JavaScript,
-                            Python, C++), which dynamically adjusts the syntax highlighting. It may also support
-                            different color themes for user preference.
-                        </li>
-                        <li>
-                            <h4>Responsive and Intuitive UI</h4>
-                            The React application is styled with CSS (or a framework like Material-UI) to create a
-                            clean, intuitive, and fully responsive interface. The layout is designed to focus on the
-                            code, with clear controls for language, sharing the room link, and viewing connected users.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Socket.IO</span>
-                        <span class="tech-tag">CodeMirror</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Code.mp4"
-                            data-title="Real-Time Collaborative Code Editor Demo"><i
-                                class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="https://github.com/Adishiv9494/CodeEditor"><i class="fab fa-github"></i> View Code</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/Job.jpg" alt="Task Management App" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Job & Internship Portal Web Application</h3>
-                        <span class="project-duration">Oct 2023 - Mar 2024</span>
-                    </div>
-                    <p class="project-description">A MERN stack Job and Internship Portal is a full-stack web
-                        application designed to bridge the gap between companies (Recruiters) and job seekers
-                        (Applicants). </p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>User Authentication & Authorization</h4>
-                            The system provides separate secure login and registration portals for recruiters and
-                            applicants. It uses technologies like JWT (JSON Web Tokens) to manage sessions, ensuring
-                            users can only access and perform actions pertinent to their role.
-                        </li>
-                        <li>
-                            <h4>Recruiter Dashboard: Job & Internship Management</h4>
-                            This dedicated interface allows recruiters to post new job/internship listings by filling
-                            out a form (title, description, requirements, etc.), view all their posted opportunities,
-                            and edit or delete them as needed.
-                        </li>
-                        <li>
-                            <h4>Applicant Dashboard: Profile & Application Management</h4>
-                            Applicants have a personal dashboard where they can create and manage a detailed
-                            professional profile (resume, skills, education). Crucially, they can browse all available
-                            jobs/internships, view details, and submit applications directly through the portal. They
-                            can also track the status of all their submitted applications.
-                        </li>
-                        <li>
-                            <h4>Advanced Filtering and Search Functionality</h4>
-                            A powerful search bar combined with filters (e.g., filter by job title, company name,
-                            location, salary range, internship/job type) is essential. This allows applicants to quickly
-                            find relevant opportunities and helps recruiters sift through applications efficiently,
-                            greatly enhancing the user experience.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Express.js</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Postman</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/J.mp4"
-                            data-title=" Job & Internship Portal Demo"><i class="fas fa-external-link-alt"></i> Live
-                            Demo</a>
-                        <a href="https://github.com/Adishiv9494/Job_Portal"><i class="fab fa-github"></i> View Code</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 4 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/Port.png" alt="Portfolio Website" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Portfolio Web Application</h3>
-                        <span class="project-duration">Mar 2023 - Jul 2025</span>
-                    </div>
-                    <p class="project-description">This portfolio website is a professional and interactive front-end
-                        project designed to showcase my skills, projects, Certificates, Education and professional
-                        background to potential employers and clients. It is built using core web technologies: HTML for
-                        the fundamental structure and content, CSS for styling, layout, and creating a visually
-                        appealing and responsive design that works on all devices, and JavaScript to add dynamic
-                        interactivity, smooth animations, and enhanced user experience. </p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>Fully Responsive Design</h4>
-                            The website uses CSS Flexbox, Grid, and media queries to ensure it automatically adapts and
-                            looks perfect on all screen sizes, from desktops and laptops to tablets and mobile phones.
-                        </li>
-                        <li>
-                            <h4>Interactive Navigation Menu</h4>
-                            Features a fixed or sticky navigation bar with smooth scrolling to different sections (e.g.,
-                            Home, About, Projects). On mobile view, it transforms into a sleek hamburger menu for
-                            optimal space utilization.
-                        </li>
-                        <li>
-                            <h4>Dynamic Project Showcase Section</h4>
-                            Includes a grid or carousel of project cards. Each card features an image, title, short
-                            description, and interactive buttons that link to the live demo and source code on GitHub.
-                        </li>
-                        <li>
-                            <h4>Animated Elements for Engagement</h4>
-                            JavaScript and CSS animations are used to create subtle effects like fade-in sections as the
-                            user scrolls (scroll-triggered animations), hover effects on buttons, and interactive
-                            elements that enhance user engagement.
-                        </li>
-                        <li>
-                            <h4>Skills & Technologies Section</h4>
-                            A dedicated area visually displays proficiency in various programming languages, frameworks,
-                            and tools using progress bars, animated percentage counters, or clean icon layouts.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Port.mp4"
-                            data-title="Portfolio Web Application Demo"><i class="fas fa-external-link-alt"></i> Live
-                            Demo</a>
-                        <a href="https://github.com/Adishiv9494/Portfolio"><i class="fab fa-github"></i> View
-                            Code</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 5 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/Todo.png" alt="Portfolio Website" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Todo List Web Application</h3>
-                        <span class="project-duration">Feb 2023</span>
-                    </div>
-                    <p class="project-description">This Todo List web application is a dynamic and user-friendly project
-                        designed to help users efficiently manage their daily tasks and boost productivity. It leverages
-                        HTML for the core structure, Bootstrap for rapid prototyping and creating a responsive, modern
-                        layout with pre-styled components, and custom CSS for personalized styling and enhancements. The
-                        functionality is driven by vanilla JavaScript, which handles all the interactive logic,
-                        including adding new tasks, marking them as complete, editing, deleting, and persistently
-                        storing the task list in the user's browser using local storage.
-
-                    </p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>Responsive Bootstrap UI</h4>
-                            Utilizes Bootstrap's grid system and components (like buttons, forms, and alerts) to create
-                            a clean, mobile-friendly interface that automatically adjusts to different screen sizes
-                            without extra effort.
-                        </li>
-                        <li>
-                            <h4>CRUD Functionality (Create, Read, Update, Delete)</h4>
-                            The core of the app allows users to Create new tasks, Read and view the list of all tasks,
-                            Update task status (mark complete/edit text), and Delete tasks individually or clear all
-                            completed ones.
-                        </li>
-                        <li>
-                            <h4>Interactive Task Management</h4>
-                            JavaScript event listeners enable users to mark tasks as complete (often with a
-                            strikethrough effect), edit existing task text inline, and delete tasks with a click, making
-                            the list fully interactive.
-                        </li>
-                        <li>
-                            <h4>Dynamic Task Count</h4>
-                            Features a dynamic counter that updates in real-time to display the total number of active
-                            tasks remaining, giving users a clear overview of their pending workload.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Bootstrap</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Todo.mp4"
-                            data-title="Todo List Web Application Demo"><i class="fas fa-external-link-alt"></i> Live
-                            Demo</a>
-                        <a href="https://github.com/Adishiv9494/TODO-List"><i class="fab fa-github"></i> View Code</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 6 -->
-            <div class="project-item">
-                <div class="project-img">
-                    <img src="Images/Weather.png" alt="Portfolio Website" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Weather Web Application</h3>
-                        <span class="project-duration">Dec 2022</span>
-                    </div>
-                    <p class="project-description">This Weather Web Application is a dynamic and interactive front-end
-                        project that provides real-time weather information for any location worldwide. It uses HTML to
-                        structure the content, CSS for styling and creating a visually appealing, responsive interface,
-                        and vanilla JavaScript to handle all the logic, user interactions, and most importantly, to
-                        fetch live data from a third-party Weather API. The core functionality relies on making
-                        asynchronous API calls to retrieve data such as temperature, humidity, wind speed, and weather
-                        conditions, which is then dynamically displayed to the user.</p>
-                    <ul class="project-features">
-                        <li>
-                            <h4>API Integration for Live Data</h4>
-                            The app's core functionality is powered by fetching data from a weather API (like
-                            OpenWeatherMap). JavaScript's fetch() API or axios is used to make HTTP requests to the
-                            API's endpoint, retrieve JSON data, and extract relevant information.
-                        </li>
-                        <li>
-                            <h4>Search Functionality</h4>
-                            Implements a user-friendly search bar that allows users to enter any city name. The
-                            application takes this input, sends it to the weather API, and displays the current weather
-                            and forecast for that specific location.
-                        </li>
-                        <li>
-                            <h4>Responsive and Visually Adaptive Design</h4>
-                            The CSS ensures the application is fully responsive on all devices. Furthermore, the
-                            background or icons can dynamically change based on the fetched weather condition (e.g.,
-                            showing a sun icon for clear sky, clouds for overcast, etc.).
-                        </li>
-                        <li>
-                            <h4>Dynamic DOM Updates</h4>
-                            Uses JavaScript to manipulate the DOM, dynamically updating HTML content to display the
-                            fetched weather data (like temperature, description, humidity) without needing to refresh
-                            the entire page, creating a seamless user experience.
-                        </li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Weather API</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="live-demo-btn" data-video="Videoes/Weather.mp4"
-                            data-title="Weather Web App Demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="https://github.com/Adishiv9494/weather"><i class="fab fa-github"></i> View Code</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Fixed Services Section -->
-    <section class="services" id="services">
-        <h2 class="heading">My <span>Services</span></h2>
-
-        <div class="services-container">
-            <!-- Service 1: Frontend Developer -->
-            <div class="service-box">
-                <i class="fas fa-laptop-code service-icon"></i>
-                <h3 class="service-title">Frontend Developer</h3>
-                <p class="service-description">
-                    I specialize in crafting engaging and intuitive user interfaces using the latest front-end
-                    technologies. Whether you need a responsive website, a dynamic web application, or interactive
-                    components, I bring expertise in modern UI/UX design principles.
-                </p>
-                <div class="service-tech">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Responsive Design</span>
-                </div>
-                <!-- <a href="#" class="read-more">Read more</a> -->
-            </div>
-
-            <!-- Service 2: Backend Developer -->
-            <div class="service-box">
-                <i class="fas fa-server service-icon"></i>
-                <h3 class="service-title">Backend Developer</h3>
-                <p class="service-description">
-                    I build robust server-side applications with scalable architectures. From API development to
-                    database optimization, I ensure your application's backend is efficient, secure, and performs
-                    flawlessly under any load.
-                </p>
-                <div class="service-tech">
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">API Development</span>
-                    <span class="tech-tag">RESTful Services</span>
-                </div>
-            </div>
-
-            <!-- Service 3: Full Stack Developer -->
-            <div class="service-box">
-                <i class="fas fa-code service-icon"></i>
-                <h3 class="service-title">Full Stack Developer</h3>
-                <p class="service-description">
-                    I deliver end-to-end web solutions that combine front-end and back-end technologies. Whether you're
-                    building a dynamic web application or any full stack web application platform, I provide expertise
-                    in complete
-                    solution development.
-                </p>
-                <div class="service-tech">
-                    <span class="tech-tag">MERN Stack</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Database Design</span>
-                    <span class="tech-tag">API Integration</span>
-                    <span class="tech-tag">Deployment</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2 class="heading">Contact <span>Me</span></h2>
-        <form action="#">
-            <div class="input-box">
-                <input type="text" id="name" class="item" placeholder="Full Name" autocomplete="off" required>
-                <input type="email" id="email" class="item" placeholder="Email Address" autocomplete="off" required>
-            </div>
-            <div class="input-box">
-                <input type="number" id="number" class="item" placeholder="Mobile Number" autocomplete="off" required>
-                <input type="text" id="subject" class="item" placeholder="Email Subject" autocomplete="off" required>
-            </div>
-            <textarea name="" id="message" cols="30" rows="10" class="item" placeholder="Your Message"
-                autocomplete="off" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
-
-        <div class="contact-qr">
-            <div class="qr-box">
-                <img src="WhatsApp.png" alt="WhatsApp QR Code" loading="lazy">
-                <p>Scan to message me</p>
-            </div>
-            <div class="qr-box">
-                <img src="Email.png" alt="Email QR Code" loading="lazy">
-                <p>Scan to email me</p>
-            </div>
-            <div class="qr-box">
-                <img src="Contact.png" alt="Call QR Code" loading="lazy">
-                <p>Scan to call me</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-text">
-            <p>Copyright &copy; 2024 by <a href="#">Aditya Singh</a> | All Rights Reserved.</p>
-        </div>
-        <div class="footer-icontop">
-            <a href="#home"><i class="fa-solid fa-angles-up"></i></a>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Scripts -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js">
-    </script>
-    <script src="script.js">
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
