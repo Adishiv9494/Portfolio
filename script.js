@@ -1,516 +1,415 @@
-// ===== Professional Loader =====
-function initLoader() {
-    const loader = document.getElementById('loader');
-    const progressFill = document.querySelector('.progress-fill');
-    const progressPercentage = document.querySelector('.progress-percentage');
-    const techItems = document.querySelectorAll('.tech-item');
-    
-    // Check if loader has been shown before
-    const loaderShown = sessionStorage.getItem('loaderShown');
-    
-    if (loaderShown) {
-        loader.style.display = 'none';
-        document.body.classList.add('loaded');
-        initAllAnimations();
-        updateAllCounters();
-        return;
-    }
-    
-    document.body.style.overflow = 'hidden';
-    
-    let progress = 0;
-    const duration = 2000;
-    const interval = 50;
-    const increment = 100 / (duration / interval);
-    
-    const updateProgress = setInterval(() => {
-        progress += increment;
-        const easedProgress = easeOutQuad(progress / 100) * 100;
-        
-        if (progressFill) {
-            progressFill.style.width = `${easedProgress}%`;
-        }
-        
-        if (progressPercentage) {
-            progressPercentage.textContent = `${Math.min(100, Math.floor(easedProgress))}%`;
-        }
-        
-        // Animate tech items as progress increases
-        techItems.forEach((item, index) => {
-            if (easedProgress > (index + 1) * 20) {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }
-        });
-        
-        if (progress >= 100) {
-            clearInterval(updateProgress);
-            
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-                document.body.style.overflow = 'auto';
+        // ================================================================
+        // 1. LOADER – FIXED: ensures loader hides and content appears
+        // ================================================================
+        function initLoader() {
+            const loader = document.getElementById('loader');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressPercentage = document.querySelector('.progress-percentage');
+            const techItems = document.querySelectorAll('.tech-item');
+
+            // If loader already shown in this session, hide immediately
+            const loaderShown = sessionStorage.getItem('loaderShown');
+            if (loaderShown) {
+                loader.classList.add('hidden-final');
                 document.body.classList.add('loaded');
-                
-                sessionStorage.setItem('loaderShown', 'true');
-                
-                setTimeout(() => {
-                    initAllAnimations();
-                    updateAllCounters();
-                }, 300);
-            }, 500);
+                initAllAnimations();
+                updateAllCounters();
+                return;
+            }
+
+            document.body.style.overflow = 'hidden';
+
+            let progress = 0;
+            const duration = 2000;
+            const interval = 50;
+            const increment = 100 / (duration / interval);
+
+            const updateProgress = setInterval(function() {
+                progress += increment;
+                var easedProgress = easeOutQuad(progress / 100) * 100;
+
+                if (progressFill) {
+                    progressFill.style.width = easedProgress + '%';
+                }
+                if (progressPercentage) {
+                    progressPercentage.textContent = Math.min(100, Math.floor(easedProgress)) + '%';
+                }
+
+                techItems.forEach(function(item, index) {
+                    if (easedProgress > (index + 1) * 20) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+
+                if (progress >= 100) {
+                    clearInterval(updateProgress);
+                    // Hide loader with animation then remove it
+                    loader.classList.add('hidden');
+                    setTimeout(function() {
+                        loader.classList.add('hidden-final');
+                        document.body.style.overflow = 'auto';
+                        document.body.classList.add('loaded');
+                        sessionStorage.setItem('loaderShown', 'true');
+                        setTimeout(function() {
+                            initAllAnimations();
+                            updateAllCounters();
+                        }, 300);
+                    }, 500);
+                }
+            }, interval);
+
+            // Safety fallback: if loader doesn't finish in 5s, force hide
+            setTimeout(function() {
+                if (!loader.classList.contains('hidden-final')) {
+                    loader.classList.add('hidden');
+                    setTimeout(function() {
+                        loader.classList.add('hidden-final');
+                        document.body.style.overflow = 'auto';
+                        document.body.classList.add('loaded');
+                        sessionStorage.setItem('loaderShown', 'true');
+                        initAllAnimations();
+                        updateAllCounters();
+                    }, 300);
+                }
+            }, 5000);
         }
-    }, interval);
-}
 
-function easeOutQuad(t) {
-    return t * (2 - t);
-}
+        function easeOutQuad(t) {
+            return t * (2 - t);
+        }
 
-// ===== Theme Toggle =====
-function initTheme() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    html.setAttribute('data-theme', savedTheme);
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Add animation effect
-            themeToggle.classList.add('clicked');
-            setTimeout(() => {
-                themeToggle.classList.remove('clicked');
-            }, 300);
-        });
-    }
-}
+        // ================================================================
+        // 2. THEME TOGGLE
+        // ================================================================
+        function initTheme() {
+            var themeToggle = document.getElementById('theme-toggle');
+            var html = document.documentElement;
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            html.setAttribute('data-theme', savedTheme);
 
-// ===== Typing Animation =====
-function initTyping() {
-    const typingElement = document.querySelector('.typing-text');
-    if (!typingElement) return;
-    
-    // Check if Typed.js is available
-    if (typeof Typed !== 'undefined') {
-        try {
-            const typed = new Typed('.typing-text', {
-                strings: [
-                    'Full Stack Developer',
-                    'Web Developer',
-                    'Frontend Developer',
-                    'Backend Developer',
-                    'Problem Solver'
-                ],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 1500,
-                loop: true,
-                showCursor: false,
-                smartBackspace: true
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    var currentTheme = html.getAttribute('data-theme');
+                    var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    html.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+        }
+
+        // ================================================================
+        // 3. TYPING ANIMATION
+        // ================================================================
+        function initTyping() {
+            var typingElement = document.querySelector('.typing-text');
+            if (!typingElement) return;
+            if (typeof Typed !== 'undefined') {
+                try {
+                    new Typed('.typing-text', {
+                        strings: ['Full Stack Developer', 'Web Developer', 'Frontend Developer', 'Backend Developer',
+                            'Problem Solver'
+                        ],
+                        typeSpeed: 50,
+                        backSpeed: 30,
+                        backDelay: 1500,
+                        loop: true,
+                        showCursor: false,
+                        smartBackspace: true
+                    });
+                } catch (e) {
+                    typingElement.textContent = 'Full Stack Developer';
+                }
+            } else {
+                typingElement.textContent = 'Full Stack Developer';
+            }
+        }
+
+        // ================================================================
+        // 4. MOBILE NAV
+        // ================================================================
+        function initMobileNav() {
+            var toggle = document.getElementById('mobile-toggle');
+            var navbar = document.querySelector('.navbar');
+            var links = document.querySelectorAll('.nav-link');
+
+            if (!toggle || !navbar) return;
+
+            toggle.addEventListener('click', function() {
+                toggle.classList.toggle('active');
+                navbar.classList.toggle('active');
+                document.body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
             });
-        } catch (error) {
-            console.warn('Typed.js error:', error);
-            typingElement.textContent = 'Full Stack Developer';
-        }
-    } else {
-        typingElement.textContent = 'Full Stack Developer';
-    }
-}
 
-// ===== Mobile Navigation =====
-function initMobileNav() {
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navbar = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    if (!mobileToggle || !navbar) return;
-    
-    mobileToggle.addEventListener('click', () => {
-        mobileToggle.classList.toggle('active');
-        navbar.classList.toggle('active');
-        document.body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
-    });
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileToggle.classList.remove('active');
-            navbar.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (navbar.classList.contains('active') && 
-            !navbar.contains(e.target) && 
-            !mobileToggle.contains(e.target)) {
-            mobileToggle.classList.remove('active');
-            navbar.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-}
+            links.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    toggle.classList.remove('active');
+                    navbar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
 
-// ===== Smooth Scrolling =====
-function initSmoothScroll() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const header = document.querySelector('.header');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                
-                // Close mobile menu if open
-                const mobileToggle = document.getElementById('mobile-toggle');
-                const navbar = document.querySelector('.navbar');
-                if (mobileToggle && navbar && navbar.classList.contains('active')) {
-                    mobileToggle.classList.remove('active');
+            document.addEventListener('click', function(e) {
+                if (navbar.classList.contains('active') &&
+                    !navbar.contains(e.target) &&
+                    !toggle.contains(e.target)) {
+                    toggle.classList.remove('active');
                     navbar.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 }
-                
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    const headerHeight = header ? header.offsetHeight : 0;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
-                    
-                    // Update active nav link
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update URL hash
-                    history.pushState(null, null, href);
+            });
+        }
+
+        // ================================================================
+        // 5. SMOOTH SCROLL & ACTIVE NAV
+        // ================================================================
+        function initSmoothScroll() {
+            var links = document.querySelectorAll('.nav-link');
+            var header = document.querySelector('.header');
+
+            links.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    var href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        var targetId = href.substring(1);
+                        var target = document.getElementById(targetId);
+                        if (target) {
+                            var offset = header ? header.offsetHeight : 0;
+                            window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                            links.forEach(function(l) { l.classList.remove('active'); });
+                            this.classList.add('active');
+                            history.pushState(null, null, href);
+                        }
+                    }
+                });
+            });
+
+            window.addEventListener('scroll', function() {
+                var sections = document.querySelectorAll('section[id]');
+                var scrollPos = window.scrollY + 100;
+                var current = '';
+                sections.forEach(function(s) {
+                    var top = s.offsetTop - (header ? header.offsetHeight : 0);
+                    var height = s.offsetHeight;
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        current = s.id;
+                    }
+                });
+                links.forEach(function(l) {
+                    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+                });
+            });
+        }
+
+        // ================================================================
+        // 6. BACK TO TOP
+        // ================================================================
+        function initBackToTop() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                var visible = window.scrollY > 300;
+                btn.classList.toggle('visible', visible);
+                btn.style.opacity = visible ? '1' : '0';
+                btn.style.visibility = visible ? 'visible' : 'hidden';
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.querySelectorAll('.nav-link').forEach(function(l) { l.classList.remove('active'); });
+                var home = document.querySelector('a[href="#home"]');
+                if (home) home.classList.add('active');
+            });
+        }
+
+        // ================================================================
+        // 7. STATS COUNTER
+        // ================================================================
+        function updateStatsCounter() {
+            var stats = document.querySelectorAll('.stat-number');
+            stats.forEach(function(stat) {
+                var target = parseInt(stat.getAttribute('data-count')) || 0;
+                var duration = 2000;
+                var interval = 50;
+                var increment = target / (duration / interval);
+                var current = 0;
+                var timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                        stat.textContent = Math.floor(current);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, interval);
+            });
+        }
+
+        // ================================================================
+        // 8. COUNTER UPDATES
+        // ================================================================
+        function updateTotalCounts() {
+            var proj = document.querySelectorAll('.project-card');
+            var total = document.getElementById('projectsTotal');
+            if (total) total.textContent = proj.length;
+
+            var skills = document.querySelectorAll('.skill-icon-card');
+            var soft = document.querySelectorAll('.soft-skill-card');
+            var skillsTotal = document.getElementById('skillsTotal');
+            if (skillsTotal) skillsTotal.textContent = skills.length + soft.length;
+
+            updateFooterStats();
+        }
+
+        function updateShowingCounts() {
+            var hidden = document.querySelectorAll('.project-card.hidden-project');
+            var showingSpan = document.getElementById('showingProjects');
+            var totalSpan = document.getElementById('projectsTotal');
+            if (showingSpan && totalSpan) {
+                var total = document.querySelectorAll('.project-card').length;
+                showingSpan.textContent = total - hidden.length;
+                totalSpan.textContent = total;
+            }
+        }
+
+        function updateFooterStats() {
+            var fp = document.getElementById('footerProjects');
+            var fc = document.getElementById('footerCerts');
+            if (fp) fp.textContent = document.querySelectorAll('.project-card').length;
+            if (fc) {
+                var tc = document.getElementById('totalCerts');
+                if (tc) fc.textContent = tc.textContent;
+            }
+        }
+
+        function updateEnhancedCounts() {
+            var hidden = document.querySelectorAll('.cert-card.hidden-cert');
+            var showingSpan = document.getElementById('showingCerts');
+            var totalSpan = document.getElementById('totalCerts');
+            var loadBtn = document.getElementById('loadMoreCerts');
+            if (showingSpan && totalSpan) {
+                var total = document.querySelectorAll('.cert-card').length;
+                var showing = total - hidden.length;
+                showingSpan.textContent = showing;
+                totalSpan.textContent = total;
+                if (loadBtn && hidden.length > 0) {
+                    var span = loadBtn.querySelector('span');
+                    if (span) span.textContent = 'Load More (' + hidden.length + ' remaining)';
                 }
             }
-        });
-    });
-}
-
-// ===== Active Navigation on Scroll =====
-function updateActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const header = document.querySelector('.header');
-    const headerHeight = header ? header.offsetHeight : 0;
-    
-    let current = '';
-    const scrollPos = window.scrollY + 100;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - headerHeight;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            current = sectionId;
         }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
 
-// ===== Back to Top Button =====
-function initBackToTop() {
-    const backToTop = document.getElementById('backToTop');
-    
-    if (!backToTop) return;
-    
-    const toggleVisibility = () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('visible');
-            backToTop.style.opacity = '1';
-            backToTop.style.visibility = 'visible';
-        } else {
-            backToTop.classList.remove('visible');
-            backToTop.style.opacity = '0';
-            backToTop.style.visibility = 'hidden';
-        }
-    };
-    
-    window.addEventListener('scroll', toggleVisibility);
-    toggleVisibility();
-    
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-        // Update active nav link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
-        const homeLink = document.querySelector('a[href="#home"]');
-        if (homeLink) homeLink.classList.add('active');
-    });
-}
-
-// ===== Animate Statistics Counter =====
-function updateStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-count')) || 0;
-        const duration = 2000;
-        const interval = 50;
-        const increment = target / (duration / interval);
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-                stat.textContent = Math.floor(current);
-                stat.parentElement.classList.add('counter-complete');
-            } else {
-                stat.textContent = Math.floor(current);
+        function updateProjectsCount() {
+            var hidden = document.querySelectorAll('.project-card.hidden-project');
+            var showingSpan = document.getElementById('showingProjects');
+            var totalSpan = document.getElementById('projectsTotal');
+            var loadBtn = document.getElementById('loadMoreProjects');
+            if (showingSpan && totalSpan) {
+                var total = document.querySelectorAll('.project-card').length;
+                var showing = total - hidden.length;
+                showingSpan.textContent = showing;
+                totalSpan.textContent = total;
+                if (loadBtn && hidden.length > 0) {
+                    var span = loadBtn.querySelector('span');
+                    if (span) span.textContent = 'View More Projects (' + hidden.length + ' remaining)';
+                }
             }
-        }, interval);
-    });
-    
-    // Update project count in stats
-    const projectsStat = document.querySelector('.stat-item:nth-child(1) .stat-number');
-    if (projectsStat) {
-        const totalProjects = document.querySelectorAll('.project-card').length;
-        projectsStat.setAttribute('data-count', totalProjects);
-    }
-}
-
-// ===== Update Total Counts =====
-function updateTotalCounts() {
-    // Update project count
-    const projectElements = document.querySelectorAll('.project-card');
-    const projectsTotal = document.getElementById('projectsTotal');
-    if (projectsTotal) projectsTotal.textContent = projectElements.length;
-    
-    // Update skill count
-    const skillElements = document.querySelectorAll('.skill-icon-card');
-    const softSkillElements = document.querySelectorAll('.soft-skill-card');
-    const skillsTotal = document.getElementById('skillsTotal');
-    if (skillsTotal) {
-        skillsTotal.textContent = skillElements.length + softSkillElements.length;
-    }
-    
-    // Update footer stats
-    updateFooterStats();
-}
-
-// ===== Update Showing Counts =====
-function updateShowingCounts() {
-    // Update projects showing
-    const hiddenProjects = document.querySelectorAll('.project-card.hidden-project');
-    const showingProjectsSpan = document.getElementById('showingProjects');
-    const projectsTotalSpan = document.getElementById('projectsTotal');
-    
-    if (showingProjectsSpan && projectsTotalSpan) {
-        const totalProjects = document.querySelectorAll('.project-card').length;
-        const showingProjects = totalProjects - hiddenProjects.length;
-        showingProjectsSpan.textContent = showingProjects;
-        projectsTotalSpan.textContent = totalProjects;
-    }
-}
-
-// ===== Update Footer Stats =====
-function updateFooterStats() {
-    const footerProjects = document.getElementById('footerProjects');
-    const footerCerts = document.getElementById('footerCerts');
-    
-    if (footerProjects) footerProjects.textContent = document.querySelectorAll('.project-card').length;
-    if (footerCerts) {
-        const totalCertsSpan = document.getElementById('totalCerts');
-        if (totalCertsSpan) {
-            footerCerts.textContent = totalCertsSpan.textContent;
+            updateFooterStats();
         }
-    }
-}
 
-// ===== Initialize Education Timeline Animation =====
-function initEducationAnimation() {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    const checkScroll = () => {
-        timelineItems.forEach(item => {
-            const itemTop = item.getBoundingClientRect().top;
-            const itemVisible = 150;
-            
-            if (itemTop < window.innerHeight - itemVisible) {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }
-        });
-    };
-    
-    window.addEventListener('scroll', checkScroll);
-    checkScroll();
-}
+        function updateAllCounters() {
+            updateStatsCounter();
+            updateTotalCounts();
+            updateShowingCounts();
+            updateFooterStats();
+            updateEnhancedCounts();
+            updateProjectsCount();
+        }
 
-// ===== Initialize All Animations =====
-function initAllAnimations() {
-    // Add scroll event listener for active nav
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav();
-    
-    // Initialize scroll animations
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const checkScroll = () => {
-        animateElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('visible');
-            }
-        });
-    };
-    
-    window.addEventListener('scroll', checkScroll);
-    checkScroll();
-}
+        // ================================================================
+        // 9. ANIMATIONS ON SCROLL
+        // ================================================================
+        function initAllAnimations() {
+            window.addEventListener('scroll', function() {
+                var els = document.querySelectorAll('.animate-on-scroll');
+                els.forEach(function(el) {
+                    var top = el.getBoundingClientRect().top;
+                    if (top < window.innerHeight - 150) {
+                        el.classList.add('visible');
+                    }
+                });
+            });
+            // trigger once
+            document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+                var top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 150) {
+                    el.classList.add('visible');
+                }
+            });
+        }
 
-// ===== Load Skills Data =====
-function loadSkillsData() {
-    const skillsData = {
-        programming: [
-            { skill: "C", level: 75, desc: "System Programming", icon: "fas fa-terminal" },
-            { skill: "C++", level: 72, desc: "OOP & Algorithms", icon: "fas fa-cogs" },
-            { skill: "Java", level: 78, desc: "Enterprise Applications", icon: "fab fa-java" },
-            { skill: "Python", level: 75, desc: "Scripting & Automation", icon: "fab fa-python" },
-            { skill: "JavaScript", level: 85, desc: "ES6+ & DOM", icon: "fab fa-js" }
-        ],
-        frontend: [
-            { skill: "HTML5", level: 95, desc: "Semantic Markup", icon: "fab fa-html5" },
-            { skill: "CSS3", level: 90, desc: "Styling & Layouts", icon: "fab fa-css3-alt" },
-            { skill: "React", level: 80, desc: "Components & Hooks", icon: "fab fa-react" },
-            { skill: "JSP", level: 85, desc: "Dynamic Web Pages", icon: "fas fa-file-code" },
-            { skill: "Bootstrap", level: 85, desc: "Responsive Design", icon: "fab fa-bootstrap" }
-        ],
-        backend: [
-            { skill: "Node.js", level: 82, desc: "Runtime & APIs", icon: "fab fa-node-js" },
-            { skill: "MySQL", level: 80, desc: "Database Management", icon: "fas fa-database" },
-            { skill: "MongoDB", level: 70, desc: "NoSQL Database", icon: "fas fa-leaf" },
-            { skill: "Express.js", level: 78, desc: "Web Framework", icon: "fas fa-rocket" },
-            { skill: "Servlet", level: 83, desc: "Java Web Components", icon: "fas fa-cogs" }
-        ],
-        tools: [
-            { skill: "Git", level: 88, desc: "Version Control", icon: "fab fa-git-alt" },
-            { skill: "GitHub", level: 90, desc: "Code Hosting", icon: "fab fa-github" },
-            { skill: "VS Code", level: 92, desc: "Code Editor", icon: "fas fa-code" },
-            { skill: "IntelliJ", level: 80, desc: "Java IDE", icon: "fas fa-lightbulb" },
-            { skill: "Eclipse", level: 75, desc: "Development IDE", icon: "fas fa-sun" }
-        ]
-    };
+        // ================================================================
+        // 10. SKILLS DATA
+        // ================================================================
+        function loadSkillsData() {
+            var data = {
+                programming: [
+                    { skill: "C", level: 75, desc: "System Programming", icon: "fas fa-terminal" },
+                    { skill: "C++", level: 72, desc: "OOP & Algorithms", icon: "fas fa-cogs" },
+                    { skill: "Java", level: 78, desc: "Enterprise Applications", icon: "fab fa-java" },
+                    { skill: "Python", level: 75, desc: "Scripting & Automation", icon: "fab fa-python" },
+                    { skill: "JavaScript", level: 85, desc: "ES6+ & DOM", icon: "fab fa-js" }
+                ],
+                frontend: [
+                    { skill: "HTML5", level: 95, desc: "Semantic Markup", icon: "fab fa-html5" },
+                    { skill: "CSS3", level: 90, desc: "Styling & Layouts", icon: "fab fa-css3-alt" },
+                    { skill: "React", level: 80, desc: "Components & Hooks", icon: "fab fa-react" },
+                    { skill: "JSP", level: 85, desc: "Dynamic Web Pages", icon: "fas fa-file-code" },
+                    { skill: "Bootstrap", level: 85, desc: "Responsive Design", icon: "fab fa-bootstrap" }
+                ],
+                backend: [
+                    { skill: "Node.js", level: 82, desc: "Runtime & APIs", icon: "fab fa-node-js" },
+                    { skill: "MySQL", level: 80, desc: "Database Management", icon: "fas fa-database" },
+                    { skill: "MongoDB", level: 70, desc: "NoSQL Database", icon: "fas fa-leaf" },
+                    { skill: "Express.js", level: 78, desc: "Web Framework", icon: "fas fa-rocket" },
+                    { skill: "Servlet", level: 83, desc: "Java Web Components", icon: "fas fa-cogs" }
+                ],
+                tools: [
+                    { skill: "Git", level: 88, desc: "Version Control", icon: "fab fa-git-alt" },
+                    { skill: "GitHub", level: 90, desc: "Code Hosting", icon: "fab fa-github" },
+                    { skill: "VS Code", level: 92, desc: "Code Editor", icon: "fas fa-code" },
+                    { skill: "IntelliJ", level: 80, desc: "Java IDE", icon: "fas fa-lightbulb" },
+                    { skill: "Eclipse", level: 75, desc: "Development IDE", icon: "fas fa-sun" }
+                ]
+            };
 
-    // Load programming skills
-    const programmingGrid = document.getElementById('programmingGrid');
-    if (programmingGrid) {
-        programmingGrid.innerHTML = skillsData.programming.map((skill, index) => `
-            <div class="skill-icon-card animate-on-scroll" data-skill="${skill.skill}" data-level="${skill.level}">
-                <div class="skill-icon-wrapper">
-                    <div class="skill-icon-bg">
-                        <i class="${skill.icon}"></i>
-                    </div>
-                </div>
-                <div class="skill-info">
-                    <h4 class="skill-name">${skill.skill}</h4>
-                    <p class="skill-description">${skill.desc}</p>
-                </div>
-            </div>
-                
-        `).join('');
-    }
+            var grids = {
+                programmingGrid: data.programming,
+                frontendGrid: data.frontend,
+                backendGrid: data.backend,
+                toolsGrid: data.tools
+            };
 
-    // Load frontend skills
-    const frontendGrid = document.getElementById('frontendGrid');
-    if (frontendGrid) {
-        frontendGrid.innerHTML = skillsData.frontend.map((skill, index) => `
-            <div class="skill-icon-card animate-on-scroll" data-skill="${skill.skill}" data-level="${skill.level}">
-                <div class="skill-icon-wrapper">
-                    <div class="skill-icon-bg">
-                        <i class="${skill.icon}"></i>
-                    </div>
-                </div>
-                <div class="skill-info">
-                    <h4 class="skill-name">${skill.skill}</h4>
-                    <p class="skill-description">${skill.desc}</p>
-                </div>
-                
-            </div>
-        `).join('');
-    }
+            Object.keys(grids).forEach(function(id) {
+                var grid = document.getElementById(id);
+                if (!grid) return;
+                grid.innerHTML = grids[id].map(function(s) {
+                    return '<div class="skill-icon-card animate-on-scroll" data-skill="' + s.skill + '" data-level="' +
+                        s.level + '">' +
+                        '<div class="skill-icon-wrapper"><div class="skill-icon-bg"><i class="' + s.icon +
+                        '"></i></div></div>' +
+                        '<div class="skill-info"><h4 class="skill-name">' + s.skill +
+                        '</h4><p class="skill-description">' + s.desc + '</p></div>' +
+                        '</div>';
+                }).join('');
+            });
+        }
 
-    // Load backend skills
-    const backendGrid = document.getElementById('backendGrid');
-    if (backendGrid) {
-        backendGrid.innerHTML = skillsData.backend.map((skill, index) => `
-            <div class="skill-icon-card animate-on-scroll" data-skill="${skill.skill}" data-level="${skill.level}">
-                <div class="skill-icon-wrapper">
-                    <div class="skill-icon-bg">
-                        <i class="${skill.icon}"></i>
-                    </div>
-                </div>
-                <div class="skill-info">
-                    <h4 class="skill-name">${skill.skill}</h4>
-                    <p class="skill-description">${skill.desc}</p>
-                </div>
-                
-            </div>
-        `).join('');
-    }
-
-    // Load tools skills
-    const toolsGrid = document.getElementById('toolsGrid');
-    if (toolsGrid) {
-        toolsGrid.innerHTML = skillsData.tools.map((skill, index) => `
-            <div class="skill-icon-card animate-on-scroll" data-skill="${skill.skill}" data-level="${skill.level}">
-                <div class="skill-icon-wrapper">
-                    <div class="skill-icon-bg">
-                        <i class="${skill.icon}"></i>
-                    </div>
-                </div>
-                <div class="skill-info">
-                    <h4 class="skill-name">${skill.skill}</h4>
-                    <p class="skill-description">${skill.desc}</p>
-                </div>
-                
-            </div>
-        `).join('');
-    }
-}
-
-// ===== Enhanced Certifications Functions =====
-function initEnhancedCertifications() {
-    loadEnhancedCertificates();
-    initCertificateFilters();
-    initCertificateHoverEffects();
-}
-
-function loadEnhancedCertificates() {
-    const certificatesData = [
-        {
+        // ================================================================
+        // 11. CERTIFICATIONS
+        // ================================================================
+        var certificateData = [{
             id: 1,
             title: "Programming in Python",
             issuer: "Dibrugarh University Conducted by NPTEL",
@@ -524,8 +423,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/Py.png",
             download: "Certificates/Python.pdf",
             fileType: "pdf"
-        },
-        {
+        }, {
             id: 2,
             title: "Getting Started with Enterprise Data Science",
             issuer: "IBM",
@@ -539,8 +437,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/ibm2.png",
             download: "Certificates/ibm2.png",
             fileType: "png"
-        },
-        {
+        }, {
             id: 3,
             title: "Programming in Java",
             issuer: "IIT Kharagpur Conducted by NPTEL",
@@ -554,8 +451,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/Java.png",
             download: "Certificates/Programming in Java.pdf",
             fileType: "pdf"
-        },
-        {
+        }, {
             id: 4,
             title: "Database Management System",
             issuer: "IIT Kharagpur Conducted by NPTEL",
@@ -569,8 +465,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/DBMS.png",
             download: "Certificates/Data Base Management System (1).pdf",
             fileType: "pdf"
-        },
-        {
+        }, {
             id: 5,
             title: "Data Structure & Algorithms Using Java",
             issuer: "IIT Kharagpur Conducted by NPTEL",
@@ -584,8 +479,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/DSA.png",
             download: "Certificates/Data Structure and Algorithms using Java.pdf",
             fileType: "pdf"
-        },
-        {
+        }, {
             id: 6,
             title: "Journey to Cloud Envisioning Your Solution",
             issuer: "IBM",
@@ -599,8 +493,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/ibm.png",
             download: "Certificates/ibm.png",
             fileType: "png"
-        },
-        {
+        }, {
             id: 7,
             title: "Frontend Web Development",
             issuer: "Lakshya IT Solution",
@@ -614,14 +507,15 @@ function loadEnhancedCertificates() {
             image: "Certificates/Front.jpg",
             download: "Certificates/Front.jpg",
             fileType: "jpg"
-        },
-        {
+        }, {
             id: 8,
             title: "Industrial Training Institute (ITI)",
             issuer: "Ministry of Skill Development and Entrepreneurship",
             date: "Aug 2017",
             description: "Upon completing the ITI COPA trade, gained comprehensive proficiency in computer fundamentals and troubleshooting, and operating systems. Developed strong skills in office productivity software.",
-            skills: ["Computer Fundamentals", "Troubleshooting", "MS Office", "C/C++ Programming", "HTML/CSS", "Database Concepts"],
+            skills: ["Computer Fundamentals", "Troubleshooting", "MS Office", "C/C++ Programming", "HTML/CSS",
+                "Database Concepts"
+            ],
             score: 100,
             category: "university",
             featured: false,
@@ -629,8 +523,7 @@ function loadEnhancedCertificates() {
             image: "Certificates/ITI.png",
             download: "Certificates/ITI.png",
             fileType: "png"
-        },
-        {
+        }, {
             id: 9,
             title: "AWS Cloud Practitioner Essentials",
             issuer: "Amazon Web Services (AWS)",
@@ -644,14 +537,15 @@ function loadEnhancedCertificates() {
             image: "Certificates/AW.png",
             download: "Certificates/AWS.pdf",
             fileType: "pdf"
-        },
-        {
+        }, {
             id: 10,
             title: "Apprenticeship in HPCL",
             issuer: "Ministry of Skill Development and Entrepreneurship",
             date: "Jan 2019",
             description: "Successfully completed the COPA Trade Apprenticeship Certificate Course, a government-recognized program certified by NCVT.",
-            skills: ["Computer Operations", "Software Installation", "Python/C++ Programming", "Database Management", "Networking"],
+            skills: ["Computer Operations", "Software Installation", "Python/C++ Programming", "Database Management",
+                "Networking"
+            ],
             score: 100,
             category: "professional",
             featured: false,
@@ -659,468 +553,202 @@ function loadEnhancedCertificates() {
             image: "Certificates/App.png",
             download: "Certificates/Apprenticeship_Certificate.pdf",
             fileType: "pdf"
+        }];
+
+        function loadEnhancedCertificates() {
+            var grid = document.getElementById('certificationsGrid');
+            var totalCerts = document.getElementById('totalCerts');
+            var certTotal = document.getElementById('certTotal');
+            if (!grid) return;
+            if (totalCerts) totalCerts.textContent = certificateData.length;
+            if (certTotal) certTotal.textContent = certificateData.length;
+
+            grid.innerHTML = '';
+            certificateData.forEach(function(cert, index) {
+                var isHidden = index >= 3;
+                var card = document.createElement('div');
+                card.className = 'cert-card' + (isHidden ? ' hidden-cert' : '') + (cert.featured ? ' featured' : '');
+                card.setAttribute('data-id', cert.id);
+                card.setAttribute('data-category', cert.category);
+                card.setAttribute('data-score', cert.score);
+
+                var scoreClass = cert.score >= 90 ? 'high-score' : (cert.score < 70 ? 'low-score' : 'medium-score');
+
+                card.innerHTML =
+                    (cert.featured ? '<div class="cert-ribbon"><i class="fas fa-star"></i> Featured</div>' : '') +
+                    '<div class="cert-header">' +
+                    '<div class="cert-badge"><i class="' + cert.icon + '"></i></div>' +
+                    '<div class="cert-title-wrapper"><div class="cert-icon"><i class="' + cert.icon +
+                    '"></i></div><h3 class="cert-title">' + cert.title + '</h3></div>' +
+                    '<p class="cert-subtitle">' + cert.category.toUpperCase() + ' CERTIFICATION</p>' +
+                    '</div>' +
+                    '<div class="cert-image" onclick="viewEnhancedCertificate(' + cert.id + ')">' +
+                    '<img src="' + cert.image + '" alt="' + cert.title + '" loading="lazy">' +
+                    '<div class="cert-image-overlay"><button class="view-cert-btn" onclick="viewEnhancedCertificate(' +
+                    cert.id + ')"><i class="fas fa-expand-alt"></i></button></div>' +
+                    '</div>' +
+                    '<div class="cert-content">' +
+                    '<div class="cert-meta"><div class="cert-issuer"><i class="fas fa-university"></i><span>' + cert
+                    .issuer + '</span></div><span class="cert-date">' + cert.date + '</span></div>' +
+                    '<div class="cert-description"><p>' + cert.description +
+                    '</p><div class="skills-gained"><div class="skills-title"><i class="fas fa-tools"></i><span>Skills Gained</span></div><div class="skills-list">' +
+                    cert.skills.map(function(s) { return '<span class="skill-tag">' + s + '</span>'; }).join('') +
+                    '</div></div></div>' +
+                    '<div class="cert-score"><div class="score-header"><span class="score-label">Achievement Score</span><span class="score-value">' +
+                    cert.score + '%</span></div>' +
+                    '<div class="score-bar-container"><div class="score-bar-fill ' + scoreClass +
+                    '" style="width:' + cert.score + '%"></div></div></div>' +
+                    '<div class="cert-actions">' +
+                    '<button class="btn-view" onclick="viewEnhancedCertificate(' + cert.id +
+                    ')"><i class="fas fa-eye"></i> View Certificate</button>' +
+                    '<button class="btn-download" onclick="downloadEnhancedCertificate(' + cert.id +
+                    ', this)"><i class="fas fa-download"></i> Download</button>' +
+                    '</div>' +
+                    '</div>';
+
+                grid.appendChild(card);
+            });
+
+            setTimeout(function() {
+                document.querySelectorAll('.score-bar-fill').forEach(function(bar) {
+                    var w = bar.style.width;
+                    bar.style.transition = 'none';
+                    bar.style.width = '0%';
+                    setTimeout(function() {
+                        bar.style.transition = 'width 1.5s ease-out';
+                        bar.style.width = w;
+                    }, 100);
+                });
+            }, 500);
+
+            updateEnhancedCounts();
+            initCertificateFilters();
         }
-    ];
 
-    const certificationsGrid = document.getElementById('certificationsGrid');
-    const totalCerts = document.getElementById('totalCerts');
-    const certTotal = document.getElementById('certTotal');
-    
-    if (!certificationsGrid) return;
-    
-    // Update total counts
-    if (totalCerts) totalCerts.textContent = certificatesData.length;
-    if (certTotal) certTotal.textContent = certificatesData.length;
-    
-    // Clear container
-    certificationsGrid.innerHTML = '';
-    
-    // Create certificate cards
-    certificatesData.forEach((cert, index) => {
-        const isHidden = index >= 3;
-        const certCard = document.createElement('div');
-        certCard.className = `cert-card ${isHidden ? 'hidden-cert' : ''} ${cert.featured ? 'featured' : ''}`;
-        certCard.setAttribute('data-id', cert.id);
-        certCard.setAttribute('data-category', cert.category);
-        certCard.setAttribute('data-score', cert.score);
-        
-        // Determine score class
-        let scoreClass = 'medium-score';
-        if (cert.score >= 90) scoreClass = 'high-score';
-        else if (cert.score < 70) scoreClass = 'low-score';
-        
-        // Create certificate card HTML
-        certCard.innerHTML = `
-            ${cert.featured ? '<div class="cert-ribbon"><i class="fas fa-star"></i> Featured</div>' : ''}
-            
-            <div class="cert-header">
-                <div class="cert-badge">
-                    <i class="${cert.icon}"></i>
-                </div>
-                <div class="cert-title-wrapper">
-                    <div class="cert-icon">
-                        <i class="${cert.icon}"></i>
-                    </div>
-                    <h3 class="cert-title">${cert.title}</h3>
-                </div>
-                <p class="cert-subtitle">${cert.category.toUpperCase()} CERTIFICATION</p>
-            </div>
-            
-            <div class="cert-image" onclick="viewEnhancedCertificate(${cert.id})">
-                <img src="${cert.image}" alt="${cert.title}" loading="lazy">
-                <div class="cert-image-overlay">
-                    <button class="view-cert-btn" onclick="viewEnhancedCertificate(${cert.id})">
-                        <i class="fas fa-expand-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="cert-content">
-                <div class="cert-meta">
-                    <div class="cert-issuer">
-                        <i class="fas fa-university"></i>
-                        <span>${cert.issuer}</span>
-                    </div>
-                    <span class="cert-date">${cert.date}</span>
-                </div>
-                
-                <div class="cert-description">
-                    <p>${cert.description}</p>
-                    
-                    <div class="skills-gained">
-                        <div class="skills-title">
-                            <i class="fas fa-tools"></i>
-                            <span>Skills Gained</span>
-                        </div>
-                        <div class="skills-list">
-                            ${cert.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="cert-score">
-                    <div class="score-header">
-                        <span class="score-label">Achievement Score</span>
-                        <span class="score-value">${cert.score}%</span>
-                    </div>
-                    <div class="score-bar-container">
-                        <div class="score-bar-fill ${scoreClass}" style="width: ${cert.score}%"></div>
-                    </div>
-                </div>
-                
-                <div class="cert-actions">
-                    <button class="btn-view" onclick="viewEnhancedCertificate(${cert.id})">
-                        <i class="fas fa-eye"></i>
-                        View Certificate
-                    </button>
-                    <button class="btn-download" onclick="downloadEnhancedCertificate(${cert.id}, this)">
-                        <i class="fas fa-download"></i>
-                        Download
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        certificationsGrid.appendChild(certCard);
-    });
-    
-    // Animate score bars
-    setTimeout(() => {
-        document.querySelectorAll('.score-bar-fill').forEach(bar => {
-            const width = bar.style.width;
-            bar.style.transition = 'none';
-            bar.style.width = '0%';
-            setTimeout(() => {
-                bar.style.transition = 'width 1.5s ease-out';
-                bar.style.width = width;
-            }, 100);
-        });
-    }, 500);
-    
-    // Update showing count
-    updateEnhancedCounts();
-    
-    // Setup event listeners
-    setupEnhancedCertificateEvents();
-}
-
-function initCertificateFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
-            
-            const filter = button.getAttribute('data-filter');
-            filterCertificates(filter);
-        });
-    });
-}
-
-function filterCertificates(filter) {
-    const allCertificates = document.querySelectorAll('.cert-card');
-    
-    allCertificates.forEach(cert => {
-        const category = cert.getAttribute('data-category');
-        const score = parseInt(cert.getAttribute('data-score'));
-        
-        let shouldShow = false;
-        
-        switch(filter) {
-            case 'all':
-                shouldShow = true;
-                break;
-            case 'university':
-                shouldShow = category === 'university';
-                break;
-            case 'professional':
-                shouldShow = category === 'professional';
-                break;
-            case 'technical':
-                shouldShow = category === 'technical';
-                break;
-            case 'top-rated':
-                shouldShow = score >= 85;
-                break;
-            default:
-                shouldShow = true;
+        function initCertificateFilters() {
+            var btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    btns.forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    var filter = this.getAttribute('data-filter');
+                    var cards = document.querySelectorAll('.cert-card');
+                    cards.forEach(function(card) {
+                        var cat = card.getAttribute('data-category');
+                        var score = parseInt(card.getAttribute('data-score'));
+                        var show = false;
+                        switch (filter) {
+                            case 'all':
+                                show = true;
+                                break;
+                            case 'university':
+                                show = cat === 'university';
+                                break;
+                            case 'professional':
+                                show = cat === 'professional';
+                                break;
+                            case 'technical':
+                                show = cat === 'technical';
+                                break;
+                            case 'top-rated':
+                                show = score >= 85;
+                                break;
+                            default:
+                                show = true;
+                        }
+                        card.style.display = show ? 'flex' : 'none';
+                        if (show) card.classList.add('show');
+                        else card.classList.remove('show');
+                    });
+                    setTimeout(updateEnhancedCounts, 300);
+                });
+            });
         }
-        
-        if (shouldShow) {
-            cert.style.display = 'flex';
-            cert.classList.add('show');
-        } else {
-            cert.style.display = 'none';
-            cert.classList.remove('show');
+
+        function viewEnhancedCertificate(id) {
+            var card = document.querySelector('.cert-card[data-id="' + id + '"]');
+            if (!card) { showToast('Certificate not found!', 'error'); return; }
+            var modal = document.getElementById('certificateModal');
+            var title = document.getElementById('modalTitle');
+            var img = document.getElementById('certificateImage');
+            if (!modal || !title || !img) return;
+            var t = card.querySelector('.cert-title').textContent;
+            var src = card.querySelector('.cert-image img').src;
+            title.textContent = t;
+            img.src = src;
+            img.alt = t + ' Certificate';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-    });
-    
-    // Update counts after filtering
-    setTimeout(updateEnhancedCounts, 300);
-}
 
-function initCertificateHoverEffects() {
-    const certCards = document.querySelectorAll('.cert-card');
-    
-    certCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.classList.add('hover-active');
-            const score = parseInt(card.getAttribute('data-score'));
-            const scoreBar = card.querySelector('.score-bar-fill');
-            
-            if (scoreBar) {
-                scoreBar.style.transform = 'scaleY(1.2)';
-            }
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.classList.remove('hover-active');
-            const scoreBar = card.querySelector('.score-bar-fill');
-            
-            if (scoreBar) {
-                scoreBar.style.transform = 'scaleY(1)';
-            }
-        });
-    });
-}
-
-function setupEnhancedCertificateEvents() {
-    // Load more certificates button
-    const loadMoreCertsBtn = document.getElementById('loadMoreCerts');
-    const showLessCertsBtn = document.getElementById('showLessCerts');
-    
-    if (loadMoreCertsBtn) {
-        loadMoreCertsBtn.addEventListener('click', loadMoreEnhancedCertificates);
-    }
-    
-    if (showLessCertsBtn) {
-        showLessCertsBtn.addEventListener('click', showLessEnhancedCertificates);
-    }
-    
-    // View certificate buttons
-    const viewButtons = document.querySelectorAll('.view-cert-btn, .btn-view');
-    viewButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const certId = btn.closest('.cert-card')?.getAttribute('data-id');
-            if (certId) viewEnhancedCertificate(certId);
-        });
-    });
-    
-    // Download certificate buttons are handled via onclick attribute
-}
-
-function loadMoreEnhancedCertificates() {
-    const hiddenCerts = document.querySelectorAll('.hidden-cert');
-    const loadMoreCertsBtn = document.getElementById('loadMoreCerts');
-    const showLessCertsBtn = document.getElementById('showLessCerts');
-    
-    if (!hiddenCerts.length) return;
-    
-    // Show all hidden certificates with staggered animation
-    hiddenCerts.forEach((cert, index) => {
-        setTimeout(() => {
-            cert.classList.remove('hidden-cert');
-            cert.style.opacity = '0';
-            cert.style.transform = 'translateY(30px)';
-            
-            // Trigger reflow
-            cert.offsetHeight;
-            
-            cert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            cert.style.opacity = '1';
-            cert.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-    
-    // Update button visibility
-    if (loadMoreCertsBtn) loadMoreCertsBtn.style.display = 'none';
-    if (showLessCertsBtn) showLessCertsBtn.style.display = 'inline-flex';
-    
-    // Update showing count
-    updateEnhancedCounts();
-    
-    // Show success toast
-    showToast('All certificates loaded successfully!', 'success');
-}
-
-function showLessEnhancedCertificates() {
-    const allCerts = document.querySelectorAll('.cert-card');
-    const loadMoreCertsBtn = document.getElementById('loadMoreCerts');
-    const showLessCertsBtn = document.getElementById('showLessCerts');
-    
-    // Hide certificates beyond first 3 with animation
-    allCerts.forEach((cert, index) => {
-        if (index >= 3) {
-            cert.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            cert.style.opacity = '0';
-            cert.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                cert.classList.add('hidden-cert');
-                cert.style.transition = '';
-            }, 300);
+        function downloadEnhancedCertificate(id, btn) {
+            var card = document.querySelector('.cert-card[data-id="' + id + '"]');
+            if (!card) { showToast('Certificate not found!', 'error'); return; }
+            var title = card.querySelector('.cert-title').textContent;
+            var src = card.querySelector('.cert-image img').src;
+            var orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            btn.disabled = true;
+            var link = document.createElement('a');
+            link.href = src;
+            link.download = 'Certificate_' + title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function() {
+                btn.innerHTML = orig;
+                btn.disabled = false;
+                showToast('"' + title + '" downloaded successfully!', 'success');
+            }, 1000);
         }
-    });
-    
-    // Update button visibility
-    if (loadMoreCertsBtn) loadMoreCertsBtn.style.display = 'inline-flex';
-    if (showLessCertsBtn) showLessCertsBtn.style.display = 'none';
-    
-    // Update showing count
-    updateEnhancedCounts();
-    
-    // Show info toast
-    showToast('Showing first 3 certificates', 'info');
-}
 
-function updateEnhancedCounts() {
-    const hiddenCerts = document.querySelectorAll('.hidden-cert');
-    const showingCertsSpan = document.getElementById('showingCerts');
-    const totalCertsSpan = document.getElementById('totalCerts');
-    const loadMoreCertsBtn = document.getElementById('loadMoreCerts');
-    
-    if (showingCertsSpan && totalCertsSpan) {
-        const totalVisibleCerts = document.querySelectorAll('.cert-card').length;
-        const hiddenCount = hiddenCerts.length;
-        const showingCount = totalVisibleCerts - hiddenCount;
-        
-        showingCertsSpan.textContent = showingCount;
-        totalCertsSpan.textContent = totalVisibleCerts;
-        
-        // Update load more button text
-        if (loadMoreCertsBtn && hiddenCount > 0) {
-            const loadMoreText = loadMoreCertsBtn.querySelector('span');
-            if (loadMoreText) {
-                loadMoreText.textContent = `Load More (${hiddenCount} remaining)`;
-            }
+        function loadMoreEnhancedCertificates() {
+            var hidden = document.querySelectorAll('.cert-card.hidden-cert');
+            var loadBtn = document.getElementById('loadMoreCerts');
+            var lessBtn = document.getElementById('showLessCerts');
+            if (!hidden.length) return;
+            hidden.forEach(function(cert, i) {
+                setTimeout(function() {
+                    cert.classList.remove('hidden-cert');
+                    cert.style.opacity = '0';
+                    cert.style.transform = 'translateY(30px)';
+                    cert.offsetHeight;
+                    cert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    cert.style.opacity = '1';
+                    cert.style.transform = 'translateY(0)';
+                }, i * 100);
+            });
+            if (loadBtn) loadBtn.style.display = 'none';
+            if (lessBtn) lessBtn.style.display = 'inline-flex';
+            updateEnhancedCounts();
+            showToast('All certificates loaded successfully!', 'success');
         }
-    }
-}
 
-function viewEnhancedCertificate(certId) {
-    const certificateCard = document.querySelector(`.cert-card[data-id="${certId}"]`);
-    if (!certificateCard) {
-        showToast('Certificate not found!', 'error');
-        return;
-    }
-    
-    const modal = document.getElementById('certificateModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const certificateImage = document.getElementById('certificateImage');
-    
-    if (!modal || !modalTitle || !certificateImage) {
-        // Create modal if it doesn't exist
-        createCertificateModal();
-        setTimeout(() => viewEnhancedCertificate(certId), 100);
-        return;
-    }
-    
-    const title = certificateCard.querySelector('.cert-title').textContent;
-    const imageSrc = certificateCard.querySelector('.cert-image img').src;
-    
-    // Set modal content
-    modalTitle.textContent = title;
-    certificateImage.src = imageSrc;
-    certificateImage.alt = `${title} Certificate`;
-    
-    // Show modal with animation
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Add loading animation
-    certificateImage.onload = () => {
-        certificateImage.style.opacity = '1';
-        certificateImage.classList.add('loaded');
-    };
-    
-    certificateImage.style.opacity = '0.3';
-    certificateImage.classList.remove('loaded');
-}
+        function showLessEnhancedCertificates() {
+            var all = document.querySelectorAll('.cert-card');
+            var loadBtn = document.getElementById('loadMoreCerts');
+            var lessBtn = document.getElementById('showLessCerts');
+            all.forEach(function(cert, i) {
+                if (i >= 3) {
+                    cert.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    cert.style.opacity = '0';
+                    cert.style.transform = 'translateY(20px)';
+                    setTimeout(function() {
+                        cert.classList.add('hidden-cert');
+                        cert.style.transition = '';
+                    }, 300);
+                }
+            });
+            if (loadBtn) loadBtn.style.display = 'inline-flex';
+            if (lessBtn) lessBtn.style.display = 'none';
+            updateEnhancedCounts();
+            showToast('Showing first 3 certificates', 'info');
+        }
 
-// FIXED: Download certificate function with proper button reset
-function downloadEnhancedCertificate(certId, buttonElement) {
-    const certificateCard = document.querySelector(`.cert-card[data-id="${certId}"]`);
-    if (!certificateCard) {
-        showToast('Certificate not found!', 'error');
-        return;
-    }
-    
-    const title = certificateCard.querySelector('.cert-title').textContent;
-    const downloadUrl = certificateCard.querySelector('.cert-image img').src;
-    
-    // Save original button content
-    const originalHTML = buttonElement.innerHTML;
-    const originalText = buttonElement.querySelector('span')?.textContent || 'Download';
-    
-    // Show downloading animation
-    buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
-    buttonElement.disabled = true;
-    
-    // Create download link
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = `Certificate_${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-    document.body.appendChild(link);
-    
-    // Trigger download
-    link.click();
-    
-    // Clean up
-    document.body.removeChild(link);
-    
-    // Reset button after a short delay (simulating download time)
-    setTimeout(() => {
-        buttonElement.innerHTML = originalHTML;
-        buttonElement.disabled = false;
-        showToast(`"${title}" downloaded successfully!`, 'success');
-    }, 1000);
-}
-
-function createCertificateModal() {
-    const modalHTML = `
-        <div class="modal" id="certificateModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="modalTitle">Certificate Preview</h3>
-                    <button class="modal-close" id="modalClose">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <img id="certificateImage" src="" alt="Certificate">
-                    <div class="modal-actions">
-                        <button class="btn btn-secondary" onclick="document.getElementById('certificateModal').classList.remove('active'); document.body.style.overflow = 'auto';">
-                            <i class="fas fa-times"></i> Close
-                        </button>
-                        <button class="btn btn-primary" onclick="downloadCurrentCertificate()">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    
-    // Add event listener for close button
-    const modalClose = document.getElementById('modalClose');
-    if (modalClose) {
-        modalClose.addEventListener('click', () => {
-            document.getElementById('certificateModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-}
-
-function downloadCurrentCertificate() {
-    const certificateImage = document.getElementById('certificateImage');
-    const modalTitle = document.getElementById('modalTitle');
-    
-    if (!certificateImage || !modalTitle) return;
-    
-    const link = document.createElement('a');
-    link.href = certificateImage.src;
-    link.download = `certificate_${modalTitle.textContent.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    showToast('Certificate download started!', 'success');
-}
-
-// ===== Enhanced Projects Functions =====
-function initEnhancedProjects() {
-    loadEnhancedProjects();
-    initProjectsViewMore();
-    initProjectVideoModal();
-}
-
-function loadEnhancedProjects() {
-    const projectsData = [
-        {
+        // ================================================================
+        // 12. PROJECTS
+        // ================================================================
+        var projectData = [{
             id: 1,
             title: "Library Management System",
             description: "A comprehensive library management system built with Java Swing for GUI and MySQL for database management. Features include book issuing, return tracking, fine calculation, and user management.",
@@ -1133,8 +761,7 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 3,
             featured: true
-        },
-        {
+        }, {
             id: 2,
             title: "Code Editor",
             description: "A web-based code editor with syntax highlighting for multiple programming languages. Features real-time preview, code formatting, and file management capabilities.",
@@ -1147,22 +774,20 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 2,
             featured: false
-        },
-        // {
-        //     id: 3,
-        //     title: "Calculator App",
-        //     description: "A responsive calculator application with basic arithmetic operations, scientific functions, and memory features. Built with clean UI and keyboard support.",
-        //     technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-        //     features: ["Basic Operations", "Scientific Functions", "Memory Storage", "Keyboard Support"],
-        //     date: "2023",
-        //     image: "Images/Cal.png",
-        //     demoLink: "Videoes/Calulator.mp4",
-        //     codeLink: "https://github.com/Adishiv9494/Calculator",
-        //     status: "completed",
-        //     complexity: 1,
-        //     featured: false
-        // },
-        {
+        }, {
+            id: 3,
+            title: "Calculator App",
+            description: "A responsive calculator application with basic arithmetic operations, scientific functions, and memory features. Built with clean UI and keyboard support.",
+            technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+            features: ["Basic Operations", "Scientific Functions", "Memory Storage", "Keyboard Support"],
+            date: "2023",
+            image: "Images/Cal.png",
+            demoLink: "Videoes/Calulator.mp4",
+            codeLink: "https://github.com/Adishiv9494/Calculator",
+            status: "completed",
+            complexity: 1,
+            featured: false
+        }, {
             id: 4,
             title: "To-Do List Application",
             description: "A productivity application for managing daily tasks with features like priority setting, due dates, task categorization, and progress tracking.",
@@ -1175,22 +800,20 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 2,
             featured: false
-        },
-        // {
-        //     id: 5,
-        //     title: "Stop Watch Application",
-        //     description: "A precise stopwatch with lap time tracking, countdown timer, and multiple display modes. Features include time formatting and export functionality.",
-        //     technologies: ["HTML5", "CSS3", "JavaScript", "CSS Animations"],
-        //     features: ["Lap Timing", "Countdown Timer", "Multiple Displays", "Time Export"],
-        //     date: "2023",
-        //     image: "Images/SWatch.jpg",
-        //     demoLink: "Videoes/SWatch.mp4",
-        //     codeLink: "https://github.com/Adishiv9494/Stop-Watch",
-        //     status: "completed",
-        //     complexity: 1,
-        //     featured: false
-        // },
-        {
+        }, {
+            id: 5,
+            title: "Stop Watch Application",
+            description: "A precise stopwatch with lap time tracking, countdown timer, and multiple display modes. Features include time formatting and export functionality.",
+            technologies: ["HTML5", "CSS3", "JavaScript", "CSS Animations"],
+            features: ["Lap Timing", "Countdown Timer", "Multiple Displays", "Time Export"],
+            date: "2023",
+            image: "Images/SWatch.jpg",
+            demoLink: "Videoes/SWatch.mp4",
+            codeLink: "https://github.com/Adishiv9494/Stop-Watch",
+            status: "completed",
+            complexity: 1,
+            featured: false
+        }, {
             id: 6,
             title: "Portfolio Website",
             description: "This responsive portfolio website showcasing skills, projects, and certifications. Features dark/light mode, animations, and contact form.",
@@ -1203,8 +826,7 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 2,
             featured: true
-        },
-        {
+        }, {
             id: 7,
             title: "Job & Internship Portal Web Application",
             description: "A MERN stack Job and Internship Portal is a full-stack web application designed to bridge the gap between companies (Recruiters) and job seekers (Applicants).",
@@ -1217,8 +839,7 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 3,
             featured: true
-        },
-        {
+        }, {
             id: 8,
             title: "Weather Web Application",
             description: "This Weather Web Application is a dynamic and interactive front-end project that provides real-time weather information for any location worldwide.",
@@ -1231,433 +852,273 @@ function loadEnhancedProjects() {
             status: "completed",
             complexity: 2,
             featured: false
+        }];
+
+        function loadEnhancedProjects() {
+            var grid = document.getElementById('projectsGrid');
+            var total = document.getElementById('projectsTotal');
+            if (!grid) return;
+            if (total) total.textContent = projectData.length;
+
+            grid.innerHTML = '';
+            projectData.forEach(function(proj, index) {
+                var isHidden = index >= 3;
+                var card = document.createElement('div');
+                card.className = 'project-card' + (isHidden ? ' hidden-project' : '') + (proj.featured ? ' featured' :
+                    '');
+                card.setAttribute('data-id', proj.id);
+                card.setAttribute('data-status', proj.status);
+                card.setAttribute('data-complexity', proj.complexity);
+
+                card.innerHTML =
+                    (proj.featured ? '<div class="project-ribbon"><i class="fas fa-star"></i> Featured</div>' : '') +
+                    '<div class="project-image"><img src="' + proj.image + '" alt="' + proj.title +
+                    '" loading="lazy"><div class="project-overlay"><div class="overlay-content"><h3>' + proj
+                    .title + '</h3><p>' + proj.description.substring(0, 100) + '...</p><div class="tech-stack">' +
+                    proj.technologies.map(function(t) { return '<span>' + t + '</span>'; }).join('') +
+                    '</div></div></div><span class="project-status ' + proj.status + '">' + proj.status
+                    .charAt(0).toUpperCase() + proj.status.slice(1) + '</span></div>' +
+                    '<div class="project-info"><div class="project-header"><h3>' + proj.title +
+                    '</h3><span class="project-date">' + proj.date + '</span></div>' +
+                    '<p class="project-description">' + proj.description + '</p>' +
+                    '<div class="project-features">' +
+                    proj.features.map(function(f) { return '<div class="feature"><i class="fas fa-check-circle"></i><span>' +
+                            f + '</span></div>'; }).join('') +
+                    '</div>' +
+                    '<div class="project-actions"><button class="demo-btn live-demo-btn" data-video="' + proj
+                    .demoLink + '" data-title="' + proj.title + ' Demo"><i class="fas fa-external-link-alt"></i> Live Demo</button>' +
+                    '<a href="' + proj.codeLink + '" class="code-btn" target="_blank"><i class="fab fa-github"></i> Source Code</a>' +
+                    '</div></div>';
+
+                grid.appendChild(card);
+            });
+
+            updateProjectsCount();
+
+            // Live demo buttons
+            document.querySelectorAll('.live-demo-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var src = this.getAttribute('data-video');
+                    var title = this.getAttribute('data-title');
+                    if (src && src.endsWith('.mp4')) {
+                        var modal = document.getElementById('videoModal');
+                        var vTitle = document.getElementById('videoTitle');
+                        var video = document.getElementById('projectVideo');
+                        if (modal && vTitle && video) {
+                            vTitle.textContent = title;
+                            video.src = src;
+                            modal.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    } else {
+                        window.open(src, '_blank');
+                    }
+                });
+            });
         }
-    ];
 
-    const projectsGrid = document.getElementById('projectsGrid');
-    const projectsTotal = document.getElementById('projectsTotal');
-    
-    if (!projectsGrid) return;
-    
-    // Update total counts
-    if (projectsTotal) projectsTotal.textContent = projectsData.length;
-    
-    // Clear container
-    projectsGrid.innerHTML = '';
-    
-    // Create project cards
-    projectsData.forEach((project, index) => {
-        const isHidden = index >= 3;
-        const projectCard = document.createElement('div');
-        projectCard.className = `project-card ${isHidden ? 'hidden-project' : ''} ${project.featured ? 'featured' : ''}`;
-        projectCard.setAttribute('data-id', project.id);
-        projectCard.setAttribute('data-status', project.status);
-        projectCard.setAttribute('data-complexity', project.complexity);
-        
-        // Create project card HTML
-        projectCard.innerHTML = `
-            ${project.featured ? '<div class="project-ribbon"><i class="fas fa-star"></i> Featured</div>' : ''}
-            
-            <div class="project-image">
-                <img src="${project.image}" alt="${project.title}" loading="lazy">
-                <div class="project-overlay">
-                    <div class="overlay-content">
-                        <h3>${project.title}</h3>
-                        <p>${project.description.substring(0, 100)}...</p>
-                        <div class="tech-stack">
-                            ${project.technologies.map(tech => `<span>${tech}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                <span class="project-status ${project.status}">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
-            </div>
-            
-            <div class="project-info">
-                <div class="project-header">
-                    <h3>${project.title}</h3>
-                    <span class="project-date">${project.date}</span>
-                </div>
-                <p class="project-description">${project.description}</p>
-                <div class="project-features">
-                    ${project.features.map(feature => `
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>${feature}</span>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="project-actions">
-                    <button class="demo-btn live-demo-btn" data-video="${project.demoLink}" data-title="${project.title} Demo">
-                        <i class="fas fa-external-link-alt"></i> Live Demo
-                    </button>
-                    <a href="${project.codeLink}" class="code-btn" target="_blank">
-                        <i class="fab fa-github"></i> Source Code
-                    </a>
-                </div>
-            </div>
-        `;
-        
-        projectsGrid.appendChild(projectCard);
-    });
-    
-    // Update showing count
-    updateProjectsCount();
-    
-    // Setup event listeners
-    setupEnhancedProjectsEvents();
-}
-
-function initProjectsViewMore() {
-    // Load more projects button
-    const loadMoreProjectsBtn = document.getElementById('loadMoreProjects');
-    const showLessProjectsBtn = document.getElementById('showLessProjects');
-    
-    if (loadMoreProjectsBtn) {
-        loadMoreProjectsBtn.addEventListener('click', loadMoreProjects);
-    }
-    
-    if (showLessProjectsBtn) {
-        showLessProjectsBtn.addEventListener('click', showLessProjects);
-    }
-}
-
-function loadMoreProjects() {
-    const hiddenProjects = document.querySelectorAll('.hidden-project');
-    const loadMoreProjectsBtn = document.getElementById('loadMoreProjects');
-    const showLessProjectsBtn = document.getElementById('showLessProjects');
-    
-    if (!hiddenProjects.length) return;
-    
-    // Show all hidden projects with staggered animation
-    hiddenProjects.forEach((project, index) => {
-        setTimeout(() => {
-            project.classList.remove('hidden-project');
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(30px)';
-            
-            // Trigger reflow
-            project.offsetHeight;
-            
-            project.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            project.style.opacity = '1';
-            project.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-    
-    // Update button visibility
-    if (loadMoreProjectsBtn) loadMoreProjectsBtn.style.display = 'none';
-    if (showLessProjectsBtn) showLessProjectsBtn.style.display = 'flex';
-    
-    // Update showing count
-    updateProjectsCount();
-    
-    // Show success toast
-    showToast('All projects loaded successfully!', 'success');
-}
-
-function showLessProjects() {
-    const allProjects = document.querySelectorAll('.project-card');
-    const loadMoreProjectsBtn = document.getElementById('loadMoreProjects');
-    const showLessProjectsBtn = document.getElementById('showLessProjects');
-    
-    // Hide projects beyond first 3 with animation
-    allProjects.forEach((project, index) => {
-        if (index >= 3) {
-            project.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                project.classList.add('hidden-project');
-                project.style.transition = '';
-            }, 300);
+        function loadMoreProjects() {
+            var hidden = document.querySelectorAll('.project-card.hidden-project');
+            var loadBtn = document.getElementById('loadMoreProjects');
+            var lessBtn = document.getElementById('showLessProjects');
+            if (!hidden.length) return;
+            hidden.forEach(function(proj, i) {
+                setTimeout(function() {
+                    proj.classList.remove('hidden-project');
+                    proj.style.opacity = '0';
+                    proj.style.transform = 'translateY(30px)';
+                    proj.offsetHeight;
+                    proj.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    proj.style.opacity = '1';
+                    proj.style.transform = 'translateY(0)';
+                }, i * 100);
+            });
+            if (loadBtn) loadBtn.style.display = 'none';
+            if (lessBtn) lessBtn.style.display = 'flex';
+            updateProjectsCount();
+            showToast('All projects loaded successfully!', 'success');
         }
-    });
-    
-    // Update button visibility
-    if (loadMoreProjectsBtn) loadMoreProjectsBtn.style.display = 'flex';
-    if (showLessProjectsBtn) showLessProjectsBtn.style.display = 'none';
-    
-    // Update showing count
-    updateProjectsCount();
-    
-    // Show info toast
-    showToast('Showing first 3 projects', 'info');
-}
 
-function updateProjectsCount() {
-    const hiddenProjects = document.querySelectorAll('.hidden-project');
-    const showingProjectsSpan = document.getElementById('showingProjects');
-    const projectsTotalSpan = document.getElementById('projectsTotal');
-    const loadMoreProjectsBtn = document.getElementById('loadMoreProjects');
-    
-    if (showingProjectsSpan && projectsTotalSpan) {
-        const totalVisibleProjects = document.querySelectorAll('.project-card').length;
-        const hiddenCount = hiddenProjects.length;
-        const showingCount = totalVisibleProjects - hiddenCount;
-        
-        showingProjectsSpan.textContent = showingCount;
-        projectsTotalSpan.textContent = totalVisibleProjects;
-        
-        // Update load more button text
-        if (loadMoreProjectsBtn && hiddenCount > 0) {
-            const loadMoreText = loadMoreProjectsBtn.querySelector('span');
-            if (loadMoreText) {
-                loadMoreText.textContent = `View More Projects (${hiddenCount} remaining)`;
-            }
-        }
-    }
-    
-    // Update footer stats
-    updateFooterStats();
-}
-
-function setupEnhancedProjectsEvents() {
-    // View project demo buttons
-    const demoButtons = document.querySelectorAll('.live-demo-btn');
-    demoButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const videoSrc = btn.getAttribute('data-video');
-            const title = btn.getAttribute('data-title');
-            
-            if (videoSrc && videoSrc.endsWith('.mp4')) {
-                // Open video modal
-                const videoModal = document.getElementById('videoModal');
-                const videoTitle = document.getElementById('videoTitle');
-                const projectVideo = document.getElementById('projectVideo');
-                
-                if (videoModal && videoTitle && projectVideo) {
-                    videoTitle.textContent = title;
-                    projectVideo.src = videoSrc;
-                    videoModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+        function showLessProjects() {
+            var all = document.querySelectorAll('.project-card');
+            var loadBtn = document.getElementById('loadMoreProjects');
+            var lessBtn = document.getElementById('showLessProjects');
+            all.forEach(function(proj, i) {
+                if (i >= 3) {
+                    proj.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    proj.style.opacity = '0';
+                    proj.style.transform = 'translateY(20px)';
+                    setTimeout(function() {
+                        proj.classList.add('hidden-project');
+                        proj.style.transition = '';
+                    }, 300);
                 }
-            } else {
-                // Open link in new tab
-                window.open(videoSrc, '_blank');
-            }
-        });
-    });
-    
-    // Code buttons already have target="_blank"
-}
-
-// ===== Project Video Modal =====
-function initProjectVideoModal() {
-    const videoModal = document.getElementById('videoModal');
-    const videoTitle = document.getElementById('videoTitle');
-    const projectVideo = document.getElementById('projectVideo');
-    const videoClose = document.getElementById('videoClose');
-    
-    if (!videoModal || !projectVideo) return;
-    
-    // Close video modal
-    if (videoClose) {
-        videoClose.addEventListener('click', () => {
-            videoModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            if (projectVideo) {
-                projectVideo.pause();
-                projectVideo.currentTime = 0;
-            }
-        });
-    }
-    
-    // Close modal on outside click
-    videoModal.addEventListener('click', (e) => {
-        if (e.target === videoModal) {
-            videoModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            if (projectVideo) {
-                projectVideo.pause();
-                projectVideo.currentTime = 0;
-            }
+            });
+            if (loadBtn) loadBtn.style.display = 'flex';
+            if (lessBtn) lessBtn.style.display = 'none';
+            updateProjectsCount();
+            showToast('Showing first 3 projects', 'info');
         }
-    });
-}
 
-// ===== Image Preview Functions =====
-function initImagePreviews() {
-    const profileImageWrapper = document.getElementById('profile-image-wrapper');
-    const aboutImageWrapper = document.getElementById('about-image-wrapper');
-    const imageModal = document.getElementById('imagePreviewModal');
-    const previewImage = document.getElementById('previewImage');
-    const imageModalClose = document.getElementById('imageModalClose');
-    
-    if (profileImageWrapper) {
-        profileImageWrapper.addEventListener('click', () => {
-            const imgSrc = profileImageWrapper.querySelector('img').src;
-            previewImage.src = imgSrc;
-            document.getElementById('imageModalTitle').textContent = 'Profile Photo';
-            imageModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    }
-    
-    if (aboutImageWrapper) {
-        aboutImageWrapper.addEventListener('click', () => {
-            const imgSrc = aboutImageWrapper.querySelector('img').src;
-            previewImage.src = imgSrc;
-            document.getElementById('imageModalTitle').textContent = 'About Photo';
-            imageModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    }
-    
-    if (imageModalClose) {
-        imageModalClose.addEventListener('click', () => {
-            imageModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-    
-    if (imageModal) {
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) {
-                imageModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
-}
+        // ================================================================
+        // 13. IMAGE PREVIEWS
+        // ================================================================
+        function initImagePreviews() {
+            var profile = document.getElementById('profile-image-wrapper');
+            var about = document.getElementById('about-image-wrapper');
+            var modal = document.getElementById('imagePreviewModal');
+            var img = document.getElementById('previewImage');
+            var close = document.getElementById('imageModalClose');
+            var title = document.getElementById('imageModalTitle');
 
-// ===== QR Code Modal Functions =====
-function initQRCodeModals() {
-    const qrModal = document.getElementById('qrModal');
-    const qrModalClose = document.getElementById('qrModalClose');
-    const closeQrModal = document.getElementById('closeQrModal');
-    const modalQrImage = document.getElementById('modalQrImage');
-    const modalQrMessage = document.getElementById('modalQrMessage');
-    const qrModalTitle = document.getElementById('qrModalTitle');
-    const downloadQrBtn = document.getElementById('downloadQr');
-    const qrCodeWrappers = document.querySelectorAll('.qr-code-wrapper');
-    const scanGuideBtns = document.querySelectorAll('.scan-guide-btn');
-    
-    // Open QR Modal on QR code click
-    qrCodeWrappers.forEach(wrapper => {
-        wrapper.addEventListener('click', (e) => {
-            e.preventDefault();
-            const qrImage = wrapper.querySelector('.qr-code-image');
-            const qrCard = wrapper.closest('.qr-card');
-            const qrTitle = qrCard.querySelector('h3').textContent;
-            
-            if (qrImage && modalQrImage) {
-                modalQrImage.src = qrImage.src;
-                modalQrMessage.textContent = `Scan this QR code to connect via ${qrTitle}`;
-                qrModalTitle.textContent = `${qrTitle} QR Code`;
-                qrModal.classList.add('active');
+            function openPreview(src, label) {
+                if (!modal || !img || !title) return;
+                img.src = src;
+                title.textContent = label;
+                modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
-        });
-    });
-    
-    // Close QR Modal
-    const closeQRModal = () => {
-        qrModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    };
-    
-    if (qrModalClose) qrModalClose.addEventListener('click', closeQRModal);
-    if (closeQrModal) closeQrModal.addEventListener('click', closeQRModal);
-    
-    // Download QR Code
-    if (downloadQrBtn) {
-        downloadQrBtn.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.href = modalQrImage.src;
-            link.download = 'qr-code.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast('QR code downloaded successfully!', 'success');
-        });
-    }
-    
-    // Close modal on outside click
-    if (qrModal) {
-        qrModal.addEventListener('click', (e) => {
-            if (e.target === qrModal) closeQRModal();
-        });
-    }
-    
-    // Scan guide buttons
-    scanGuideBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const type = btn.getAttribute('data-type');
-            let message = '';
-            
-            switch(type) {
-                case 'whatsapp':
-                    message = 'Open your phone\'s camera app and point it at the QR code. Tap the notification to start a chat on WhatsApp.';
-                    break;
-                case 'email':
-                    message = 'Scan the QR code with your phone\'s camera. Your email app will open with my address pre-filled.';
-                    break;
-                case 'phone':
-                    message = 'Use your phone\'s camera to scan the QR code. Your phone will prompt you to call the number.';
-                    break;
-                case 'instagram':
-                    message = 'Scan with Instagram camera or your phone\'s camera app to open my Instagram profile directly.';
-                    break;
-                default:
-                    message = 'Open your phone\'s camera app and point it at the QR code. Follow the on-screen instructions.';
-            }
-            
-            if (typeof swal === 'function') {
-                swal({
-                    title: `How to Scan ${type.charAt(0).toUpperCase() + type.slice(1)} QR Code`,
-                    text: message,
-                    icon: 'info',
-                    button: 'Got it!'
-                });
-            } else {
-                showToast(message, 'info');
-            }
-        });
-    });
-}
 
-// ================================================================
-        // 11. CONTACT FORM – EmailJS (FIXED)
+            if (profile) {
+                profile.addEventListener('click', function() {
+                    var src = this.querySelector('img').src;
+                    openPreview(src, 'Profile Photo');
+                });
+            }
+            if (about) {
+                about.addEventListener('click', function() {
+                    var src = this.querySelector('img').src;
+                    openPreview(src, 'About Photo');
+                });
+            }
+            if (close) {
+                close.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        }
+
         // ================================================================
-        (function initContactForm() {
-            const form = document.getElementById('contactForm');
-            const submitBtn = document.getElementById('formSubmit');
-            const charCount = document.getElementById('charCount');
-            const msg = document.getElementById('userMessage');
+        // 14. QR CODE MODALS
+        // ================================================================
+        function initQRCodeModals() {
+            var modal = document.getElementById('qrModal');
+            var close = document.getElementById('qrModalClose');
+            var closeBtn = document.getElementById('closeQrModal');
+            var img = document.getElementById('modalQrImage');
+            var msg = document.getElementById('modalQrMessage');
+            var title = document.getElementById('qrModalTitle');
+            var downloadBtn = document.getElementById('downloadQr');
+
+            var wrappers = document.querySelectorAll('.qr-code-wrapper');
+            wrappers.forEach(function(w) {
+                w.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var qrImg = this.querySelector('.qr-code-image');
+                    var card = this.closest('.qr-card');
+                    var name = card ? card.querySelector('h3').textContent : 'QR Code';
+                    if (qrImg && img) {
+                        img.src = qrImg.src;
+                        msg.textContent = 'Scan this QR code to connect via ' + name;
+                        title.textContent = name + ' QR Code';
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            if (close) close.addEventListener('click', closeModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) closeModal();
+                });
+            }
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    var link = document.createElement('a');
+                    link.href = img.src;
+                    link.download = 'qr-code.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast('QR code downloaded successfully!', 'success');
+                });
+            }
+
+            document.querySelectorAll('.scan-guide-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var type = this.getAttribute('data-type');
+                    var msgs = {
+                        whatsapp: 'Open your phone\'s camera app and point it at the QR code. Tap the notification to start a chat on WhatsApp.',
+                        email: 'Scan the QR code with your phone\'s camera. Your email app will open with my address pre-filled.',
+                        phone: 'Use your phone\'s camera to scan the QR code. Your phone will prompt you to call the number.',
+                        instagram: 'Scan with Instagram camera or your phone\'s camera app to open my Instagram profile directly.'
+                    };
+                    var m = msgs[type] ||
+                        'Open your phone\'s camera app and point it at the QR code. Follow the on-screen instructions.';
+                    if (typeof swal === 'function') {
+                        swal({ title: 'How to Scan ' + type.charAt(0).toUpperCase() + type.slice(1) +
+                                ' QR Code', text: m, icon: 'info', button: 'Got it!' });
+                    } else {
+                        showToast(m, 'info');
+                    }
+                });
+            });
+        }
+
+        // ================================================================
+        // 15. CONTACT FORM – EmailJS
+        // ================================================================
+        function initContactForm() {
+            var form = document.getElementById('contactForm');
+            var submitBtn = document.getElementById('formSubmit');
+            var charCount = document.getElementById('charCount');
+            var msg = document.getElementById('userMessage');
 
             if (msg && charCount) {
-                msg.addEventListener('input', () => {
-                    const len = msg.value.length;
+                msg.addEventListener('input', function() {
+                    var len = this.value.length;
                     charCount.textContent = len;
                     if (len > 500) {
-                        msg.value = msg.value.substring(0, 500);
+                        this.value = this.value.substring(0, 500);
                         charCount.textContent = 500;
                     }
                 });
             }
 
-            // Initialize EmailJS with the public key
             emailjs.init('21fjfdG5_Sgm82ifT');
 
-            form.addEventListener('submit', async (e) => {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                const name = document.getElementById('userName').value.trim();
-                const email = document.getElementById('userEmail').value.trim();
-                const phone = document.getElementById('userPhone').value.trim();
-                const subject = document.getElementById('userSubject').value.trim();
-                const message = document.getElementById('userMessage').value.trim();
+                var name = document.getElementById('userName').value.trim();
+                var email = document.getElementById('userEmail').value.trim();
+                var phone = document.getElementById('userPhone').value.trim();
+                var subject = document.getElementById('userSubject').value.trim();
+                var message = document.getElementById('userMessage').value.trim();
 
                 if (!name || !email || !subject || !message) {
                     showToast('Please fill all required fields.', 'error');
                     return;
                 }
-
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                     showToast('Please enter a valid email address.', 'error');
                     return;
@@ -1666,328 +1127,246 @@ function initQRCodeModals() {
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
 
-                try {
-                    // Build a complete HTML email body so all details appear correctly.
-                    const htmlBody = `
-                            <h2 style="color:#6c5ce7; margin-bottom:16px;">📩 New Contact Form Message</h2>
-                            <table style="width:100%; border-collapse:collapse; font-family:Inter, sans-serif;">
-                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Name</td>
-                                    <td style="padding:8px 12px; border:1px solid #ddd;">${name}</td></tr>
-                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Email</td>
-                                    <td style="padding:8px 12px; border:1px solid #ddd;">${email}</td></tr>
-                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Phone</td>
-                                    <td style="padding:8px 12px; border:1px solid #ddd;">${phone || 'Not provided'}</td></tr>
-                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Subject</td>
-                                    <td style="padding:8px 12px; border:1px solid #ddd;">${subject}</td></tr>
-                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Message</td>
-                                    <td style="padding:8px 12px; border:1px solid #ddd; white-space:pre-wrap;">${message}</td></tr>
-                            </table>
-                            <p style="margin-top:20px; color:#888; font-size:12px;">Sent from your portfolio contact form.</p>
-                        `;
+                var htmlBody =
+                    '<h2 style="color:#6c5ce7;margin-bottom:16px;">📩 New Contact Form Message</h2>' +
+                    '<table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;">' +
+                    '<tr><td style="padding:8px 12px;font-weight:700;background:#f0f0ff;border:1px solid #ddd;">Name</td><td style="padding:8px 12px;border:1px solid #ddd;">' +
+                    name + '</td></tr>' +
+                    '<tr><td style="padding:8px 12px;font-weight:700;background:#f0f0ff;border:1px solid #ddd;">Email</td><td style="padding:8px 12px;border:1px solid #ddd;">' +
+                    email + '</td></tr>' +
+                    '<tr><td style="padding:8px 12px;font-weight:700;background:#f0f0ff;border:1px solid #ddd;">Phone</td><td style="padding:8px 12px;border:1px solid #ddd;">' +
+                    (phone || 'Not provided') + '</td></tr>' +
+                    '<tr><td style="padding:8px 12px;font-weight:700;background:#f0f0ff;border:1px solid #ddd;">Subject</td><td style="padding:8px 12px;border:1px solid #ddd;">' +
+                    subject + '</td></tr>' +
+                    '<tr><td style="padding:8px 12px;font-weight:700;background:#f0f0ff;border:1px solid #ddd;">Message</td><td style="padding:8px 12px;border:1px solid #ddd;white-space:pre-wrap;">' +
+                    message + '</td></tr></table>' +
+                    '<p style="margin-top:20px;color:#888;font-size:12px;">Sent from your portfolio contact form.</p>';
 
-                    // Send email with all required fields.
-                    // The template on EmailJS should use these variables:
-                    //   {{from_name}}  – sender's full name
-                    //   {{from_email}} – sender's email address
-                    //   {{phone}}      – sender's phone number
-                    //   {{subject}}    – message subject
-                    //   {{message}}    – plain text message
-                    //   {{html_body}}  – full HTML formatted message (preferred for rich display)
-                    //   {{to_email}}   – recipient email address
-                    const response = await emailjs.send('service_smhhvth', 'template_z4feg0q', {
-                        from_name: name,
-                        from_email: email,
-                        phone: phone || 'Not provided',
-                        subject: subject,
-                        message: message,
-                        html_body: htmlBody,
-                        to_email: 'myportfoliomails01@gmail.com'
-                    });
-
-                    console.log('Email sent successfully:', response);
+                emailjs.send('service_smhhvth', 'template_z4feg0q', {
+                    from_name: name,
+                    from_email: email,
+                    phone: phone || 'Not provided',
+                    subject: subject,
+                    message: message,
+                    html_body: htmlBody,
+                    to_email: 'myportfoliomails01@gmail.com'
+                }).then(function() {
                     showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
                     form.reset();
                     if (charCount) charCount.textContent = '0';
-                } catch (error) {
-                    console.error('EmailJS Error:', error);
+                }).catch(function(err) {
+                    console.error('EmailJS Error:', err);
                     showToast('Failed to send message. Please try again later.', 'error');
-                } finally {
+                }).finally(function() {
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
+                });
+            });
+        }
+
+        // ================================================================
+        // 16. NEWSLETTER
+        // ================================================================
+        function initNewsletter() {
+            var btn = document.getElementById('newsletterBtn');
+            var input = document.getElementById('newsletterEmail');
+            if (!btn || !input) return;
+
+            function subscribe() {
+                var email = input.value.trim();
+                if (!email) { showToast('Please enter your email address', 'error'); return; }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email address',
+                    'error'); return; }
+                var orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                btn.disabled = true;
+                setTimeout(function() {
+                    showToast('Successfully subscribed to newsletter!', 'success');
+                    input.value = '';
+                    btn.innerHTML = orig;
+                    btn.disabled = false;
+                }, 1500);
+            }
+
+            btn.addEventListener('click', subscribe);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') subscribe();
+            });
+        }
+
+        // ================================================================
+        // 17. RESUME DOWNLOAD
+        // ================================================================
+        function initResumeDownload() {
+            var btn = document.getElementById('resumeBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Starting resume download...', 'info');
+                try {
+                    var link = document.createElement('a');
+                    link.href = 'Aditya_Resume.pdf';
+                    link.download = 'Aditya_Singh_Resume.pdf';
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    setTimeout(function() {
+                        document.body.removeChild(link);
+                        showToast('Resume downloaded successfully!', 'success');
+                    }, 100);
+                } catch (err) {
+                    showToast('Failed to download resume. Please try again.', 'error');
+                    setTimeout(function() { window.open('Aditya_Resume.pdf', '_blank'); }, 500);
                 }
             });
-        })();
-// ===== Newsletter Functions =====
-function initNewsletter() {
-    const newsletterBtn = document.getElementById('newsletterBtn');
-    const newsletterEmail = document.getElementById('newsletterEmail');
-    
-    if (!newsletterBtn || !newsletterEmail) return;
-    
-    newsletterBtn.addEventListener('click', () => {
-        const email = newsletterEmail.value.trim();
-        
-        if (!email) {
-            showToast('Please enter your email address', 'error');
-            return;
         }
-        
-        if (!validateEmail(email)) {
-            showToast('Please enter a valid email address', 'error');
-            return;
-        }
-        
-        // Show loading state
-        const originalHTML = newsletterBtn.innerHTML;
-        newsletterBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        newsletterBtn.disabled = true;
-        
-        // Simulate subscription
-        setTimeout(() => {
-            showToast('Successfully subscribed to newsletter!', 'success');
-            newsletterEmail.value = '';
-            newsletterBtn.innerHTML = originalHTML;
-            newsletterBtn.disabled = false;
-        }, 1500);
-    });
-    
-    // Allow Enter key to submit
-    newsletterEmail.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            newsletterBtn.click();
-        }
-    });
-}
 
-// ===== Resume Download Function =====
-function initResumeDownload() {
-    const resumeBtn = document.getElementById('resumeBtn');
-    
-    if (resumeBtn) {
-        resumeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Show downloading toast
-            showToast('Starting resume download...', 'info');
-            
-            try {
-                // Create a temporary anchor element to trigger download
-                const link = document.createElement('a');
-                link.href = 'Aditya_Resume.pdf'; // Make sure this filename matches your actual file
-                link.download = 'Aditya_Singh_Resume.pdf';
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                
-                // Trigger click
-                link.click();
-                
-                // Clean up
-                setTimeout(() => {
-                    document.body.removeChild(link);
-                    showToast('Resume downloaded successfully!', 'success');
-                }, 100);
-                
-            } catch (error) {
-                console.error('Error downloading resume:', error);
-                showToast('Failed to download resume. Please try again.', 'error');
-                
-                // Fallback: open in new tab
-                setTimeout(() => {
-                    window.open('Aditya_Resume.pdf', '_blank');
-                }, 500);
+        // ================================================================
+        // 18. MODAL CLOSURES
+        // ================================================================
+        function initModalClosures() {
+            var certModal = document.getElementById('certificateModal');
+            var certClose = document.getElementById('modalClose');
+            if (certModal && certClose) {
+                certClose.addEventListener('click', function() {
+                    certModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+                certModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
             }
-        });
-    }
-}
 
-// ===== Modal Close Functions =====
-function initModalClosures() {
-    // Certificate modal
-    const certModal = document.getElementById('certificateModal');
-    const certModalClose = document.getElementById('modalClose');
-    
-    if (certModal && certModalClose) {
-        certModalClose.addEventListener('click', () => {
-            certModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        
-        certModal.addEventListener('click', (e) => {
-            if (e.target === certModal) {
-                certModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
+            var videoModal = document.getElementById('videoModal');
+            var videoClose = document.getElementById('videoClose');
+            var video = document.getElementById('projectVideo');
+            if (videoModal && videoClose) {
+                videoClose.addEventListener('click', function() {
+                    videoModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    if (video) video.pause();
+                });
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                        if (video) video.pause();
+                    }
+                });
             }
-        });
-    }
-    
-    // Video modal
-    const videoModal = document.getElementById('videoModal');
-    const videoClose = document.getElementById('videoClose');
-    const projectVideo = document.getElementById('projectVideo');
-    
-    if (videoModal && videoClose) {
-        videoClose.addEventListener('click', () => {
-            videoModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            if (projectVideo) projectVideo.pause();
-        });
-        
-        videoModal.addEventListener('click', (e) => {
-            if (e.target === videoModal) {
-                videoModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                if (projectVideo) projectVideo.pause();
-            }
-        });
-    }
-}
-
-// ===== Toast Notification Function =====
-function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    const toastMessage = toast.querySelector('.toast-message');
-    const toastIcon = toast.querySelector('i');
-    const toastProgress = toast.querySelector('.toast-progress');
-    
-    if (!toast || !toastMessage) return;
-    
-    // Set message and icon
-    toastMessage.textContent = message;
-    
-    // Set icon and color based on type
-    if (type === 'success') {
-        toastIcon.className = 'fas fa-check-circle';
-        toast.style.borderLeftColor = '#10b981';
-    } else if (type === 'error') {
-        toastIcon.className = 'fas fa-exclamation-circle';
-        toast.style.borderLeftColor = '#ef4444';
-    } else if (type === 'warning') {
-        toastIcon.className = 'fas fa-exclamation-triangle';
-        toast.style.borderLeftColor = '#f59e0b';
-    } else {
-        toastIcon.className = 'fas fa-info-circle';
-        toast.style.borderLeftColor = '#3b82f6';
-    }
-    
-    // Reset and show toast
-    if (toastProgress) {
-        toastProgress.style.width = '100%';
-        toastProgress.style.transition = 'none';
-        void toastProgress.offsetWidth; // Trigger reflow
-        toastProgress.style.transition = 'width 3s linear';
-        toastProgress.style.width = '0%';
-    }
-    
-    toast.classList.add('show');
-    
-    // Hide toast after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
-// ===== Utility Functions =====
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function updateAllCounters() {
-    updateStatsCounter();
-    updateTotalCounts();
-    updateShowingCounts();
-    updateFooterStats();
-    updateEnhancedCounts();
-    updateProjectsCount();
-}
-
-// ===== Initialize Everything =====
-function initializeAll() {
-    // Initialize core functionalities
-    initLoader();
-    initTheme();
-    initTyping();
-    initMobileNav();
-    initSmoothScroll();
-    initBackToTop();
-    
-    // Load data
-    loadSkillsData();
-    initEnhancedProjects(); // Updated to use enhanced projects
-    initEnhancedCertifications();
-    
-    // Initialize interactive elements
-    initImagePreviews();
-    initQRCodeModals();
-    initContactForm();
-    initNewsletter();
-    initResumeDownload();
-    initModalClosures();
-    initEducationAnimation();
-    
-    // Add keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        // Ctrl/Cmd + T to toggle theme
-        if ((e.ctrlKey || e.metaKey) && e.key === 't') {
-            e.preventDefault();
-            document.getElementById('theme-toggle')?.click();
         }
-        
-        // Escape to close modals
-        if (e.key === 'Escape') {
-            const activeModal = document.querySelector('.modal.active');
-            if (activeModal) {
-                activeModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                // Pause video if it's playing
-                const video = document.getElementById('projectVideo');
-                if (video) {
-                    video.pause();
-                    video.currentTime = 0;
+
+        // ================================================================
+        // 19. TOAST
+        // ================================================================
+        function showToast(message, type) {
+            type = type || 'success';
+            var toast = document.getElementById('toast');
+            if (!toast) return;
+            var msgEl = toast.querySelector('.toast-message');
+            var icon = toast.querySelector('i');
+            var prog = toast.querySelector('.toast-progress');
+
+            msgEl.textContent = message;
+            icon.className = type === 'success' ? 'fas fa-check-circle' :
+                (type === 'error' ? 'fas fa-exclamation-circle' :
+                    (type === 'warning' ? 'fas fa-exclamation-triangle' : 'fas fa-info-circle'));
+            toast.style.borderLeftColor = type === 'success' ? '#10b981' :
+                (type === 'error' ? '#ef4444' :
+                    (type === 'warning' ? '#f59e0b' : '#3b82f6'));
+
+            if (prog) {
+                prog.style.width = '100%';
+                prog.style.transition = 'none';
+                void prog.offsetWidth;
+                prog.style.transition = 'width 3s linear';
+                prog.style.width = '0%';
+            }
+
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ================================================================
+        // 20. EDUCATION ANIMATION
+        // ================================================================
+        function initEducationAnimation() {
+            var items = document.querySelectorAll('.timeline-item');
+            function check() {
+                items.forEach(function(item) {
+                    var top = item.getBoundingClientRect().top;
+                    if (top < window.innerHeight - 150) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            window.addEventListener('scroll', check);
+            check();
+        }
+
+        // ================================================================
+        // 21. INIT
+        // ================================================================
+        function initializeAll() {
+            initLoader();
+            initTheme();
+            initTyping();
+            initMobileNav();
+            initSmoothScroll();
+            initBackToTop();
+            loadSkillsData();
+            loadEnhancedProjects();
+            loadEnhancedCertificates();
+            initImagePreviews();
+            initQRCodeModals();
+            initContactForm();
+            initNewsletter();
+            initResumeDownload();
+            initModalClosures();
+            initEducationAnimation();
+
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+                    e.preventDefault();
+                    var toggle = document.getElementById('theme-toggle');
+                    if (toggle) toggle.click();
                 }
-            }
+                if (e.key === 'Escape') {
+                    var active = document.querySelector('.modal.active');
+                    if (active) {
+                        active.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                        var v = document.getElementById('projectVideo');
+                        if (v) { v.pause();
+                            v.currentTime = 0; }
+                    }
+                }
+            });
+
+            setTimeout(function() {
+                initAllAnimations();
+            }, 100);
         }
-    });
-    
-    // Initialize animations after a short delay
-    setTimeout(() => {
-        initAllAnimations();
-    }, 100);
-}
 
-// ===== DOM Ready =====
-document.addEventListener('DOMContentLoaded', initializeAll);
+        document.addEventListener('DOMContentLoaded', initializeAll);
 
-// ===== Window Load =====
-window.addEventListener('load', () => {
-    // Final optimizations after everything is loaded
-    document.body.classList.add('fully-loaded');
-    
-    // Update counters one more time to ensure accuracy
-    setTimeout(() => {
-        updateAllCounters();
-    }, 500);
-});
+        window.addEventListener('load', function() {
+            document.body.classList.add('fully-loaded');
+            setTimeout(function() { updateAllCounters(); }, 500);
+        });
 
-// ===== Error Handling =====
-window.addEventListener('error', (e) => {
-    console.error('Error occurred:', e.error);
-    
-    // Graceful degradation for critical errors
-    if (e.error && e.error.message && e.error.message.includes('Typed')) {
-        const typingElement = document.querySelector('.typing-text');
-        if (typingElement) {
-            typingElement.textContent = 'Full Stack Developer';
-        }
-    }
-});
-
-// Make functions globally available for onclick attributes
-window.downloadEnhancedCertificate = downloadEnhancedCertificate;
-window.viewEnhancedCertificate = viewEnhancedCertificate;
-window.loadMoreEnhancedCertificates = loadMoreEnhancedCertificates;
-window.showLessEnhancedCertificates = showLessEnhancedCertificates;
-window.downloadCurrentCertificate = downloadCurrentCertificate;
-window.showToast = showToast;
-window.loadMoreProjects = loadMoreProjects;
-window.showLessProjects = showLessProjects;
+        // Expose globals for onclick
+        window.downloadEnhancedCertificate = downloadEnhancedCertificate;
+        window.viewEnhancedCertificate = viewEnhancedCertificate;
+        window.loadMoreEnhancedCertificates = loadMoreEnhancedCertificates;
+        window.showLessEnhancedCertificates = showLessEnhancedCertificates;
+        window.showToast = showToast;
+        window.loadMoreProjects = loadMoreProjects;
+        window.showLessProjects = showLessProjects;
