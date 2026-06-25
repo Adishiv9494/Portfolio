@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="adi2.png" type="image/x-icon" />
     <title>Aditya Singh | Full Stack Developer</title>
-    <!-- External Fonts & Icons -->
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- EmailJS & SweetAlert CDN -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- SweetAlert2 for modern popups -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css" />
@@ -20,11 +21,7 @@
     <div id="loader">
         <div class="loader-container">
             <div class="loader-logo">
-                <div class="logo-outer">
-                    <div class="logo-inner">
-                        <img src="adi2.png" alt="Code Loading" class="loader-gif" />
-                    </div>
-                </div>
+                <div class="logo-outer"><div class="logo-inner"><img src="adi2.png" alt="Code Loading" class="loader-gif" /></div></div>
                 <div class="logo-text">ADITYA SINGH</div>
                 <div class="logo-subtext">Full Stack Developer</div>
             </div>
@@ -45,14 +42,14 @@
     <!-- ===== PAGE CONTENT ===== -->
     <div id="page-content">
 
-        <!-- Background Decor -->
+        <!-- 5D Background Canvas -->
+        <canvas id="bgCanvas"></canvas>
+
+        <!-- Professional Background Decor -->
         <div class="professional-bg">
             <div class="bg-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-                <div class="shape shape-4"></div>
-                <div class="shape shape-5"></div>
+                <div class="shape shape-1"></div><div class="shape shape-2"></div>
+                <div class="shape shape-3"></div><div class="shape shape-4"></div><div class="shape shape-5"></div>
             </div>
             <div class="bg-grid"></div>
             <div class="bg-dots"></div>
@@ -63,10 +60,7 @@
             <div class="header-container">
                 <div class="logo-wrapper">
                     <div class="logo-icon"><i class="fas fa-code"></i></div>
-                    <div class="logo-text">
-                        <span class="logo-name">Aditya Singh</span>
-                        <span class="logo-tag">Full Stack Developer</span>
-                    </div>
+                    <div class="logo-text"><span class="logo-name">Aditya Singh</span><span class="logo-tag">Full Stack Developer</span></div>
                 </div>
                 <nav class="navbar">
                     <a href="#home" class="nav-link active" data-text="Home"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-text">Home</span></a>
@@ -126,9 +120,7 @@
                                 <img src="Adi09.jpeg" alt="Aditya Singh" class="profile-image" />
                                 <div class="profile-overlay"><div class="overlay-content"><i class="fas fa-expand"></i><span>View Profile</span></div></div>
                             </div>
-                            <div class="profile-border"></div>
-                            <div class="profile-shine"></div>
-                            <div class="profile-glow"></div>
+                            <div class="profile-border"></div><div class="profile-shine"></div><div class="profile-glow"></div>
                         </div>
                         <div class="profile-badge">
                             <div class="badge-icon"><i class="fas fa-user-graduate"></i></div>
@@ -429,8 +421,13 @@
                         </div>
                         <button type="submit" class="btn-submit" id="formSubmit"><span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span></button>
                     </form>
-                    
-                     <!-- Alternative Contact -->
+                    <div style="margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--border-color);display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center;">
+                        <a href="mailto:aadityasingh.knp@gmail.com" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-envelope"></i> aadityasingh.knp@gmail.com</a>
+                        <a href="tel:+917318413600" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-phone"></i> +91 7318413600</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Alternative Contact -->
             <div class="alternative-contact" style="max-width:1400px;margin:4rem auto 0;">
                 <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
                 <div class="alt-contact-grid">
@@ -439,16 +436,11 @@
                     <a href="https://twitter.com/Aditya_Singh_96" class="alt-contact-item twitter" target="_blank"><i class="fab fa-x-twitter"></i><div class="alt-contact-info"><h5>Twitter</h5><p>Follow updates</p></div></a>
                     <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank"><i class="fab fa-facebook-f"></i><div class="alt-contact-info"><h5>Facebook</h5><p>Connect socially</p></div></a>
                 </div>
-                <div class="contact-info-cards" style="max-width:1400px;margin:4rem auto 0;">
+            </div>
+            <div class="contact-info-cards" style="max-width:1400px;margin:4rem auto 0;">
                 <div class="contact-info-card"><div class="info-icon"><i class="fas fa-envelope"></i></div><div class="info-content"><h4>Email Address</h4><p>aadityasingh.knp@gmail.com</p></div></div>
                 <div class="contact-info-card"><div class="info-icon"><i class="fas fa-phone"></i></div><div class="info-content"><h4>Phone Number</h4><p>+91 7318413600</p></div></div>
             </div>
-            </div>
-            
-            </div>
-                </div>
-               
-            
         </section>
 
         <!-- ===== FOOTER ===== -->
