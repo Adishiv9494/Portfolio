@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="adi2.png" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="adi2.png" type="image/x-icon" />
     <title>Aditya Singh | Full Stack Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- External Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- EmailJS & SweetAlert CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+
     <!-- ===== LOADER ===== -->
     <div id="loader">
         <div class="loader-container">
@@ -26,12 +29,8 @@
                 <div class="logo-subtext">Full Stack Developer</div>
             </div>
             <div class="loader-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <div class="progress-text">
-                    Loading Portfolio <span class="progress-percentage">0%</span>
-                </div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-text">Loading Portfolio <span class="progress-percentage">0%</span></div>
             </div>
             <div class="loader-tech">
                 <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
@@ -43,635 +42,401 @@
         </div>
     </div>
 
-    <!-- ===== BACKGROUND ===== -->
-    <div class="professional-bg">
-        <div class="bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-        <div class="bg-grid"></div>
-        <div class="bg-dots"></div>
-    </div>
+    <!-- ===== PAGE CONTENT ===== -->
+    <div id="page-content">
 
-    <!-- ===== HEADER ===== -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo-wrapper">
-                <div class="logo-icon"><i class="fas fa-code"></i></div>
-                <div class="logo-text">
-                    <span class="logo-name">Aditya Singh</span>
-                    <span class="logo-tag">Full Stack Developer</span>
+        <!-- Background Decor -->
+        <div class="professional-bg">
+            <div class="bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+            <div class="bg-grid"></div>
+            <div class="bg-dots"></div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="header-container">
+                <div class="logo-wrapper">
+                    <div class="logo-icon"><i class="fas fa-code"></i></div>
+                    <div class="logo-text">
+                        <span class="logo-name">Aditya Singh</span>
+                        <span class="logo-tag">Full Stack Developer</span>
+                    </div>
+                </div>
+                <nav class="navbar">
+                    <a href="#home" class="nav-link active" data-text="Home"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-text">Home</span></a>
+                    <a href="#about" class="nav-link" data-text="About"><span class="nav-icon"><i class="fas fa-user"></i></span><span class="nav-text">About</span></a>
+                    <a href="#education" class="nav-link" data-text="Education"><span class="nav-icon"><i class="fas fa-graduation-cap"></i></span><span class="nav-text">Education</span></a>
+                    <a href="#certifications" class="nav-link" data-text="Certifications"><span class="nav-icon"><i class="fas fa-certificate"></i></span><span class="nav-text">Certifications</span></a>
+                    <a href="#skills" class="nav-link" data-text="Skills"><span class="nav-icon"><i class="fas fa-code"></i></span><span class="nav-text">Skills</span></a>
+                    <a href="#projects" class="nav-link" data-text="Projects"><span class="nav-icon"><i class="fas fa-project-diagram"></i></span><span class="nav-text">Projects</span></a>
+                    <a href="#contact" class="nav-link" data-text="Contact"><span class="nav-icon"><i class="fas fa-envelope"></i></span><span class="nav-text">Contact</span></a>
+                    <div class="theme-toggle-wrapper">
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                            <div class="toggle-track"><div class="toggle-thumb"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div></div>
+                        </button>
+                    </div>
+                </nav>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            </div>
+        </header>
+
+        <!-- ===== HOME ===== -->
+        <section class="home" id="home">
+            <div class="home-container">
+                <div class="home-content">
+                    <div class="intro-badge"><span class="badge-text">Welcome to my Portfolio</span><div class="badge-dots"><span></span><span></span><span></span></div></div>
+                    <h1 class="hero-title">
+                        <span class="title-line">Hi, I'm</span>
+                        <span class="title-line highlight">Aditya Singh</span>
+                        <span class="title-line"><span class="typing-text"></span><span class="cursor-animate">|</span></span>
+                    </h1>
+                    <p class="hero-description">A passionate Full Stack Developer specializing in creating modern web applications. With expertise in both frontend and backend technologies, I transform ideas into functional, scalable, and user-friendly digital solutions.</p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary"><span class="btn-text">View Projects</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span></a>
+                        <a href="#contact" class="btn btn-secondary"><span class="btn-text">Contact Me</span><span class="btn-icon"><i class="fas fa-paper-plane"></i></span></a>
+                    </div>
+                    <div class="stats-counter">
+                        <div class="stat-item"><div class="stat-number" data-count="8">0</div><div class="stat-label">Projects</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="10">0</div><div class="stat-label">Certificates</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="0">0</div><div class="stat-label">Years Exp</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="20">0</div><div class="stat-label">Skills</div></div>
+                    </div>
+                    <div class="social-hub">
+                        <div class="social-title">Connect with me</div>
+                        <div class="social-grid-icons">
+                            <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="social-icon-btn linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/Adishiv9494" class="social-icon-btn github" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://twitter.com/Aditya_Singh_96" class="social-icon-btn twitter" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                            <a href="https://tinyurl.com/3myan9h2" class="social-icon-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.instagram.com/the_aditya__singh_" class="social-icon-btn instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/" class="social-icon-btn facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-image">
+                    <div class="professional-profile">
+                        <div class="profile-frame">
+                            <div class="profile-image-wrapper" id="profile-image-wrapper">
+                                <img src="Adi09.jpeg" alt="Aditya Singh" class="profile-image" />
+                                <div class="profile-overlay"><div class="overlay-content"><i class="fas fa-expand"></i><span>View Profile</span></div></div>
+                            </div>
+                            <div class="profile-border"></div>
+                            <div class="profile-shine"></div>
+                            <div class="profile-glow"></div>
+                        </div>
+                        <div class="profile-badge">
+                            <div class="badge-icon"><i class="fas fa-user-graduate"></i></div>
+                            <div class="badge-content"><div class="badge-title">Fresher</div><div class="badge-subtitle">Ready to Work</div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div><span class="scroll-text">Scroll Down</span></div>
+        </section>
 
-            <nav class="navbar">
-                <a href="#home" class="nav-link active" data-text="Home">
-                    <span class="nav-icon"><i class="fas fa-home"></i></span>
-                    <span class="nav-text">Home</span>
-                </a>
-                <a href="#about" class="nav-link" data-text="About">
-                    <span class="nav-icon"><i class="fas fa-user"></i></span>
-                    <span class="nav-text">About</span>
-                </a>
-                <a href="#education" class="nav-link" data-text="Education">
-                    <span class="nav-icon"><i class="fas fa-graduation-cap"></i></span>
-                    <span class="nav-text">Education</span>
-                </a>
-                <a href="#certifications" class="nav-link" data-text="Certifications">
-                    <span class="nav-icon"><i class="fas fa-certificate"></i></span>
-                    <span class="nav-text">Certifications</span>
-                </a>
-                <a href="#skills" class="nav-link" data-text="Skills">
-                    <span class="nav-icon"><i class="fas fa-code"></i></span>
-                    <span class="nav-text">Skills</span>
-                </a>
-                <a href="#projects" class="nav-link" data-text="Projects">
-                    <span class="nav-icon"><i class="fas fa-project-diagram"></i></span>
-                    <span class="nav-text">Projects</span>
-                </a>
-                <a href="#contact" class="nav-link" data-text="Contact">
-                    <span class="nav-icon"><i class="fas fa-envelope"></i></span>
-                    <span class="nav-text">Contact</span>
-                </a>
+        <!-- ===== ABOUT ===== -->
+        <section class="about" id="about">
+            <div class="section-header">
+                <div class="section-title"><h2>About <span>Me</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            <div class="about-container">
+                <div class="about-image">
+                    <div class="professional-about-image">
+                        <div class="about-image-wrapper" id="about-image-wrapper">
+                            <img src="Adi07.jpeg" alt="Aditya Singh" class="about-profile" />
+                            <div class="image-overlay"><div class="overlay-content"><i class="fas fa-eye"></i><span>View Full</span></div></div>
+                        </div>
+                        <div class="image-decoration">
+                            <div class="decoration-border"></div>
+                            <div class="decoration-corner corner-tl"></div><div class="decoration-corner corner-tr"></div>
+                            <div class="decoration-corner corner-bl"></div><div class="decoration-corner corner-br"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="content-header">
+                        <div class="role-badge"><i class="fas fa-laptop-code"></i><span>Full Stack Developer</span></div>
+                        <h3 class="content-title">Crafting Digital Excellence</h3>
+                    </div>
+                    <div class="content-body">
+                        <p class="content-para">Hello! I'm a dedicated and enthusiastic student currently pursuing a Master's degree in Computer Applications (MCA). My journey in computer science began with a fascination for how technology transforms ideas into reality.</p>
+                        <p class="content-para">I specialize in creating responsive, high-performance web applications using modern technologies. With expertise in both front-end and back-end development, I deliver clean, efficient, and scalable solutions.</p>
+                        <p class="content-para">My approach combines technical expertise with creative problem-solving to build applications that not only function flawlessly but also provide exceptional user experiences.</p>
+                    </div>
+                    <div class="about-features">
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-rocket"></i></div><div class="feature-info"><h4>Fast & Efficient</h4><p>Optimized performance</p></div></div>
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><div class="feature-info"><h4>Secure Code</h4><p>Best practices</p></div></div>
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><div class="feature-info"><h4>Responsive</h4><p>All devices</p></div></div>
+                    </div>
+                    <div class="content-actions">
+                        <a href="Aditya_Resume.pdf" class="btn btn-primary" id="resumeBtn"><span class="btn-text">Download Resume</span><span class="btn-icon"><i class="fas fa-download"></i></span></a>
+                        <a href="#contact" class="btn btn-secondary"><span class="btn-text">Hire Me</span><span class="btn-icon"><i class="fas fa-briefcase"></i></span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <div class="theme-toggle-wrapper">
-                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                        <div class="toggle-track">
-                            <div class="toggle-thumb">
-                                <i class="fas fa-sun"></i>
-                                <i class="fas fa-moon"></i>
+        <!-- ===== EDUCATION ===== -->
+        <section class="education" id="education">
+            <div class="section-header">
+                <div class="section-title"><h2>My <span>Education</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Academic Journey</p>
+            </div>
+            <div class="education-timeline">
+                <div class="timeline">
+                    <!-- MCA -->
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <div class="content-icon"><i class="fas fa-graduation-cap fa-2x"></i></div>
+                            <div class="timeline-date timeline-date-left"><span class="date-year">2025 - 2027</span><span class="date-duration">2 Years</span></div>
+                            <div class="content-card card-left">
+                                <div class="card-header"><h3>Master of Computer Applications (MCA)(Pursuing)</h3><span class="card-badge">CGPA: 6.26/10</span></div>
+                                <p class="card-institution">Allenhouse Institute of Technology</p>
+                                <p class="card-description">Specialization in Software Development with focus on modern web technologies and programming principles.</p>
+                                <div class="card-tags"><span class="tag">Programming</span><span class="tag">Data Structure</span><span class="tag">Database</span></div>
                             </div>
                         </div>
-                    </button>
-                </div>
-            </nav>
-
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- ===== HOME ===== -->
-    <section class="home" id="home">
-        <div class="home-container">
-            <div class="home-content">
-                <div class="intro-badge">
-                    <span class="badge-text">Welcome to my Portfolio</span>
-                    <div class="badge-dots"><span></span><span></span><span></span></div>
-                </div>
-
-                <h1 class="hero-title">
-                    <span class="title-line">Hi, I'm</span>
-                    <span class="title-line highlight">Aditya Singh</span>
-                    <span class="title-line">
-                        <span class="typing-text"></span>
-                        <span class="cursor-animate">|</span>
-                    </span>
-                </h1>
-
-                <p class="hero-description">
-                    A passionate Full Stack Developer specializing in creating modern web applications.
-                    With expertise in both frontend and backend technologies, I transform ideas into
-                    functional, scalable, and user-friendly digital solutions.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">
-                        <span class="btn-text">View Projects</span>
-                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span class="btn-text">Contact Me</span>
-                        <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
-                    </a>
-                </div>
-
-                <div class="stats-counter">
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="6">0</div>
-                        <div class="stat-label">Projects</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="10">0</div>
-                        <div class="stat-label">Certificates</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="0">0</div>
-                        <div class="stat-label">Years Exp</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="19">0</div>
-                        <div class="stat-label">Skills</div>
-                    </div>
-                </div>
-
-                <div class="social-hub">
-                    <div class="social-title">Connect with me</div>
-                    <div class="social-grid-icons">
-                        <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="social-icon-btn linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/Adishiv9494" class="social-icon-btn github" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://twitter.com/Aditya_Singh_96" class="social-icon-btn twitter" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://tinyurl.com/3myan9h2" class="social-icon-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/the_aditya__singh_" class="social-icon-btn instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/" class="social-icon-btn facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="home-image">
-                <div class="professional-profile">
-                    <div class="profile-frame">
-                        <div class="profile-image-wrapper" id="profile-image-wrapper">
-                            <img src="Adi09.jpeg" alt="Aditya Singh" class="profile-image" />
-                            <div class="profile-overlay">
-                                <div class="overlay-content"><i class="fas fa-expand"></i><span>View Profile</span></div>
+                    <!-- BCA -->
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <div class="content-icon"><i class="fas fa-graduation-cap fa-2x"></i></div>
+                            <div class="timeline-date timeline-date-right"><span class="date-year">2022 - 2025</span><span class="date-duration">3 Years</span></div>
+                            <div class="content-card card-right">
+                                <div class="card-header"><h3>Bachelor of Computer Applications (BCA)</h3><span class="card-badge">CGPA: 7.3/10</span></div>
+                                <p class="card-institution">Allenhouse Business School</p>
+                                <p class="card-description">Specialization in Software Development with focus on modern web technologies and programming principles.</p>
+                                <div class="card-tags"><span class="tag">Programming</span><span class="tag">Web Development</span><span class="tag">Database</span></div>
                             </div>
                         </div>
-                        <div class="profile-border"></div>
-                        <div class="profile-shine"></div>
-                        <div class="profile-glow"></div>
                     </div>
-                    <div class="profile-badge">
-                        <div class="badge-icon"><i class="fas fa-user-graduate"></i></div>
-                        <div class="badge-content">
-                            <div class="badge-title">Fresher</div>
-                            <div class="badge-subtitle">Ready to Work</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse"><div class="wheel"></div></div>
-            <span class="scroll-text">Scroll Down</span>
-        </div>
-    </section>
-
-    <!-- ===== ABOUT ===== -->
-    <section class="about" id="about">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>About <span>Me</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Get to know me better</p>
-        </div>
-
-        <div class="about-container">
-            <div class="about-image">
-                <div class="professional-about-image">
-                    <div class="about-image-wrapper" id="about-image-wrapper">
-                        <img src="Adi07.jpeg" alt="Aditya Singh" class="about-profile" />
-                        <div class="image-overlay">
-                            <div class="overlay-content"><i class="fas fa-eye"></i><span>View Full</span></div>
-                        </div>
-                    </div>
-                    <div class="image-decoration">
-                        <div class="decoration-border"></div>
-                        <div class="decoration-corner corner-tl"></div>
-                        <div class="decoration-corner corner-tr"></div>
-                        <div class="decoration-corner corner-bl"></div>
-                        <div class="decoration-corner corner-br"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="about-content">
-                <div class="content-header">
-                    <div class="role-badge"><i class="fas fa-laptop-code"></i><span>Full Stack Developer</span></div>
-                    <h3 class="content-title">Crafting Digital Excellence</h3>
-                </div>
-
-                <div class="content-body">
-                    <p class="content-para">Hello! I'm a dedicated and enthusiastic student currently pursuing a Master's degree in Computer Applications (MCA). My journey in computer science began with a fascination for how technology transforms ideas into reality.</p>
-                    <p class="content-para">I specialize in creating responsive, high-performance web applications using modern technologies. With expertise in both front-end and back-end development, I deliver clean, efficient, and scalable solutions.</p>
-                    <p class="content-para">My approach combines technical expertise with creative problem-solving to build applications that not only function flawlessly but also provide exceptional user experiences.</p>
-                </div>
-
-                <div class="about-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-                        <div class="feature-info"><h4>Fast & Efficient</h4><p>Optimized performance</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="feature-info"><h4>Secure Code</h4><p>Best practices</p></div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="feature-info"><h4>Responsive</h4><p>All devices</p></div>
-                    </div>
-                </div>
-
-                <div class="content-actions">
-                    <a href="Aditya_Resume.pdf" class="btn btn-primary" id="resumeBtn">
-                        <span class="btn-text">Download Resume</span>
-                        <span class="btn-icon"><i class="fas fa-download"></i></span>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span class="btn-text">Hire Me</span>
-                        <span class="btn-icon"><i class="fas fa-briefcase"></i></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== EDUCATION ===== -->
-    <section class="education" id="education">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>My <span>Education</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Academic Journey</p>
-        </div>
-
-        <div class="education-timeline">
-            <div class="timeline">
-                <!-- MCA -->
-                <div class="timeline-item timeline-item-left">
-                    <div class="timeline-content">
-                        <div class="content-icon"><i class="fas fa-graduation-cap fa-2x"></i></div>
-                        <div class="timeline-date timeline-date-left">
-                            <span class="date-year">2025 - 2027</span>
-                            <span class="date-duration">2 Years</span>
-                        </div>
-                        <div class="content-card card-left">
-                            <div class="card-header">
-                                <h3>Master of Computer Applications (MCA)(Pursuing)</h3>
-                                <span class="card-badge">CGPA: 6.26/10</span>
-                            </div>
-                            <p class="card-institution">Allenhouse Institute of Technology</p>
-                            <p class="card-description">Specialization in Software Development with focus on modern web technologies and programming principles.</p>
-                            <div class="card-tags"><span class="tag">Programming</span><span class="tag">Data Structure</span><span class="tag">Database</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BCA -->
-                <div class="timeline-item timeline-item-right">
-                    <div class="timeline-content">
-                        <div class="content-icon"><i class="fas fa-graduation-cap fa-2x"></i></div>
-                        <div class="timeline-date timeline-date-right">
-                            <span class="date-year">2022 - 2025</span>
-                            <span class="date-duration">3 Years</span>
-                        </div>
-                        <div class="content-card card-right">
-                            <div class="card-header">
-                                <h3>Bachelor of Computer Applications (BCA)</h3>
-                                <span class="card-badge">CGPA: 7.3/10</span>
-                            </div>
-                            <p class="card-institution">Allenhouse Business School</p>
-                            <p class="card-description">Specialization in Software Development with focus on modern web technologies and programming principles.</p>
-                            <div class="card-tags"><span class="tag">Programming</span><span class="tag">Web Development</span><span class="tag">Database</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- B.Sc -->
-                <div class="timeline-item timeline-item-left">
-                    <div class="timeline-content">
-                        <div class="content-icon"><i class="fas fa-university fa-2x"></i></div>
-                        <div class="timeline-date timeline-date-left">
-                            <span class="date-year">2015 - 2018</span>
-                            <span class="date-duration">3 Years</span>
-                        </div>
-                        <div class="content-card card-left">
-                            <div class="card-header">
-                                <h3>Bachelor of Science (B.Sc.)</h3>
-                                <span class="card-badge">Percentage: 44%</span>
-                            </div>
-                            <p class="card-institution">Shankranand Mahavidyalaya</p>
-                            <p class="card-description">Specialization in Mathematics with advanced studies in calculus, algebra, and mathematical modeling.</p>
-                            <div class="card-tags"><span class="tag">Mathematics</span><span class="tag">Statistics</span><span class="tag">Analysis</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 12th -->
-                <div class="timeline-item timeline-item-right">
-                    <div class="timeline-content">
-                        <div class="content-icon"><i class="fas fa-school fa-2x"></i></div>
-                        <div class="timeline-date timeline-date-right">
-                            <span class="date-year">2014 - 2015</span>
-                            <span class="date-duration">1 Year</span>
-                        </div>
-                        <div class="content-card card-right">
-                            <div class="card-header">
-                                <h3>12th Grade (Senior Secondary)</h3>
-                                <span class="card-badge">Percentage: 64.4%</span>
-                            </div>
-                            <p class="card-institution">Acharya Raghuveer Inter College</p>
-                            <p class="card-description">Science Stream with Mathematics, Physics, and Chemistry.</p>
-                            <div class="card-tags"><span class="tag">Science</span><span class="tag">Mathematics</span><span class="tag">Physics</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10th -->
-                <div class="timeline-item timeline-item-left">
-                    <div class="timeline-content">
-                        <div class="content-icon"><i class="fas fa-school fa-2x"></i></div>
-                        <div class="timeline-date timeline-date-left">
-                            <span class="date-year">2012 - 2013</span>
-                            <span class="date-duration">1 Year</span>
-                        </div>
-                        <div class="content-card card-left">
-                            <div class="card-header">
-                                <h3>10th Grade (Secondary)</h3>
-                                <span class="card-badge">Percentage: 75.5%</span>
-                            </div>
-                            <p class="card-institution">Acharya Raghuveer Inter College</p>
-                            <p class="card-description">Mathematics and Science Focus with strong foundation in core subjects.</p>
-                            <div class="card-tags"><span class="tag">Foundation</span><span class="tag">Core Subjects</span><span class="tag">Basic Sciences</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CERTIFICATIONS ===== -->
-    <section class="certifications" id="certifications">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>My <span>Certifications</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Professional Accreditations &amp; Achievements</p>
-            <div class="cert-stats">
-                <div class="stat-badge"><i class="fas fa-trophy"></i><span>Total: <strong id="certTotal">10</strong> Certifications</span></div>
-                <div class="stat-badge"><i class="fas fa-star"></i><span>Average Score: <strong>85%</strong></span></div>
-            </div>
-        </div>
-
-        <div class="cert-filter">
-            <button class="filter-btn active" data-filter="all">All Certificates</button>
-            <button class="filter-btn" data-filter="university">University</button>
-            <button class="filter-btn" data-filter="professional">Professional</button>
-            <button class="filter-btn" data-filter="technical">Technical</button>
-            <button class="filter-btn" data-filter="top-rated">Top Rated</button>
-        </div>
-
-        <div class="certifications-grid" id="certificationsGrid"></div>
-
-        <div class="cert-controls">
-            <div class="count-display">Showing <span id="showingCerts">3</span> of <span id="totalCerts">10</span> certificates</div>
-            <div class="control-buttons">
-                <button class="btn btn-load-more" id="loadMoreCerts"><i class="fas fa-chevron-down"></i><span>Load More Certificates</span></button>
-                <button class="btn btn-show-less" id="showLessCerts" style="display:none;"><i class="fas fa-chevron-up"></i><span>Show Less</span></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== SKILLS ===== -->
-    <section class="skills" id="skills">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>Technical <span>Skills</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Technologies I'm Working with us</p>
-            <div class="skill-count"><i class="fas fa-code"></i><span>Total: <span id="skillsTotal">19</span> Skills</span></div>
-        </div>
-
-        <div class="skills-container">
-            <!-- Programming Languages -->
-            <div class="skills-category">
-                <div class="category-header">
-                    <h3 class="category-title"><i class="fas fa-keyboard"></i> Programming Languages</h3>
-                    <div class="category-pulse"></div>
-                </div>
-                <div class="skills-grid" id="programmingGrid"></div>
-            </div>
-
-            <!-- Frontend -->
-            <div class="skills-category">
-                <div class="category-header">
-                    <h3 class="category-title"><i class="fas fa-desktop"></i> Frontend</h3>
-                    <div class="category-pulse"></div>
-                </div>
-                <div class="skills-grid" id="frontendGrid"></div>
-            </div>
-
-            <!-- Backend -->
-            <div class="skills-category">
-                <div class="category-header">
-                    <h3 class="category-title"><i class="fas fa-server"></i> Backend</h3>
-                    <div class="category-pulse"></div>
-                </div>
-                <div class="skills-grid" id="backendGrid"></div>
-            </div>
-
-            <!-- Development Tools -->
-            <div class="skills-category">
-                <div class="category-header">
-                    <h3 class="category-title"><i class="fas fa-tools"></i> Development Tools</h3>
-                    <div class="category-pulse"></div>
-                </div>
-                <div class="skills-grid" id="toolsGrid"></div>
-            </div>
-
-            <!-- Soft Skills -->
-            <div class="skills-category">
-                <div class="category-header">
-                    <h3 class="category-title"><i class="fas fa-brain"></i> Soft Skills</h3>
-                    <div class="category-pulse"></div>
-                </div>
-                <div class="soft-skills-grid">
-                    <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-comments"></i></div><h4>Communication</h4></div>
-                    <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-puzzle-piece"></i></div><h4>Problem Solving</h4></div>
-                    <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-users"></i></div><h4>Teamwork</h4></div>
-                    <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-lightbulb"></i></div><h4>Creativity</h4></div>
-                    <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-clock"></i></div><h4>Time Management</h4></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PROJECTS ===== -->
-    <section class="projects" id="projects">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>My <span>Projects</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Featured Work</p>
-            <div class="projects-count"><i class="fas fa-project-diagram"></i><span>Showing: <span id="showingProjects">3</span> of <span id="projectsTotal">8</span> Projects</span></div>
-        </div>
-
-        <div class="projects-grid" id="projectsGrid"></div>
-
-        <div class="view-more">
-            <button class="btn btn-load" id="loadMoreProjects"><span>View More Projects</span><i class="fas fa-chevron-down"></i></button>
-            <button class="btn btn-less" id="showLessProjects" style="display:none;"><span>Show Less</span><i class="fas fa-chevron-up"></i></button>
-        </div>
-    </section>
-
-    <!-- ===== CONTACT ===== -->
-    <section class="contact" id="contact">
-        <div class="section-header">
-            <div class="section-title">
-                <h2>Contact <span>Me</span></h2>
-                <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
-            </div>
-            <p class="section-subtitle">Scan QR codes or send a message to connect instantly</p>
-        </div>
-
-        <div class="contact-container">
-            <!-- QR Section -->
-            <div class="qr-section">
-                <div class="qr-section-header">
-                    <h3><i class="fas fa-qrcode"></i> Quick Connect via QR Codes</h3>
-                    <p class="qr-section-subtitle">Scan any QR code for instant connection</p>
-                </div>
-
-                <div class="qr-cards-grid">
-                    <!-- WhatsApp -->
-                    <div class="qr-card">
-                        <div class="qr-card-header">
-                            <div class="qr-card-icon whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
-                            <div class="qr-card-info">
-                                <h3>WhatsApp Chat</h3>
-                                <div class="qr-status"><span class="status-dot active"></span><span class="status-text">Online</span></div>
+                    <!-- B.Sc -->
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <div class="content-icon"><i class="fas fa-university fa-2x"></i></div>
+                            <div class="timeline-date timeline-date-left"><span class="date-year">2015 - 2018</span><span class="date-duration">3 Years</span></div>
+                            <div class="content-card card-left">
+                                <div class="card-header"><h3>Bachelor of Science (B.Sc.)</h3><span class="card-badge">Percentage: 44%</span></div>
+                                <p class="card-institution">Shankranand Mahavidyalaya</p>
+                                <p class="card-description">Specialization in Mathematics with advanced studies in calculus, algebra, and mathematical modeling.</p>
+                                <div class="card-tags"><span class="tag">Mathematics</span><span class="tag">Statistics</span><span class="tag">Analysis</span></div>
                             </div>
                         </div>
-                        <div class="qr-code-container">
-                            <div class="qr-code-wrapper">
-                                <img src="WhatsApp.png" alt="WhatsApp QR Code" class="qr-code-image" />
-                                <div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div>
+                    </div>
+                    <!-- 12th -->
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-content">
+                            <div class="content-icon"><i class="fas fa-school fa-2x"></i></div>
+                            <div class="timeline-date timeline-date-right"><span class="date-year">2014 - 2015</span><span class="date-duration">1 Year</span></div>
+                            <div class="content-card card-right">
+                                <div class="card-header"><h3>12th Grade (Senior Secondary)</h3><span class="card-badge">Percentage: 64.4%</span></div>
+                                <p class="card-institution">Acharya Raghuveer Inter College</p>
+                                <p class="card-description">Science Stream with Mathematics, Physics, and Chemistry.</p>
+                                <div class="card-tags"><span class="tag">Science</span><span class="tag">Mathematics</span><span class="tag">Physics</span></div>
                             </div>
-                            <div class="qr-instruction"><p class="qr-message"><i class="fas fa-mobile-alt"></i> Scan to start a conversation on WhatsApp</p></div>
-                        </div>
-                        <div class="qr-actions">
-                            <button class="btn-qr-action scan-guide-btn" data-type="whatsapp"><i class="fas fa-info-circle"></i> How to Scan</button>
-                            <a href="https://tinyurl.com/3myan9h2" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-external-link-alt"></i> Open Directly</a>
                         </div>
                     </div>
-
-                    <!-- Email -->
-                    <div class="qr-card">
-                        <div class="qr-card-header">
-                            <div class="qr-card-icon email-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="qr-card-info">
-                                <h3>Email Contact</h3>
-                                <div class="qr-status"><span class="status-dot active"></span><span class="status-text">24/7 Response</span></div>
+                    <!-- 10th -->
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-content">
+                            <div class="content-icon"><i class="fas fa-school fa-2x"></i></div>
+                            <div class="timeline-date timeline-date-left"><span class="date-year">2012 - 2013</span><span class="date-duration">1 Year</span></div>
+                            <div class="content-card card-left">
+                                <div class="card-header"><h3>10th Grade (Secondary)</h3><span class="card-badge">Percentage: 75.5%</span></div>
+                                <p class="card-institution">Acharya Raghuveer Inter College</p>
+                                <p class="card-description">Mathematics and Science Focus with strong foundation in core subjects.</p>
+                                <div class="card-tags"><span class="tag">Foundation</span><span class="tag">Core Subjects</span><span class="tag">Basic Sciences</span></div>
                             </div>
-                        </div>
-                        <div class="qr-code-container">
-                            <div class="qr-code-wrapper">
-                                <img src="Email.png" alt="Email QR Code" class="qr-code-image" />
-                                <div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div>
-                            </div>
-                            <div class="qr-instruction"><p class="qr-message"><i class="fas fa-envelope-open-text"></i> Scan to compose email instantly</p></div>
-                        </div>
-                        <div class="qr-actions">
-                            <button class="btn-qr-action scan-guide-btn" data-type="email"><i class="fas fa-info-circle"></i> How to Scan</button>
-                            <a href="mailto:aadityasingh.knp@gmail.com" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-paper-plane"></i> Compose Email</a>
-                        </div>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="qr-card">
-                        <div class="qr-card-header">
-                            <div class="qr-card-icon phone-icon"><i class="fas fa-phone"></i></div>
-                            <div class="qr-card-info">
-                                <h3>Phone Call</h3>
-                                <div class="qr-status"><span class="status-dot active"></span><span class="status-text">Available</span></div>
-                            </div>
-                        </div>
-                        <div class="qr-code-container">
-                            <div class="qr-code-wrapper">
-                                <img src="Contact.png" alt="Call QR Code" class="qr-code-image" />
-                                <div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div>
-                            </div>
-                            <div class="qr-instruction"><p class="qr-message"><i class="fas fa-phone-volume"></i> Scan to call directly from your phone</p></div>
-                        </div>
-                        <div class="qr-actions">
-                            <button class="btn-qr-action scan-guide-btn" data-type="phone"><i class="fas fa-info-circle"></i> How to Scan</button>
-                            <a href="tel:+917318413600" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-phone-alt"></i> Call Now</a>
-                        </div>
-                    </div>
-
-                    <!-- Instagram -->
-                    <div class="qr-card">
-                        <div class="qr-card-header">
-                            <div class="qr-card-icon instagram-icon"><i class="fab fa-instagram"></i></div>
-                            <div class="qr-card-info">
-                                <h3>Instagram Profile</h3>
-                                <div class="qr-status"><span class="status-dot active"></span><span class="status-text">Active</span></div>
-                            </div>
-                        </div>
-                        <div class="qr-code-container">
-                            <div class="qr-code-wrapper">
-                                <img src="Instragram.png" alt="Instagram QR Code" class="qr-code-image" />
-                                <div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div>
-                            </div>
-                            <div class="qr-instruction"><p class="qr-message"><i class="fab fa-instagram"></i> Scan to follow me on Instagram</p></div>
-                        </div>
-                        <div class="qr-actions">
-                            <button class="btn-qr-action scan-guide-btn" data-type="instagram"><i class="fas fa-info-circle"></i> How to Scan</button>
-                            <a href="https://www.instagram.com/the_aditya__singh_?igsh=OWhzcm1seDBrNm9k" class="btn-qr-action direct-link-btn" target="_blank"><i class="fab fa-instagram"></i> Open Profile</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Contact Form -->
-            <div class="contact-form-section">
-                <div class="form-header">
-                    <h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3>
-                    <p>I'll respond within 24 hours</p>
+        <!-- ===== CERTIFICATIONS ===== -->
+        <section class="certifications" id="certifications">
+            <div class="section-header">
+                <div class="section-title"><h2>My <span>Certifications</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Professional Accreditations & Achievements</p>
+                <div class="cert-stats">
+                    <div class="stat-badge"><i class="fas fa-trophy"></i><span>Total: <strong id="certTotal">10</strong> Certifications</span></div>
+                    <div class="stat-badge"><i class="fas fa-star"></i><span>Average Score: <strong>85%</strong></span></div>
                 </div>
+            </div>
+            <div class="cert-filter">
+                <button class="filter-btn active" data-filter="all">All Certificates</button>
+                <button class="filter-btn" data-filter="university">University</button>
+                <button class="filter-btn" data-filter="professional">Professional</button>
+                <button class="filter-btn" data-filter="technical">Technical</button>
+                <button class="filter-btn" data-filter="top-rated">Top Rated</button>
+            </div>
+            <div class="certifications-grid" id="certificationsGrid"></div>
+            <div class="cert-controls">
+                <div class="count-display">Showing <span id="showingCerts">3</span> of <span id="totalCerts">10</span> certificates</div>
+                <div class="control-buttons">
+                    <button class="btn btn-load-more" id="loadMoreCerts"><i class="fas fa-chevron-down"></i><span>Load More Certificates</span></button>
+                    <button class="btn btn-show-less" id="showLessCerts" style="display:none;"><i class="fas fa-chevron-up"></i><span>Show Less</span></button>
+                </div>
+            </div>
+        </section>
 
-                <form id="contactForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" id="userName" placeholder="Your full name" required />
+        <!-- ===== SKILLS ===== -->
+        <section class="skills" id="skills">
+            <div class="section-header">
+                <div class="section-title"><h2>Technical <span>Skills</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Technologies I'm Working with us</p>
+                <div class="skill-count"><i class="fas fa-code"></i><span>Total: <span id="skillsTotal">19</span> Skills</span></div>
+            </div>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <div class="category-header"><h3 class="category-title"><i class="fas fa-keyboard"></i> Programming Languages</h3><div class="category-pulse"></div></div>
+                    <div class="skills-grid" id="programmingGrid"></div>
+                </div>
+                <div class="skills-category">
+                    <div class="category-header"><h3 class="category-title"><i class="fas fa-desktop"></i> Frontend</h3><div class="category-pulse"></div></div>
+                    <div class="skills-grid" id="frontendGrid"></div>
+                </div>
+                <div class="skills-category">
+                    <div class="category-header"><h3 class="category-title"><i class="fas fa-server"></i> Backend</h3><div class="category-pulse"></div></div>
+                    <div class="skills-grid" id="backendGrid"></div>
+                </div>
+                <div class="skills-category">
+                    <div class="category-header"><h3 class="category-title"><i class="fas fa-tools"></i> Development Tools</h3><div class="category-pulse"></div></div>
+                    <div class="skills-grid" id="toolsGrid"></div>
+                </div>
+                <div class="skills-category">
+                    <div class="category-header"><h3 class="category-title"><i class="fas fa-brain"></i> Soft Skills</h3><div class="category-pulse"></div></div>
+                    <div class="soft-skills-grid">
+                        <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-comments"></i></div><h4>Communication</h4></div>
+                        <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-puzzle-piece"></i></div><h4>Problem Solving</h4></div>
+                        <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-users"></i></div><h4>Teamwork</h4></div>
+                        <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-lightbulb"></i></div><h4>Creativity</h4></div>
+                        <div class="soft-skill-card"><div class="soft-skill-icon"><i class="fas fa-clock"></i></div><h4>Time Management</h4></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROJECTS ===== -->
+        <section class="projects" id="projects">
+            <div class="section-header">
+                <div class="section-title"><h2>My <span>Projects</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Featured Work</p>
+                <div class="projects-count"><i class="fas fa-project-diagram"></i><span>Showing: <span id="showingProjects">3</span> of <span id="projectsTotal">8</span> Projects</span></div>
+            </div>
+            <div class="projects-grid" id="projectsGrid"></div>
+            <div class="view-more">
+                <button class="btn btn-load" id="loadMoreProjects"><span>View More Projects</span><i class="fas fa-chevron-down"></i></button>
+                <button class="btn btn-less" id="showLessProjects" style="display:none;"><span>Show Less</span><i class="fas fa-chevron-up"></i></button>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section class="contact" id="contact">
+            <div class="section-header">
+                <div class="section-title"><h2>Contact <span>Me</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <p class="section-subtitle">Scan QR codes or send a message to connect instantly</p>
+            </div>
+            <div class="contact-container">
+                <!-- QR Section -->
+                <div class="qr-section">
+                    <div class="qr-section-header">
+                        <h3><i class="fas fa-qrcode"></i> Quick Connect via QR Codes</h3>
+                        <p class="qr-section-subtitle">Scan any QR code for instant connection</p>
+                    </div>
+                    <div class="qr-cards-grid">
+                        <div class="qr-card">
+                            <div class="qr-card-header">
+                                <div class="qr-card-icon whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+                                <div class="qr-card-info"><h3>WhatsApp Chat</h3><div class="qr-status"><span class="status-dot active"></span><span class="status-text">Online</span></div></div>
+                            </div>
+                            <div class="qr-code-container">
+                                <div class="qr-code-wrapper"><img src="WhatsApp.png" alt="WhatsApp QR Code" class="qr-code-image" /><div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div></div>
+                                <div class="qr-instruction"><p class="qr-message"><i class="fas fa-mobile-alt"></i> Scan to start a conversation on WhatsApp</p></div>
+                            </div>
+                            <div class="qr-actions">
+                                <button class="btn-qr-action scan-guide-btn" data-type="whatsapp"><i class="fas fa-info-circle"></i> How to Scan</button>
+                                <a href="https://tinyurl.com/3myan9h2" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-external-link-alt"></i> Open Directly</a>
+                            </div>
+                        </div>
+                        <div class="qr-card">
+                            <div class="qr-card-header">
+                                <div class="qr-card-icon email-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="qr-card-info"><h3>Email Contact</h3><div class="qr-status"><span class="status-dot active"></span><span class="status-text">24/7 Response</span></div></div>
+                            </div>
+                            <div class="qr-code-container">
+                                <div class="qr-code-wrapper"><img src="Email.png" alt="Email QR Code" class="qr-code-image" /><div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div></div>
+                                <div class="qr-instruction"><p class="qr-message"><i class="fas fa-envelope-open-text"></i> Scan to compose email instantly</p></div>
+                            </div>
+                            <div class="qr-actions">
+                                <button class="btn-qr-action scan-guide-btn" data-type="email"><i class="fas fa-info-circle"></i> How to Scan</button>
+                                <a href="mailto:aadityasingh.knp@gmail.com" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-paper-plane"></i> Compose Email</a>
+                            </div>
+                        </div>
+                        <div class="qr-card">
+                            <div class="qr-card-header">
+                                <div class="qr-card-icon phone-icon"><i class="fas fa-phone"></i></div>
+                                <div class="qr-card-info"><h3>Phone Call</h3><div class="qr-status"><span class="status-dot active"></span><span class="status-text">Available</span></div></div>
+                            </div>
+                            <div class="qr-code-container">
+                                <div class="qr-code-wrapper"><img src="Contact.png" alt="Call QR Code" class="qr-code-image" /><div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div></div>
+                                <div class="qr-instruction"><p class="qr-message"><i class="fas fa-phone-volume"></i> Scan to call directly from your phone</p></div>
+                            </div>
+                            <div class="qr-actions">
+                                <button class="btn-qr-action scan-guide-btn" data-type="phone"><i class="fas fa-info-circle"></i> How to Scan</button>
+                                <a href="tel:+917318413600" class="btn-qr-action direct-link-btn" target="_blank"><i class="fas fa-phone-alt"></i> Call Now</a>
+                            </div>
+                        </div>
+                        <div class="qr-card">
+                            <div class="qr-card-header">
+                                <div class="qr-card-icon instagram-icon"><i class="fab fa-instagram"></i></div>
+                                <div class="qr-card-info"><h3>Instagram Profile</h3><div class="qr-status"><span class="status-dot active"></span><span class="status-text">Active</span></div></div>
+                            </div>
+                            <div class="qr-code-container">
+                                <div class="qr-code-wrapper"><img src="Instragram.png" alt="Instagram QR Code" class="qr-code-image" /><div class="qr-code-overlay"><i class="fas fa-expand-alt"></i></div></div>
+                                <div class="qr-instruction"><p class="qr-message"><i class="fab fa-instagram"></i> Scan to follow me on Instagram</p></div>
+                            </div>
+                            <div class="qr-actions">
+                                <button class="btn-qr-action scan-guide-btn" data-type="instagram"><i class="fas fa-info-circle"></i> How to Scan</button>
+                                <a href="https://www.instagram.com/the_aditya__singh_?igsh=OWhzcm1seDBrNm9k" class="btn-qr-action direct-link-btn" target="_blank"><i class="fab fa-instagram"></i> Open Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <div class="form-header"><h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3><p>I'll respond within 24 hours</p></div>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="userName" placeholder="Your full name" required /></div>
+                            <div class="form-group"><label><i class="fas fa-envelope"></i> Email Address</label><input type="email" id="userEmail" placeholder="Your email address" required /></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label><i class="fas fa-phone"></i> Phone Number</label><input type="tel" id="userPhone" placeholder="Your phone number" /></div>
+                            <div class="form-group"><label><i class="fas fa-tag"></i> Subject</label><input type="text" id="userSubject" placeholder="What is this regarding?" required /></div>
                         </div>
                         <div class="form-group">
-                            <label><i class="fas fa-envelope"></i> Email Address</label>
-                            <input type="email" id="userEmail" placeholder="Your email address" required />
+                            <label><i class="fas fa-comment-alt"></i> Your Message</label>
+                            <textarea id="userMessage" placeholder="Hello Aditya, I'd like to discuss..." rows="5" required></textarea>
+                            <div class="char-counter"><span id="charCount">0</span>/500 characters</div>
                         </div>
+                        <button type="submit" class="btn-submit" id="formSubmit"><span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span></button>
+                    </form>
+                    <div style="margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--border-color);display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center;">
+                        <a href="mailto:aadityasingh.knp@gmail.com" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-envelope"></i> aadityasingh.knp@gmail.com</a>
+                        <a href="tel:+917318413600" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-phone"></i> +91 7318413600</a>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-phone"></i> Phone Number</label>
-                            <input type="tel" id="userPhone" placeholder="Your phone number" />
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-tag"></i> Subject</label>
-                            <input type="text" id="userSubject" placeholder="What is this regarding?" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-comment-alt"></i> Your Message</label>
-                        <textarea id="userMessage" placeholder="Hello Aditya, I'd like to discuss..." rows="5" required></textarea>
-                        <div class="char-counter"><span id="charCount">0</span>/500 characters</div>
-                    </div>
-                    <button type="submit" class="btn-submit" id="formSubmit">
-                        <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
-                        <span class="loader-dots"><span></span><span></span><span></span></span>
-                    </button>
-                </form>
-
-                <div style="margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--border-color);display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center;">
-                    <a href="mailto:aadityasingh.knp@gmail.com" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-envelope"></i> aadityasingh.knp@gmail.com</a>
-                    <a href="tel:+917318413600" style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i class="fas fa-phone"></i> +91 7318413600</a>
                 </div>
             </div>
-        </div>
-
-        <!-- Alternative Contact -->
-        <div class="contact-container" style="margin-top:4rem;max-width:1400px;margin-left:auto;margin-right:auto;">
-            <div class="alternative-contact" style="width:100%;">
+            <!-- Alternative Contact -->
+            <div class="alternative-contact" style="max-width:1400px;margin:4rem auto 0;">
                 <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
                 <div class="alt-contact-grid">
                     <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="alt-contact-item linkedin" target="_blank"><i class="fab fa-linkedin-in"></i><div class="alt-contact-info"><h5>LinkedIn</h5><p>Professional networking</p></div></a>
@@ -680,125 +445,86 @@
                     <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank"><i class="fab fa-facebook-f"></i><div class="alt-contact-info"><h5>Facebook</h5><p>Connect socially</p></div></a>
                 </div>
             </div>
-
-            <div class="contact-info-cards">
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="info-content"><h4>Email Address</h4><p>aadityasingh.knp@gmail.com</p></div>
-                </div>
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fas fa-phone"></i></div>
-                    <div class="info-content"><h4>Phone Number</h4><p>+91 7318413600</p></div>
-                </div>
+            <div class="contact-info-cards" style="max-width:1400px;margin:4rem auto 0;">
+                <div class="contact-info-card"><div class="info-icon"><i class="fas fa-envelope"></i></div><div class="info-content"><h4>Email Address</h4><p>aadityasingh.knp@gmail.com</p></div></div>
+                <div class="contact-info-card"><div class="info-icon"><i class="fas fa-phone"></i></div><div class="info-content"><h4>Phone Number</h4><p>+91 7318413600</p></div></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-main">
-                <div class="footer-logo"><i class="fas fa-code"></i><span>Aditya Singh</span></div>
-                <p class="footer-tagline">Building the future, one line of code at a time</p>
-                <div class="footer-stats">
-                    <div class="footer-stat"><i class="fas fa-project-diagram"></i><span><span id="footerProjects">6</span> Projects</span></div>
-                    <div class="footer-stat"><i class="fas fa-certificate"></i><span><span id="footerCerts">10</span> Certificates</span></div>
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo"><i class="fas fa-code"></i><span>Aditya Singh</span></div>
+                    <p class="footer-tagline">Building the future, one line of code at a time</p>
+                    <div class="footer-stats">
+                        <div class="footer-stat"><i class="fas fa-project-diagram"></i><span><span id="footerProjects">8</span> Projects</span></div>
+                        <div class="footer-stat"><i class="fas fa-certificate"></i><span><span id="footerCerts">10</span> Certificates</span></div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="footer-links">
-                <div class="link-group">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#contact">Contact</a>
+                <div class="link-group"><h4>Quick Links</h4><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Get notified about new projects</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address" id="newsletterEmail" />
+                        <button type="button" id="newsletterBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-newsletter">
-                <h4>Stay Updated</h4>
-                <p>Get notified about new projects</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Your email address" id="newsletterEmail" />
-                    <button type="button" id="newsletterBtn"><i class="fas fa-paper-plane"></i></button>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Aditya Singh. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/aditya-singh-671a592b6"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Adishiv9494"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/Aditya_Singh_96"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/the_aditya__singh_"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-        </div>
+            <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+        </footer>
 
-        <div class="footer-bottom">
-            <p>&copy; 2024 Aditya Singh. All rights reserved.</p>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/aditya-singh-671a592b6"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/Adishiv9494"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com/Aditya_Singh_96"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/the_aditya__singh_"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-
-        <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
-    </footer>
-
-    <!-- ===== MODALS ===== -->
-    <!-- QR Modal -->
-    <div class="modal qr-modal" id="qrModal">
-        <div class="modal-content qr-modal-content">
-            <div class="modal-header">
-                <h3 id="qrModalTitle">QR Code Preview</h3>
-                <button class="modal-close" id="qrModalClose">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="qr-modal-image"><img id="modalQrImage" src="" alt="QR Code" /></div>
-                <p class="qr-modal-message" id="modalQrMessage"></p>
-                <div class="qr-modal-actions">
-                    <button class="btn btn-secondary" id="closeQrModal"><i class="fas fa-times"></i> Close</button>
-                    <button class="btn btn-primary" id="downloadQr"><i class="fas fa-download"></i> Download QR</button>
+        <!-- ===== MODALS ===== -->
+        <div class="modal qr-modal" id="qrModal">
+            <div class="modal-content qr-modal-content">
+                <div class="modal-header"><h3 id="qrModalTitle">QR Code Preview</h3><button class="modal-close" id="qrModalClose">&times;</button></div>
+                <div class="modal-body">
+                    <div class="qr-modal-image"><img id="modalQrImage" src="" alt="QR Code" /></div>
+                    <p class="qr-modal-message" id="modalQrMessage"></p>
+                    <div class="qr-modal-actions">
+                        <button class="btn btn-secondary" id="closeQrModal"><i class="fas fa-times"></i> Close</button>
+                        <button class="btn btn-primary" id="downloadQr"><i class="fas fa-download"></i> Download QR</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Image Preview Modal -->
-    <div class="modal" id="imagePreviewModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="imageModalTitle">Image Preview</h3>
-                <button class="modal-close" id="imageModalClose">&times;</button>
+        <div class="modal" id="imagePreviewModal">
+            <div class="modal-content">
+                <div class="modal-header"><h3 id="imageModalTitle">Image Preview</h3><button class="modal-close" id="imageModalClose">&times;</button></div>
+                <div class="modal-body"><img id="previewImage" src="" alt="Preview" /></div>
             </div>
-            <div class="modal-body"><img id="previewImage" src="" alt="Preview" /></div>
         </div>
-    </div>
-
-    <!-- Certificate Modal -->
-    <div class="modal" id="certificateModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Certificate Preview</h3>
-                <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal" id="certificateModal">
+            <div class="modal-content">
+                <div class="modal-header"><h3 id="modalTitle">Certificate Preview</h3><button class="modal-close" id="modalClose">&times;</button></div>
+                <div class="modal-body"><img id="certificateImage" src="" alt="Certificate" /></div>
             </div>
-            <div class="modal-body"><img id="certificateImage" src="" alt="Certificate" /></div>
         </div>
-    </div>
-
-    <!-- Video Modal -->
-    <div class="modal video-modal" id="videoModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="videoTitle">Project Demo</h3>
-                <button class="modal-close" id="videoClose">&times;</button>
+        <div class="modal video-modal" id="videoModal">
+            <div class="modal-content">
+                <div class="modal-header"><h3 id="videoTitle">Project Demo</h3><button class="modal-close" id="videoClose">&times;</button></div>
+                <div class="modal-body"><video id="projectVideo" controls>Your browser does not support the video tag.</video></div>
             </div>
-            <div class="modal-body"><video id="projectVideo" controls></video></div>
         </div>
-    </div>
+        <div class="toast" id="toast">
+            <div class="toast-content"><i class="fas fa-check-circle"></i><div class="toast-message"></div></div>
+            <div class="toast-progress"></div>
+        </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <div class="toast-content"><i class="fas fa-check-circle"></i><div class="toast-message"></div></div>
-        <div class="toast-progress"></div>
-    </div>
-    <!-- Scripts -->
+    </div> <!-- end page-content -->
+
+    <!-- ===== SCRIPTS ===== -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
