@@ -1621,71 +1621,102 @@ function initQRCodeModals() {
     });
 }
 
-// ===== Contact Form Functions =====
-function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    const messageTextarea = document.getElementById('message');
-    const charCount = document.getElementById('charCount');
-    
-    if (!contactForm) return;
-    
-    // Character counter for message
-    if (messageTextarea && charCount) {
-        messageTextarea.addEventListener('input', () => {
-            const length = messageTextarea.value.length;
-            charCount.textContent = length;
-            
-            if (length > 500) {
-                charCount.style.color = '#ef4444';
-                messageTextarea.value = messageTextarea.value.substring(0, 500);
-            } else if (length > 400) {
-                charCount.style.color = '#f59e0b';
-            } else {
-                charCount.style.color = 'var(--text-secondary)';
-            }
-        });
-    }
-    
-    // Form submission
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitBtn = contactForm.querySelector('.btn-submit');
-        const loader = submitBtn.querySelector('.submit-loader');
-        const btnText = submitBtn.querySelector('span');
-        const originalText = btnText.textContent;
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        btnText.textContent = 'Sending...';
-        loader.style.display = 'flex';
-        
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            subject: document.getElementById('subject').value,
-            message: document.getElementById('message').value
-        };
-        
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Show success message
-        showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-        
-        // Reset form
-        contactForm.reset();
-        if (charCount) charCount.textContent = '0';
-        
-        // Reset button state
-        submitBtn.disabled = false;
-        btnText.textContent = originalText;
-        loader.style.display = 'none';
-    });
-}
+// ================================================================
+        // 11. CONTACT FORM – EmailJS (FIXED)
+        // ================================================================
+        (function initContactForm() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('formSubmit');
+            const charCount = document.getElementById('charCount');
+            const msg = document.getElementById('userMessage');
 
+            if (msg && charCount) {
+                msg.addEventListener('input', () => {
+                    const len = msg.value.length;
+                    charCount.textContent = len;
+                    if (len > 500) {
+                        msg.value = msg.value.substring(0, 500);
+                        charCount.textContent = 500;
+                    }
+                });
+            }
+
+            // Initialize EmailJS with the public key
+            emailjs.init('21fjfdG5_Sgm82ifT');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const phone = document.getElementById('userPhone').value.trim();
+                const subject = document.getElementById('userSubject').value.trim();
+                const message = document.getElementById('userMessage').value.trim();
+
+                if (!name || !email || !subject || !message) {
+                    showToast('Please fill all required fields.', 'error');
+                    return;
+                }
+
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showToast('Please enter a valid email address.', 'error');
+                    return;
+                }
+
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+
+                try {
+                    // Build a complete HTML email body so all details appear correctly.
+                    const htmlBody = `
+                            <h2 style="color:#6c5ce7; margin-bottom:16px;">📩 New Contact Form Message</h2>
+                            <table style="width:100%; border-collapse:collapse; font-family:Inter, sans-serif;">
+                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Name</td>
+                                    <td style="padding:8px 12px; border:1px solid #ddd;">${name}</td></tr>
+                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Email</td>
+                                    <td style="padding:8px 12px; border:1px solid #ddd;">${email}</td></tr>
+                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Phone</td>
+                                    <td style="padding:8px 12px; border:1px solid #ddd;">${phone || 'Not provided'}</td></tr>
+                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Subject</td>
+                                    <td style="padding:8px 12px; border:1px solid #ddd;">${subject}</td></tr>
+                                <tr><td style="padding:8px 12px; font-weight:700; background:#f0f0ff; border:1px solid #ddd;">Message</td>
+                                    <td style="padding:8px 12px; border:1px solid #ddd; white-space:pre-wrap;">${message}</td></tr>
+                            </table>
+                            <p style="margin-top:20px; color:#888; font-size:12px;">Sent from your portfolio contact form.</p>
+                        `;
+
+                    // Send email with all required fields.
+                    // The template on EmailJS should use these variables:
+                    //   {{from_name}}  – sender's full name
+                    //   {{from_email}} – sender's email address
+                    //   {{phone}}      – sender's phone number
+                    //   {{subject}}    – message subject
+                    //   {{message}}    – plain text message
+                    //   {{html_body}}  – full HTML formatted message (preferred for rich display)
+                    //   {{to_email}}   – recipient email address
+                    const response = await emailjs.send('service_smhhvth', 'template_z4feg0q', {
+                        from_name: name,
+                        from_email: email,
+                        phone: phone || 'Not provided',
+                        subject: subject,
+                        message: message,
+                        html_body: htmlBody,
+                        to_email: 'myportfoliomails01@gmail.com'
+                    });
+
+                    console.log('Email sent successfully:', response);
+                    showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
+                    form.reset();
+                    if (charCount) charCount.textContent = '0';
+                } catch (error) {
+                    console.error('EmailJS Error:', error);
+                    showToast('Failed to send message. Please try again later.', 'error');
+                } finally {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            });
+        })();
 // ===== Newsletter Functions =====
 function initNewsletter() {
     const newsletterBtn = document.getElementById('newsletterBtn');
