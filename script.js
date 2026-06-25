@@ -1,5 +1,5 @@
 // ================================================================
-// 1. LOADER – properly hides and shows content
+// 1. LOADER
 // ================================================================
 (function initLoader() {
     const loader = document.getElementById('loader');
@@ -55,7 +55,133 @@
 })();
 
 // ================================================================
-// 2. THEME TOGGLE
+// 2. 5D BACKGROUND (Canvas Particle System)
+// ================================================================
+function init5DBackground() {
+    const canvas = document.getElementById('bgCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+    const particleCount = 120;
+
+    // Mouse position for parallax
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Particle class with 3D depth (z)
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.z = Math.random() * 200 - 100; // depth -100 to 100
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 0.4;
+            this.speedY = (Math.random() - 0.5) * 0.4;
+            this.opacity = Math.random() * 0.6 + 0.2;
+            this.color = `hsla(${Math.random() * 60 + 210}, 80%, 60%, `; // blue-purple hue
+        }
+        update() {
+            // Parallax based on mouse position and depth
+            const depthFactor = this.z / 100; // -1 to 1
+            const parallaxX = (mouseX - width/2) * 0.02 * depthFactor;
+            const parallaxY = (mouseY - height/2) * 0.02 * depthFactor;
+
+            this.x += this.speedX + parallaxX * 0.1;
+            this.y += this.speedY + parallaxY * 0.1;
+
+            // Wrap around with a margin
+            if (this.x < -50) this.x = width + 50;
+            if (this.x > width + 50) this.x = -50;
+            if (this.y < -50) this.y = height + 50;
+            if (this.y > height + 50) this.y = -50;
+        }
+        draw() {
+            const size = this.size + (this.z / 50); // depth affects size
+            const opacity = this.opacity + (this.z / 200);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, Math.max(0.5, size), 0, Math.PI * 2);
+            ctx.fillStyle = this.color + Math.min(1, Math.max(0.1, opacity)) + ')';
+            ctx.fill();
+            // Glow effect for larger particles
+            if (size > 2) {
+                ctx.shadowColor = this.color + '0.3)';
+                ctx.shadowBlur = 15;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+    }
+
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+
+    // Mouse tracking with smooth interpolation
+    document.addEventListener('mousemove', function(e) {
+        targetMouseX = e.clientX;
+        targetMouseY = e.clientY;
+    });
+    document.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 0) {
+            targetMouseX = e.touches[0].clientX;
+            targetMouseY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    function animate() {
+        // Smooth mouse following
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw connecting lines for nearby particles (depth-aware)
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+
+        // Draw lines between close particles (with depth influence)
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dz = particles[i].z - particles[j].z;
+                const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                if (dist < 120) {
+                    const opacity = (1 - dist / 120) * 0.3;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = 'rgba(100, 150, 255, ' + opacity + ')';
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+// ================================================================
+// 3. THEME TOGGLE
 // ================================================================
 function initTheme() {
     const themeToggle = document.getElementById('theme-toggle');
@@ -73,7 +199,7 @@ function initTheme() {
 }
 
 // ================================================================
-// 3. TYPING ANIMATION
+// 4. TYPING
 // ================================================================
 function initTyping() {
     const el = document.querySelector('.typing-text');
@@ -94,7 +220,7 @@ function initTyping() {
 }
 
 // ================================================================
-// 4. MOBILE NAV
+// 5. MOBILE NAV
 // ================================================================
 function initMobileNav() {
     const toggle = document.getElementById('mobile-toggle');
@@ -115,7 +241,7 @@ function initMobileNav() {
 }
 
 // ================================================================
-// 5. SMOOTH SCROLL & ACTIVE NAV
+// 6. SMOOTH SCROLL
 // ================================================================
 function initSmoothScroll() {
     const links = document.querySelectorAll('.nav-link');
@@ -158,7 +284,7 @@ function initSmoothScroll() {
 }
 
 // ================================================================
-// 6. BACK TO TOP
+// 7. BACK TO TOP
 // ================================================================
 function initBackToTop() {
     const btn = document.getElementById('backToTop');
@@ -172,7 +298,7 @@ function initBackToTop() {
 }
 
 // ================================================================
-// 7. STATS COUNTER
+// 8. STATS COUNTER
 // ================================================================
 function initStatsCounter() {
     document.querySelectorAll('.stat-number').forEach(function(stat) {
@@ -196,37 +322,37 @@ function initStatsCounter() {
 }
 
 // ================================================================
-// 8. SKILLS DATA
+// 9. SKILLS DATA
 // ================================================================
 function loadSkillsData() {
     const data = {
         programming: [
-            { skill: 'C', level: 75, desc: 'System Programming', icon: 'fas fa-terminal' },
-            { skill: 'C++', level: 72, desc: 'OOP & Algorithms', icon: 'fas fa-cogs' },
-            { skill: 'Java', level: 78, desc: 'Enterprise Applications', icon: 'fab fa-java' },
-            { skill: 'Python', level: 75, desc: 'Scripting & Automation', icon: 'fab fa-python' },
-            { skill: 'JavaScript', level: 85, desc: 'ES6+ & DOM', icon: 'fab fa-js' }
+            { skill:'C', level:75, desc:'System Programming', icon:'fas fa-terminal' },
+            { skill:'C++', level:72, desc:'OOP & Algorithms', icon:'fas fa-cogs' },
+            { skill:'Java', level:78, desc:'Enterprise Applications', icon:'fab fa-java' },
+            { skill:'Python', level:75, desc:'Scripting & Automation', icon:'fab fa-python' },
+            { skill:'JavaScript', level:85, desc:'ES6+ & DOM', icon:'fab fa-js' }
         ],
         frontend: [
-            { skill: 'HTML5', level: 95, desc: 'Semantic Markup', icon: 'fab fa-html5' },
-            { skill: 'CSS3', level: 90, desc: 'Styling & Layouts', icon: 'fab fa-css3-alt' },
-            { skill: 'React', level: 80, desc: 'Components & Hooks', icon: 'fab fa-react' },
-            { skill: 'JSP', level: 85, desc: 'Dynamic Web Pages', icon: 'fas fa-file-code' },
-            { skill: 'Bootstrap', level: 85, desc: 'Responsive Design', icon: 'fab fa-bootstrap' }
+            { skill:'HTML5', level:95, desc:'Semantic Markup', icon:'fab fa-html5' },
+            { skill:'CSS3', level:90, desc:'Styling & Layouts', icon:'fab fa-css3-alt' },
+            { skill:'React', level:80, desc:'Components & Hooks', icon:'fab fa-react' },
+            { skill:'JSP', level:85, desc:'Dynamic Web Pages', icon:'fas fa-file-code' },
+            { skill:'Bootstrap', level:85, desc:'Responsive Design', icon:'fab fa-bootstrap' }
         ],
         backend: [
-            { skill: 'Node.js', level: 82, desc: 'Runtime & APIs', icon: 'fab fa-node-js' },
-            { skill: 'MySQL', level: 80, desc: 'Database Management', icon: 'fas fa-database' },
-            { skill: 'MongoDB', level: 70, desc: 'NoSQL Database', icon: 'fas fa-leaf' },
-            { skill: 'Express.js', level: 78, desc: 'Web Framework', icon: 'fas fa-rocket' },
-            { skill: 'Servlet', level: 83, desc: 'Java Web Components', icon: 'fas fa-cogs' }
+            { skill:'Node.js', level:82, desc:'Runtime & APIs', icon:'fab fa-node-js' },
+            { skill:'MySQL', level:80, desc:'Database Management', icon:'fas fa-database' },
+            { skill:'MongoDB', level:70, desc:'NoSQL Database', icon:'fas fa-leaf' },
+            { skill:'Express.js', level:78, desc:'Web Framework', icon:'fas fa-rocket' },
+            { skill:'Servlet', level:83, desc:'Java Web Components', icon:'fas fa-cogs' }
         ],
         tools: [
-            { skill: 'Git', level: 88, desc: 'Version Control', icon: 'fab fa-git-alt' },
-            { skill: 'GitHub', level: 90, desc: 'Code Hosting', icon: 'fab fa-github' },
-            { skill: 'VS Code', level: 92, desc: 'Code Editor', icon: 'fas fa-code' },
-            { skill: 'IntelliJ', level: 80, desc: 'Java IDE', icon: 'fas fa-lightbulb' },
-            { skill: 'Eclipse', level: 75, desc: 'Development IDE', icon: 'fas fa-sun' }
+            { skill:'Git', level:88, desc:'Version Control', icon:'fab fa-git-alt' },
+            { skill:'GitHub', level:90, desc:'Code Hosting', icon:'fab fa-github' },
+            { skill:'VS Code', level:92, desc:'Code Editor', icon:'fas fa-code' },
+            { skill:'IntelliJ', level:80, desc:'Java IDE', icon:'fas fa-lightbulb' },
+            { skill:'Eclipse', level:75, desc:'Development IDE', icon:'fas fa-sun' }
         ]
     };
 
@@ -248,7 +374,7 @@ function loadSkillsData() {
 }
 
 // ================================================================
-// 9. CERTIFICATIONS
+// 10. CERTIFICATIONS
 // ================================================================
 function loadCertifications() {
     const certs = [
@@ -384,6 +510,7 @@ function initCertControls() {
         hidden.forEach(function(card, i) {
             setTimeout(function() {
                 card.classList.remove('hidden-cert');
+                card.style.display = 'flex'; // ensure visibility
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
                 card.offsetHeight;
@@ -405,7 +532,7 @@ function initCertControls() {
                 card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
-                setTimeout(function() { card.classList.add('hidden-cert'); card.style.transition = ''; }, 300);
+                setTimeout(function() { card.classList.add('hidden-cert'); card.style.display = 'none'; card.style.transition = ''; }, 300);
             }
         });
         this.style.display = 'none';
@@ -416,7 +543,7 @@ function initCertControls() {
 }
 
 // ================================================================
-// 10. PROJECTS
+// 11. PROJECTS
 // ================================================================
 function loadProjects() {
     const projects = [
@@ -509,6 +636,7 @@ function initProjectControls() {
         hidden.forEach(function(card, i) {
             setTimeout(function() {
                 card.classList.remove('hidden-project');
+                card.style.display = 'flex'; // ensure visibility
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
                 card.offsetHeight;
@@ -530,7 +658,7 @@ function initProjectControls() {
                 card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
-                setTimeout(function() { card.classList.add('hidden-project'); card.style.transition = ''; }, 300);
+                setTimeout(function() { card.classList.add('hidden-project'); card.style.display = 'none'; card.style.transition = ''; }, 300);
             }
         });
         this.style.display = 'none';
@@ -541,7 +669,7 @@ function initProjectControls() {
 }
 
 // ================================================================
-// 11. IMAGE PREVIEWS
+// 12. IMAGE PREVIEWS
 // ================================================================
 function initImagePreviews() {
     const profile = document.getElementById('profile-image-wrapper');
@@ -588,7 +716,7 @@ function initImagePreviews() {
 }
 
 // ================================================================
-// 12. QR CODE MODALS
+// 13. QR CODE MODALS (with modern popup using SweetAlert2)
 // ================================================================
 function initQRCodeModals() {
     const modal = document.getElementById('qrModal');
@@ -642,29 +770,61 @@ function initQRCodeModals() {
         });
     }
 
+    // ===== MODERN "How to Scan" POPUP using SweetAlert2 =====
     document.querySelectorAll('.scan-guide-btn').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             const type = this.getAttribute('data-type');
-            var messages = {
+            const messages = {
                 whatsapp: 'Open your phone\'s camera app and point it at the QR code. Tap the notification to start a chat on WhatsApp.',
                 email: 'Scan the QR code with your phone\'s camera. Your email app will open with my address pre-filled.',
                 phone: 'Use your phone\'s camera to scan the QR code. Your phone will prompt you to call the number.',
                 instagram: 'Scan with Instagram camera or your phone\'s camera app to open my Instagram profile directly.'
             };
-            var msg = messages[type] || 'Open your phone\'s camera app and point it at the QR code. Follow the on-screen instructions.';
-            if (typeof swal === 'function') {
-                swal({ title: 'How to Scan ' + type.charAt(0).toUpperCase() + type.slice(1) + ' QR Code', text: msg, icon: 'info', button: 'Got it!' });
+            const msg = messages[type] || 'Open your phone\'s camera app and point it at the QR code. Follow the on-screen instructions.';
+
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: '📱 How to Scan',
+                    html: `
+                        <div style="text-align:left; font-size:1.5rem; line-height:1.6;">
+                            <p style="margin-bottom:1.5rem;"><strong>${type.charAt(0).toUpperCase()+type.slice(1)}</strong></p>
+                            <p style="background:var(--bg-secondary); padding:1.5rem; border-radius:12px; border-left:4px solid var(--primary);">
+                                ${msg}
+                            </p>
+                            <div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                                <span style="background:var(--primary); color:white; padding:0.4rem 1.2rem; border-radius:20px; font-size:1.2rem;">📸 Open Camera</span>
+                                <span style="background:var(--accent); color:white; padding:0.4rem 1.2rem; border-radius:20px; font-size:1.2rem;">🔍 Point at QR</span>
+                                <span style="background:var(--success); color:white; padding:0.4rem 1.2rem; border-radius:20px; font-size:1.2rem;">✅ Tap Notification</span>
+                            </div>
+                        </div>
+                    `,
+                    icon: 'info',
+                    confirmButtonText: 'Got it!',
+                    confirmButtonColor: 'var(--primary)',
+                    background: 'var(--bg-card)',
+                    color: 'var(--text-primary)',
+                    backdrop: 'rgba(0,0,0,0.7)',
+                    width: 500,
+                    padding: '2rem',
+                    showClass: { popup: 'animate__animated animate__fadeInUp' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutDown' }
+                });
             } else {
-                showToast(msg, 'info');
+                // Fallback to old swal if SweetAlert2 not loaded
+                if (typeof swal === 'function') {
+                    swal({ title: 'How to Scan ' + type.charAt(0).toUpperCase() + type.slice(1) + ' QR Code', text: msg, icon: 'info', button: 'Got it!' });
+                } else {
+                    showToast(msg, 'info');
+                }
             }
         });
     });
 }
 
 // ================================================================
-// 13. VIDEO MODAL
+// 14. VIDEO MODAL
 // ================================================================
 function initVideoModal() {
     const modal = document.getElementById('videoModal');
@@ -685,7 +845,7 @@ function initVideoModal() {
 }
 
 // ================================================================
-// 14. CONTACT FORM – EmailJS
+// 15. CONTACT FORM – EmailJS
 // ================================================================
 function initContactForm() {
     const form = document.getElementById('contactForm');
@@ -767,7 +927,7 @@ function initContactForm() {
 }
 
 // ================================================================
-// 15. NEWSLETTER
+// 16. NEWSLETTER
 // ================================================================
 function initNewsletter() {
     const btn = document.getElementById('newsletterBtn');
@@ -793,7 +953,7 @@ function initNewsletter() {
 }
 
 // ================================================================
-// 16. RESUME DOWNLOAD
+// 17. RESUME DOWNLOAD
 // ================================================================
 function initResumeDownload() {
     const btn = document.getElementById('resumeBtn');
@@ -820,7 +980,7 @@ function initResumeDownload() {
 }
 
 // ================================================================
-// 17. TOAST NOTIFICATION
+// 18. TOAST
 // ================================================================
 function showToast(message, type) {
     type = type || 'success';
@@ -843,7 +1003,7 @@ function showToast(message, type) {
 }
 
 // ================================================================
-// 18. EDUCATION ANIMATION
+// 19. EDUCATION ANIMATION
 // ================================================================
 function initEducationAnimation() {
     const items = document.querySelectorAll('.timeline-item');
@@ -861,9 +1021,10 @@ function initEducationAnimation() {
 }
 
 // ================================================================
-// 19. INIT ALL
+// 20. INIT ALL
 // ================================================================
 function initAll() {
+    init5DBackground();       // <-- new 5D background
     initTheme();
     initTyping();
     initMobileNav();
@@ -896,14 +1057,14 @@ function initAll() {
 }
 
 // ================================================================
-// 20. EXPOSE GLOBALS for onclick
+// 21. EXPOSE GLOBALS
 // ================================================================
 window.viewCert = viewCert;
 window.downloadCert = downloadCert;
 window.showToast = showToast;
 
 // ================================================================
-// 21. DOM READY FALLBACK
+// 22. DOM READY
 // ================================================================
 document.addEventListener('DOMContentLoaded', function() {
     const pageContent = document.getElementById('page-content');
@@ -919,4 +1080,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-console.log('🚀 Portfolio Loaded Successfully!');
+console.log('🚀 Portfolio Loaded with 5D Background & Modern Popup!');
