@@ -901,74 +901,55 @@
                 </div>
             </div>
 
-            <!-- Professional Contact Form -->
             <div class="contact-form-section">
                 <div class="form-header">
-                    <div class="form-header-icon">
-                        <i class="fas fa-comment-dots"></i>
-                    </div>
-                    <h3>Send Me a Message</h3>
+                    <h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3>
                     <p>I'll respond within 24 hours</p>
                 </div>
-
                 <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name">
-                                <i class="fas fa-user"></i>
-                                <span>Full Name</span>
-                            </label>
-                            <input type="text" id="name" placeholder="Enter your full name" required>
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="userName" placeholder="Your full name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i>
-                                <span>Email Address</span>
-                            </label>
-                            <input type="email" id="email" placeholder="Enter your email address" required>
+                            <label><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="userEmail" placeholder="Your email address" required>
                         </div>
                     </div>
-
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i>
-                                <span>Phone Number</span>
-                            </label>
-                            <input type="tel" id="phone" placeholder="Enter your phone number">
+                            <label><i class="fas fa-phone"></i> Phone Number</label>
+                            <input type="tel" id="userPhone" placeholder="Your phone number">
                         </div>
                         <div class="form-group">
-                            <label for="subject">
-                                <i class="fas fa-tag"></i>
-                                <span>Subject</span>
-                            </label>
-                            <input type="text" id="subject" placeholder="What is this regarding?" required>
+                            <label><i class="fas fa-tag"></i> Subject</label>
+                            <input type="text" id="userSubject" placeholder="What is this regarding?" required>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="message">
-                            <i class="fas fa-comment-alt"></i>
-                            <span>Your Message</span>
-                        </label>
-                        <textarea id="message" placeholder="Hello Aditya, I'd like to discuss..." rows="6"
+                        <label><i class="fas fa-comment-alt"></i> Your Message</label>
+                        <textarea id="userMessage" placeholder="Hello Aditya, I'd like to discuss..." rows="5"
                             required></textarea>
-                        <div class="char-counter">
-                            <span id="charCount">0</span>/500 characters
-                        </div>
+                        <div class="char-counter"><span id="charCount">0</span>/500 characters</div>
                     </div>
-
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Send Message</span>
-                        <div class="submit-loader">
-                            <div class="loader-dot"></div>
-                            <div class="loader-dot"></div>
-                            <div class="loader-dot"></div>
-                        </div>
+                    <button type="submit" class="btn-submit" id="formSubmit">
+                        <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+                        <span class="loader-dots"><span></span><span></span><span></span></span>
                     </button>
                 </form>
-
+                <div
+                    style="margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--border-color);display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center;">
+                    <a href="mailto:aadityasingh.knp@gmail.com"
+                        style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i
+                            class="fas fa-envelope"></i> aadityasingh.knp@gmail.com</a>
+                    <a href="tel:+917318413600"
+                        style="color:var(--text-secondary);font-size:1.3rem;text-decoration:none;"><i
+                            class="fas fa-phone"></i> +91 7318413600</a>
+                </div>
+            </div>
+        </div>
+    </section>
                 <!-- Alternative Contact Methods -->
                 <div class="alternative-contact">
                     <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
