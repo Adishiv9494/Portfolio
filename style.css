@@ -772,7 +772,7 @@ section { padding:10rem 2rem; position:relative; }
 
 /* ===== Contact ===== */
 .contact { position:relative; background:var(--bg-primary); }
-.contact-container { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:flex-start; }
+.contact-container { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:flex-start; }
 
 .qr-section { background:var(--bg-card); border-radius:var(--radius-xl); padding:3rem; border:1px solid var(--border-color); box-shadow:var(--shadow-lg); animation:fadeInLeft 0.8s ease; }
 .qr-section-header { text-align:center; margin-bottom:4rem; padding:2rem; background:linear-gradient(135deg, rgba(37,99,235,0.1), rgba(14,165,233,0.1)); border-radius:var(--radius-lg); border:1px solid rgba(37,99,235,0.2); }
