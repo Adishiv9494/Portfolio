@@ -1073,7 +1073,7 @@ section { padding:10rem 2rem; position:relative; }
     .category-title { font-size:2rem; }
     .skill-icon-card { padding:2rem; }
     .soft-skills-grid { grid-template-columns:1fr; }
-    .qr-section,.contact-form-section { padding:2rem; }
+    .qr-section,.contact-form-section { padding:1rem; }
     .qr-code-wrapper { width:180px; height:180px; }
     .qr-actions { flex-direction:column; }
     .btn-qr-action { width:100%; }
