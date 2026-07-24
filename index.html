@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="adi2.png" type="image/x-icon" />
-    <title>Aditya Singh | Full Stack Developer</title>
-    <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- SweetAlert2 for modern popups -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-    <!-- ===== LOADER ===== -->
-    <div id="loader">
+<div id="loader">
         <div class="loader-container">
             <div class="loader-logo">
                 <div class="logo-outer"><div class="logo-inner"><img src="adi2.png" alt="Code Loading" class="loader-gif" /></div></div>
@@ -336,7 +316,10 @@
                 <div class="section-title"><h2>Contact <span>Me</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
                 <p class="section-subtitle">Scan QR codes or send a message to connect instantly</p>
             </div>
-            <div class="contact-container">
+
+            <!-- Equal height wrapper for QR + Form -->
+            <div class="contact-equal-wrapper">
+
                 <!-- QR Section -->
                 <div class="qr-section">
                     <div class="qr-section-header">
@@ -402,7 +385,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Contact Form -->
+
+                <!-- Contact Form Section -->
                 <div class="contact-form-section">
                     <div class="form-header"><h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3><p>I'll respond within 24 hours</p></div>
                     <form id="contactForm">
@@ -416,25 +400,66 @@
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-comment-alt"></i> Your Message</label>
-                            <textarea id="userMessage" placeholder="Hello Aditya, I'd like to discuss..." rows="5" required></textarea>
+                            <textarea id="userMessage" placeholder="Hello Aditya, I'd like to discuss..." rows="4" required></textarea>
                             <div class="char-counter"><span id="charCount">0</span>/500 characters</div>
                         </div>
                         <button type="submit" class="btn-submit" id="formSubmit"><span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span></button>
                     </form>
-                     <!-- Alternative Contact -->
-                 <div class="alternative-contact" style="max-width:1400px;margin:4rem auto 0;">
-                <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
-                <div class="alt-contact-grid">
-                     <div class="contact-info-card"><div class="info-icon"><i class="fas fa-envelope"></i></div><div class="info-content"><h4>Email Address</h4><p>aadityasingh.knp@gmail.com</p></div></div>
-                <div class="contact-info-card"><div class="info-icon"><i class="fas fa-phone"></i></div><div class="info-content"><h4>Phone Number</h4><p>+91 7318413600</p></div></div>
-                    <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="alt-contact-item linkedin" target="_blank"><i class="fab fa-linkedin-in"></i><div class="alt-contact-info"><h5>LinkedIn</h5><p>Professional networking</p></div></a>
-                    <a href="https://github.com/Adishiv9494" class="alt-contact-item github" target="_blank"><i class="fab fa-github"></i><div class="alt-contact-info"><h5>GitHub</h5><p>View my projects</p></div></a>
-                    <a href="https://twitter.com/Aditya_Singh_96" class="alt-contact-item twitter" target="_blank"><i class="fab fa-x-twitter"></i><div class="alt-contact-info"><h5>Twitter</h5><p>Follow updates</p></div></a>
-                    <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank"><i class="fab fa-facebook-f"></i><div class="alt-contact-info"><h5>Facebook</h5><p>Connect socially</p></div></a>
-                </div>
-            </div>
-                </div>
-           
+
+                    <!-- Alternative Contact -->
+                    <div class="alternative-contact">
+                        <h4><i class="fas fa-exchange-alt"></i> Alternative Contact Methods</h4>
+                        <div class="alt-contact-grid">
+                            <div class="contact-info-card"><div class="info-icon"><i class="fas fa-envelope"></i></div><div class="info-content"><h4>Email Address</h4><p>aadityasingh.knp@gmail.com</p></div></div>
+                            <div class="contact-info-card"><div class="info-icon"><i class="fas fa-phone"></i></div><div class="info-content"><h4>Phone Number</h4><p>+91 7318413600</p></div></div>
+                            <a href="https://www.linkedin.com/in/aditya-singh-671a592b6" class="alt-contact-item linkedin" target="_blank"><i class="fab fa-linkedin-in"></i><div class="alt-contact-info"><h5>LinkedIn</h5><p>Professional networking</p></div></a>
+                            <a href="https://github.com/Adishiv9494" class="alt-contact-item github" target="_blank"><i class="fab fa-github"></i><div class="alt-contact-info"><h5>GitHub</h5><p>View my projects</p></div></a>
+                            <a href="https://twitter.com/Aditya_Singh_96" class="alt-contact-item twitter" target="_blank"><i class="fab fa-x-twitter"></i><div class="alt-contact-info"><h5>Twitter</h5><p>Follow updates</p></div></a>
+                            <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank"><i class="fab fa-facebook-f"></i><div class="alt-contact-info"><h5>Facebook</h5><p>Connect socially</p></div></a>
+                        </div>
+                    </div>
+
+                    <!-- ===== BOOKS / RESOURCES SECTION ===== -->
+                    <div class="books-section">
+                        <h4><i class="fas fa-book-open"></i> Recommended Books & Resources</h4>
+                        <div class="books-grid">
+                            <div class="book-card">
+                                <div class="book-cover"><i class="fas fa-code"></i></div>
+                                <div class="book-info">
+                                    <h5>Clean Code</h5>
+                                    <p>Robert C. Martin</p>
+                                    <span class="book-tag">Programming</span>
+                                </div>
+                            </div>
+                            <div class="book-card">
+                                <div class="book-cover"><i class="fas fa-database"></i></div>
+                                <div class="book-info">
+                                    <h5>Database Systems</h5>
+                                    <p>Raghu Ramakrishnan</p>
+                                    <span class="book-tag">Database</span>
+                                </div>
+                            </div>
+                            <div class="book-card">
+                                <div class="book-cover"><i class="fas fa-cloud"></i></div>
+                                <div class="book-info">
+                                    <h5>Cloud Computing</h5>
+                                    <p>Thomas Erl</p>
+                                    <span class="book-tag">Cloud</span>
+                                </div>
+                            </div>
+                            <div class="book-card">
+                                <div class="book-cover"><i class="fas fa-brain"></i></div>
+                                <div class="book-info">
+                                    <h5>Design Patterns</h5>
+                                    <p>Gamma, Helm, Johnson</p>
+                                    <span class="book-tag">Architecture</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- end contact-form-section -->
+            </div><!-- end contact-equal-wrapper -->
         </section>
 
         <!-- ===== FOOTER ===== -->
@@ -507,10 +532,10 @@
             <div class="toast-progress"></div>
         </div>
 
-    </div> <!-- end page-content -->
+    </div><!-- end page-content -->
 
     <!-- ===== SCRIPTS ===== -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js">
+    </script>    <script src="script.js"></script>
 </body>
 </html>
