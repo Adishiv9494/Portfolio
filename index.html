@@ -9,25 +9,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- SweetAlert2 for modern popups -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
     <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js">
+    </script>
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
     <!-- ===== LOADER ===== -->
-<div id="loader">
+    <div id="loader">
         <div class="loader-container">
             <div class="loader-logo">
-                <div class="logo-outer"><div class="logo-inner"><img src="adi2.png" alt="Code Loading" class="loader-gif" /></div></div>
+                <div class="logo-outer">
+                    <div class="logo-inner">
+                        <img src="adi2.png" alt="Code Loading" class="loader-gif" />
+                    </div>
+                </div>
                 <div class="logo-text">ADITYA SINGH</div>
                 <div class="logo-subtext">Full Stack Developer</div>
             </div>
             <div class="loader-progress">
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <div class="progress-text">Loading Portfolio <span class="progress-percentage">0%</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    Loading Portfolio <span class="progress-percentage">0%</span>
+                </div>
             </div>
             <div class="loader-tech">
                 <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
@@ -48,8 +61,11 @@
         <!-- Professional Background Decor -->
         <div class="professional-bg">
             <div class="bg-shapes">
-                <div class="shape shape-1"></div><div class="shape shape-2"></div>
-                <div class="shape shape-3"></div><div class="shape shape-4"></div><div class="shape shape-5"></div>
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
             </div>
             <div class="bg-grid"></div>
             <div class="bg-dots"></div>
@@ -60,7 +76,10 @@
             <div class="header-container">
                 <div class="logo-wrapper">
                     <div class="logo-icon"><i class="fas fa-code"></i></div>
-                    <div class="logo-text"><span class="logo-name">Aditya Singh</span><span class="logo-tag">Full Stack Developer</span></div>
+                    <div class="logo-text">
+                        <span class="logo-name">Aditya Singh</span>
+                        <span class="logo-tag">Full Stack Developer</span>
+                    </div>
                 </div>
                 <nav class="navbar">
                     <a href="#home" class="nav-link active" data-text="Home"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-text">Home</span></a>
@@ -72,7 +91,12 @@
                     <a href="#contact" class="nav-link" data-text="Contact"><span class="nav-icon"><i class="fas fa-envelope"></i></span><span class="nav-text">Contact</span></a>
                     <div class="theme-toggle-wrapper">
                         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                            <div class="toggle-track"><div class="toggle-thumb"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div></div>
+                            <div class="toggle-track">
+                                <div class="toggle-thumb">
+                                    <i class="fas fa-sun"></i>
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                            </div>
                         </button>
                     </div>
                 </nav>
@@ -84,7 +108,10 @@
         <section class="home" id="home">
             <div class="home-container">
                 <div class="home-content">
-                    <div class="intro-badge"><span class="badge-text">Welcome to my Portfolio</span><div class="badge-dots"><span></span><span></span><span></span></div></div>
+                    <div class="intro-badge">
+                        <span class="badge-text">Welcome to my Portfolio</span>
+                        <div class="badge-dots"><span></span><span></span><span></span></div>
+                    </div>
                     <h1 class="hero-title">
                         <span class="title-line">Hi, I'm</span>
                         <span class="title-line highlight">Aditya Singh</span>
@@ -118,24 +145,37 @@
                         <div class="profile-frame">
                             <div class="profile-image-wrapper" id="profile-image-wrapper">
                                 <img src="Adi09.jpeg" alt="Aditya Singh" class="profile-image" />
-                                <div class="profile-overlay"><div class="overlay-content"><i class="fas fa-expand"></i><span>View Profile</span></div></div>
+                                <div class="profile-overlay">
+                                    <div class="overlay-content"><i class="fas fa-expand"></i><span>View Profile</span></div>
+                                </div>
                             </div>
-                            <div class="profile-border"></div><div class="profile-shine"></div><div class="profile-glow"></div>
+                            <div class="profile-border"></div>
+                            <div class="profile-shine"></div>
+                            <div class="profile-glow"></div>
                         </div>
                         <div class="profile-badge">
                             <div class="badge-icon"><i class="fas fa-user-graduate"></i></div>
-                            <div class="badge-content"><div class="badge-title">Fresher</div><div class="badge-subtitle">Ready to Work</div></div>
+                            <div class="badge-content">
+                                <div class="badge-title">Fresher</div>
+                                <div class="badge-subtitle">Ready to Work</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div><span class="scroll-text">Scroll Down</span></div>
+            <div class="scroll-indicator">
+                <div class="mouse"><div class="wheel"></div></div>
+                <span class="scroll-text">Scroll Down</span>
+            </div>
         </section>
 
         <!-- ===== ABOUT ===== -->
         <section class="about" id="about">
             <div class="section-header">
-                <div class="section-title"><h2>About <span>Me</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>About <span>Me</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Get to know me better</p>
             </div>
             <div class="about-container">
@@ -143,12 +183,16 @@
                     <div class="professional-about-image">
                         <div class="about-image-wrapper" id="about-image-wrapper">
                             <img src="Adi07.jpeg" alt="Aditya Singh" class="about-profile" />
-                            <div class="image-overlay"><div class="overlay-content"><i class="fas fa-eye"></i><span>View Full</span></div></div>
+                            <div class="image-overlay">
+                                <div class="overlay-content"><i class="fas fa-eye"></i><span>View Full</span></div>
+                            </div>
                         </div>
                         <div class="image-decoration">
                             <div class="decoration-border"></div>
-                            <div class="decoration-corner corner-tl"></div><div class="decoration-corner corner-tr"></div>
-                            <div class="decoration-corner corner-bl"></div><div class="decoration-corner corner-br"></div>
+                            <div class="decoration-corner corner-tl"></div>
+                            <div class="decoration-corner corner-tr"></div>
+                            <div class="decoration-corner corner-bl"></div>
+                            <div class="decoration-corner corner-br"></div>
                         </div>
                     </div>
                 </div>
@@ -178,7 +222,10 @@
         <!-- ===== EDUCATION ===== -->
         <section class="education" id="education">
             <div class="section-header">
-                <div class="section-title"><h2>My <span>Education</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>My <span>Education</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Academic Journey</p>
             </div>
             <div class="education-timeline">
@@ -255,7 +302,10 @@
         <!-- ===== CERTIFICATIONS ===== -->
         <section class="certifications" id="certifications">
             <div class="section-header">
-                <div class="section-title"><h2>My <span>Certifications</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>My <span>Certifications</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Professional Accreditations & Achievements</p>
                 <div class="cert-stats">
                     <div class="stat-badge"><i class="fas fa-trophy"></i><span>Total: <strong id="certTotal">10</strong> Certifications</span></div>
@@ -282,7 +332,10 @@
         <!-- ===== SKILLS ===== -->
         <section class="skills" id="skills">
             <div class="section-header">
-                <div class="section-title"><h2>Technical <span>Skills</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>Technical <span>Skills</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Technologies I'm Working with us</p>
                 <div class="skill-count"><i class="fas fa-code"></i><span>Total: <span id="skillsTotal">19</span> Skills</span></div>
             </div>
@@ -319,7 +372,10 @@
         <!-- ===== PROJECTS ===== -->
         <section class="projects" id="projects">
             <div class="section-header">
-                <div class="section-title"><h2>My <span>Projects</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>My <span>Projects</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Featured Work</p>
                 <div class="projects-count"><i class="fas fa-project-diagram"></i><span>Showing: <span id="showingProjects">3</span> of <span id="projectsTotal">8</span> Projects</span></div>
             </div>
@@ -333,7 +389,10 @@
         <!-- ===== CONTACT ===== -->
         <section class="contact" id="contact">
             <div class="section-header">
-                <div class="section-title"><h2>Contact <span>Me</span></h2><div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div></div>
+                <div class="section-title">
+                    <h2>Contact <span>Me</span></h2>
+                    <div class="title-line"><div class="line-dot"></div><div class="line-dot"></div><div class="line-dot"></div></div>
+                </div>
                 <p class="section-subtitle">Scan QR codes or send a message to connect instantly</p>
             </div>
 
@@ -408,7 +467,10 @@
 
                 <!-- Contact Form Section -->
                 <div class="contact-form-section">
-                    <div class="form-header"><h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3><p>I'll respond within 24 hours</p></div>
+                    <div class="form-header">
+                        <h3><i class="fas fa-comment-dots" style="color:var(--primary);"></i> Send Me a Message</h3>
+                        <p>I'll respond within 24 hours</p>
+                    </div>
                     <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="userName" placeholder="Your full name" required /></div>
@@ -438,46 +500,6 @@
                             <a href="https://www.facebook.com/" class="alt-contact-item facebook" target="_blank"><i class="fab fa-facebook-f"></i><div class="alt-contact-info"><h5>Facebook</h5><p>Connect socially</p></div></a>
                         </div>
                     </div>
-
-                    <!-- ===== BOOKS / RESOURCES SECTION ===== -->
-                    <div class="books-section">
-                        <h4><i class="fas fa-book-open"></i> Recommended Books & Resources</h4>
-                        <div class="books-grid">
-                            <div class="book-card">
-                                <div class="book-cover"><i class="fas fa-code"></i></div>
-                                <div class="book-info">
-                                    <h5>Clean Code</h5>
-                                    <p>Robert C. Martin</p>
-                                    <span class="book-tag">Programming</span>
-                                </div>
-                            </div>
-                            <div class="book-card">
-                                <div class="book-cover"><i class="fas fa-database"></i></div>
-                                <div class="book-info">
-                                    <h5>Database Systems</h5>
-                                    <p>Raghu Ramakrishnan</p>
-                                    <span class="book-tag">Database</span>
-                                </div>
-                            </div>
-                            <div class="book-card">
-                                <div class="book-cover"><i class="fas fa-cloud"></i></div>
-                                <div class="book-info">
-                                    <h5>Cloud Computing</h5>
-                                    <p>Thomas Erl</p>
-                                    <span class="book-tag">Cloud</span>
-                                </div>
-                            </div>
-                            <div class="book-card">
-                                <div class="book-cover"><i class="fas fa-brain"></i></div>
-                                <div class="book-info">
-                                    <h5>Design Patterns</h5>
-                                    <p>Gamma, Helm, Johnson</p>
-                                    <span class="book-tag">Architecture</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div><!-- end contact-form-section -->
             </div><!-- end contact-equal-wrapper -->
         </section>
@@ -516,6 +538,7 @@
         </footer>
 
         <!-- ===== MODALS ===== -->
+        <!-- QR Modal -->
         <div class="modal qr-modal" id="qrModal">
             <div class="modal-content qr-modal-content">
                 <div class="modal-header"><h3 id="qrModalTitle">QR Code Preview</h3><button class="modal-close" id="qrModalClose">&times;</button></div>
@@ -529,24 +552,32 @@
                 </div>
             </div>
         </div>
+
+        <!-- Image Preview Modal -->
         <div class="modal" id="imagePreviewModal">
             <div class="modal-content">
                 <div class="modal-header"><h3 id="imageModalTitle">Image Preview</h3><button class="modal-close" id="imageModalClose">&times;</button></div>
                 <div class="modal-body"><img id="previewImage" src="" alt="Preview" /></div>
             </div>
         </div>
+
+        <!-- Certificate Modal -->
         <div class="modal" id="certificateModal">
             <div class="modal-content">
                 <div class="modal-header"><h3 id="modalTitle">Certificate Preview</h3><button class="modal-close" id="modalClose">&times;</button></div>
                 <div class="modal-body"><img id="certificateImage" src="" alt="Certificate" /></div>
             </div>
         </div>
+
+        <!-- Video Modal -->
         <div class="modal video-modal" id="videoModal">
             <div class="modal-content">
                 <div class="modal-header"><h3 id="videoTitle">Project Demo</h3><button class="modal-close" id="videoClose">&times;</button></div>
                 <div class="modal-body"><video id="projectVideo" controls>Your browser does not support the video tag.</video></div>
             </div>
         </div>
+
+        <!-- Toast -->
         <div class="toast" id="toast">
             <div class="toast-content"><i class="fas fa-check-circle"></i><div class="toast-message"></div></div>
             <div class="toast-progress"></div>
@@ -554,8 +585,7 @@
 
     </div><!-- end page-content -->
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js">
-    </script>    <script src="script.js"></script>
+    <!-- ===== MAIN JAVASCRIPT ===== -->
+    <script src="script.js"></script>
 </body>
 </html>
