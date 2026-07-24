@@ -658,7 +658,7 @@ function loadProjects() {
         technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
         features: ['Responsive Design', 'Dark/Light Mode', 'Animations', 'Contact Form'],
         date: '2024',
-        image: 'Images/Port.png',
+        image: 'Port1.png',
         demoLink: 'Videoes/Port.mp4',
         codeLink: 'https://github.com/Adishiv9494/Portfolio',
         status: 'completed',
